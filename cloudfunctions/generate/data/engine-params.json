@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "name": "规则引擎可调参数",
+    "version": "v0.1",
+    "note": "T06 音律/笔画/字频/姓氏适配四维权重与风格映射全部外置于此，依据 T17 反馈通道迭代"
+  },
+  "generate": {
+    "topN": 30,
+    "nameLength": 2,
+    "maxWriteCost": 40,
+    "maxSameCandidatesRatio": 0.2
+  },
+  "tones": {
+    "pingTones": [1, 2],
+    "zeTones": [3, 4],
+    "lightTone": 0
+  },
+  "surnameFit": {
+    "surnameZePreferPingBonus": 3,
+    "surnamePingPreferZeBonus": 1,
+    "sameInitialTriplePenalty": 4,
+    "sameFinalPenalty": 2,
+    "sameToneTriplePenalty": 2
+  },
+  "strokes": {
+    "idealRange": [10, 26],
+    "balancePenaltyPerStep": 0.5,
+    "overCostPenalty": 2
+  },
+  "freq": {
+    "duplicateMap": { "high": "high", "mid": "mid", "low": "low" },
+    "lowDuplicateBonus": 2,
+    "midDuplicateBonus": 1,
+    "highDuplicatePenalty": 1
+  },
+  "styles": {
+    "weights": {
+      "古风雅致": { "文采": 3, "品德": 3, "美玉": 2, "音律": 1, "山岳": 1 },
+      "温柔诗意": { "温柔": 3, "水泽": 2, "草木": 2, "光亮": 1, "自然": 1 },
+      "阳光开朗": { "光亮": 3, "灵动": 2, "力量": 2, "自然": 1 },
+      "英气飒爽": { "刚毅": 3, "力量": 2, "高远": 2, "山岳": 1 },
+      "中性大方": { "品德": 2, "高远": 2, "自然": 2, "文采": 1 },
+      "诗意江南": { "水泽": 3, "草木": 2, "温柔": 2, "音律": 1 },
+      "典籍感": { "文采": 3, "言信": 2, "品德": 2, "美玉": 1 },
+      "自然清新": { "草木": 3, "水泽": 2, "自然": 2, "丰茂": 1 }
+    },
+    "defaultWeight": 1,
+    "tagUnionMode": "union"
+  },
+  "score": {
+    "surnameFitWeight": 1.0,
+    "styleWeight": 1.0,
+    "strokeWeight": 0.8,
+    "freqWeight": 0.8,
+    "generationCharBonus": 10
+  }
+}

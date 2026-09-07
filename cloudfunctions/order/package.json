@@ -1,0 +1,9 @@
+{
+  "name": "order",
+  "version": "0.1.0",
+  "description": "虚拟支付云函数：下单/回调/查单补发",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

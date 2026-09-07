@@ -1,0 +1,6 @@
+<!-- poster 页占位 -->
+<view class="page-pad">
+  <view class="placeholder-card">
+    <text class="font-serif">名字卡片 · 占位页</text>
+  </view>
+</view>

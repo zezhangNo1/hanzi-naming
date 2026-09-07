@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="72p15h3vaRPdFi4ajV0TKh">
+<head data-page-node-id="xAIoe6EgyYuDKvbCss625q">
+<meta charset="UTF-8" data-page-node-id="vxgLDTIzQKcfsTRaw1bS45">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="XHXjspleNKVk3GLPCAzP2q">
+<title>汉字美学 · 取名工具 — 高保真原型</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="T13mANbIE1cXhcu891rNyh">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet" data-page-node-id="ShDh9KplQC0i1tDtBaKqgA">
+<style>
+  .serif { font-family: "Noto Serif SC", "Songti SC", "STSong", serif; }
+  .phone { width: 375px; height: 812px; }
+  .capsule { backdrop-filter: blur(4px); }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+</style>
+</head>
+<body class="bg-[#EDEAE4] min-h-screen antialiased text-[#1C1917]" data-page-node-id="OnBVouaYsASaHQqL3DVPtF">
+
+<!-- Page header -->
+<header class="max-w-[1400px] mx-auto px-8 pt-12 pb-6" data-page-node-id="B0FffbGeSAj0QoblPYiugk">
+  <div class="flex items-end justify-between flex-wrap gap-4" data-page-node-id="hCM4Zc8WbV2s3Vu0q60N4C">
+    <div data-page-node-id="N3irjAejTQCp3aIXGS3DdO">
+      <p class="text-xs tracking-[0.3em] text-[#A8402F] font-medium mb-2" data-page-node-id="K2UcBzCTN3k3jLPP47VCR5">HI-FI PROTOTYPE · V1.0</p>
+      <h1 class="serif text-4xl font-bold tracking-tight" data-page-node-id="eRsvIUHrO7TLULVHEPJXit">汉字美学 · 取名工具</h1>
+      <p class="text-sm text-[#78716C] mt-2" data-page-node-id="RnsSzlY3EhwtQZH9oQu6Cj">微信小程序高保真原型 · 6 屏 · 彻底去玄学化 · 零吉凶零打分</p>
+    </div>
+    <div class="text-xs text-[#78716C] leading-5 text-right" data-page-node-id="jAqOcQrKP2A3qxX1uc1ysr">
+      <p data-page-node-id="qcsE92ATm4ezyNG3L1lNId">配套 PRD：prd-hanzi-naming-v1-2026-09-06.md</p>
+      <p data-page-node-id="ixbljmXncsPIvpG4VtxSkr">主色 · 朱砂 <span class="inline-block w-3 h-3 rounded-full bg-[#A8402F] align-middle mx-1" data-page-node-id="AmU6WRusMYRlcdjTlYqIAZ"></span> / 底色 · 宣纸 <span class="inline-block w-3 h-3 rounded-full bg-[#F7F5F1] align-middle mx-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="4Xghug1WpllPyuJatBDkOd"></span></p>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1400px] mx-auto px-8 pb-24 flex flex-wrap gap-10 justify-center lg:justify-start" data-page-node-id="oZWXnDf4qnIESA2WMZjCKI">
+
+  <!-- ============ SCREEN 1 · 首页输入 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="v9BW9kyOHWsTxz6Eps6NW8">
+    <div class="phone relative bg-[#F7F5F1] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="2sOBe9NBcyYgU0Frt4EiOM">
+      <!-- status bar -->
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="bQdtxB9J4q6vw9YFkKALue">
+        <span data-page-node-id="uqommqZjSUYCiFGYESC4zx">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="4Yjclw8iN3E1gbSezP4AdQ"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="FpFnGHlFoPyfViI0bY89Tl"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="h5iJtqPiYW244BWMqH3CJo"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="FwTMiCoO9tZNYwQtkqgkb9"></i></div>
+      </div>
+      <!-- mini program header -->
+      <div class="flex justify-between items-center px-5 py-2" data-page-node-id="MuWOi6RDEiPGboJ1BUAPbV">
+        <span class="serif text-[15px] font-semibold" data-page-node-id="7IjuC7eix94KZx7APvBJLe">汉字美学</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="A1hx5zYD10GyJlEJgSmFMM">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="Ux1kYVBHrZBCh6olLON3dA"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="3yYDD9RDIIs42w0mZkfk0h"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="oXdO6LsWxlWWuTGkG2K9er"></i>
+        </div>
+      </div>
+      <!-- AIGC banner -->
+      <div class="mx-4 mt-1 flex items-center gap-2 bg-[#F3EEE6] rounded-xl px-3 py-2" data-page-node-id="B8pEwZixrdHiHeu4NZsjqk">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-[#A8402F]" data-page-node-id="8WChPfjEwSionVt9y9jSuE"></i>
+        <p class="text-[10.5px] leading-4 text-[#78716C]" data-page-node-id="VtnIAs4WbDuP5y48OJVBTr">内容由 AI 生成，仅供文化参考，不具备任何预测效力</p>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-6 pt-6" data-page-node-id="ZwgPhqyDeVnGWbObUIGKg4">
+        <p class="text-[11px] tracking-[0.25em] text-[#A8402F] font-medium" data-page-node-id="wNE5960x5x4tHmXsVyI7vx">为新生儿取一个有出处的名字</p>
+        <h2 class="serif text-[30px] font-bold leading-snug mt-2 tracking-tight" data-page-node-id="mcU7SY3B9HmSnswPzvyrfs">好名字，<br data-page-node-id="8cBXaBPdezqvaxWeJGNymD">从字义与音律开始</h2>
+
+        <!-- surname -->
+        <div class="mt-8" data-page-node-id="LlZa7JoasE1N6gqsQfdfSI">
+          <label class="text-xs text-[#78716C]" data-page-node-id="qAcsCWaXdQaagrz8ps44UI">宝宝姓氏 <span class="text-[#A8402F]" data-page-node-id="EFarOlo0rMLdRK2j9hodhI">*</span></label>
+          <div class="mt-2 flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 outline outline-1 outline-[#E7E2D9] focus-within:outline-[#A8402F] transition" data-page-node-id="6rl13o8MDLSmBQi5LhK2HP">
+            <span class="serif text-2xl font-bold" data-page-node-id="dDMSJ2sFwRPLEctNH2WFo7">沈</span>
+            <i data-lucide="delete" class="w-4 h-4 text-[#C9C2B6] ml-auto" data-page-node-id="7Vn3KElm30WJn8YKBbAxLo"></i>
+          </div>
+        </div>
+
+        <!-- gender -->
+        <div class="mt-5" data-page-node-id="YVVZs1N6guWUHA7zw0S4l3">
+          <label class="text-xs text-[#78716C]" data-page-node-id="MtveH5s0Ux7C7AdlDVDuwb">宝宝性别 <span class="text-[#A8402F]" data-page-node-id="zGso86Z26pjwATeLjhxk5F">*</span></label>
+          <div class="mt-2 grid grid-cols-2 gap-2.5" data-page-node-id="EEWZVqcKoUqFuHbYvE9ZbD">
+            <button class="rounded-2xl py-3 text-sm font-medium bg-[#1C1917] text-[#F7F5F1] transition" data-page-node-id="aVVvQ0uFXl9NDJho1emOHF">男宝宝</button>
+            <button class="rounded-2xl py-3 text-sm font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="642ymAXQDY6ArQ3wBkFnNJ">女宝宝</button>
+          </div>
+        </div>
+
+        <!-- styles -->
+        <div class="mt-5" data-page-node-id="4AYVOt29V9w1798G2QcArc">
+          <div class="flex items-center justify-between" data-page-node-id="qqkJ3vS3ZaE2jUUIqAMlPN">
+            <label class="text-xs text-[#78716C]" data-page-node-id="qkLT5CERi1QBri5U8l27Lp">风格偏好（可多选，可跳过）</label>
+            <span class="text-[10px] text-[#A8402F]" data-page-node-id="iDDeJWz54pRi0VvP2WF625">已选 2</span>
+          </div>
+          <div class="mt-2.5 flex flex-wrap gap-2" data-page-node-id="jmnCL0M48FmL63ciIBO6bd">
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-[#A8402F] text-white transition" data-page-node-id="EI0w3ZUox4WxMQa5Rv7Az7">古风雅致</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-[#1C1917] text-white transition" data-page-node-id="B1JgSVQDQvEf8hA1d69j0D">温柔诗意</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="oADvKMCNVMh0G6tjlzuuL2">阳光开朗</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="ErmBuCnDQbNRUsFPvESBiR">英气飒爽</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="iJbiByJjO2DeeWooJEGVBu">中性大方</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="b5ZXExf2noc0CRaFBrA0oW">典籍感</button>
+            <button class="px-3.5 py-2 rounded-full text-xs font-medium bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="T3QeigaHvP7RLGGD5ohiLu">自然清新</button>
+          </div>
+        </div>
+
+        <!-- optional expand -->
+        <button class="mt-5 w-full flex items-center justify-between rounded-2xl bg-white px-4 py-3.5 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="HgUcV1KKBJIfOssNC9pfLS">
+          <span class="flex items-center gap-2 text-xs text-[#78716C]" data-page-node-id="TjCQm3HuBMC3XrpDcdyRnb"><i data-lucide="plus-circle" class="w-3.5 h-3.5" data-page-node-id="X3EDA0sS4X6VYf7L1afvCS"></i>补充信息，提升推荐精度（可选）</span>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-[#C9C2B6]" data-page-node-id="XUEEyPl0EOsgcpxFcc5Mzl"></i>
+        </button>
+        <p class="text-[10px] text-[#B3AC9F] mt-2.5 leading-4" data-page-node-id="Eb5By4y1DBawqEaM16BDul">出生日期为可选项，不填写同样可使用全部功能</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="px-6 pb-8 pt-3" data-page-node-id="a8fBPj9wppIey4cXdWItAW">
+        <button class="w-full rounded-2xl bg-[#A8402F] text-white py-4 text-[15px] font-semibold tracking-[0.2em] hover:bg-[#8F3527] transition" data-page-node-id="dvtAThFP9JoPSg5qCEJ5YR">开 始 取 名</button>
+      </div>
+      <!-- home indicator -->
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="YOse41tSaUBD3eoCMIfncn"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="EPVRmbaLv0RIW1023Nac3a"><span class="font-semibold text-[#1C1917]" data-page-node-id="WHSE4q2nFKQoeq9NvsNape">01 · 首页</span> — 极简 3 项输入，生辰仅为可选增强项（合规 15.1.3）</p>
+  </section>
+
+  <!-- ============ SCREEN 2 · 结果列表 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="pH61C0gyUGwr4mcXbGkiuV">
+    <div class="phone relative bg-[#F7F5F1] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="h2BDDHClKlHCvAAAsVHEv9">
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="4atJHBISlUuan0qHRzUcMQ">
+        <span data-page-node-id="DUzUGlUlya7DDqt4CEF9i4">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="FuCA4HYJqCZII60sOinPFE"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="4lDpErRxj2QFOJDvwulxiq"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="1KVHxLaWDe9Vykcq7SGe4i"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="H8PnMC2xDfwv6e7MPddxVk"></i></div>
+      </div>
+      <div class="px-5 pt-2 flex items-center justify-between" data-page-node-id="U4ZASu3LUo5LlfeXelzurg">
+        <i data-lucide="chevron-left" class="w-5 h-5" data-page-node-id="vqAYNEgUa3F70qBjeddweB"></i>
+        <span class="serif text-[15px] font-semibold" data-page-node-id="o9v6fIvfAoHD9U57EcNQra">候选名字 · 30 个</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="kxTNRnBDwTCeXL4vgT4yw1">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="dKpoeoMcCv9cYcHi8i9kwV"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="yposZnDrzke0HOKR84eRHh"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="DzjabM5BGsZVuSstBrmyu0"></i>
+        </div>
+      </div>
+      <!-- generation progress -->
+      <div class="mx-4 mt-2 rounded-xl bg-[#F3EEE6] px-3 py-2 flex items-center gap-2" data-page-node-id="jTJiHr9XrMrd2j0cadFHYB">
+        <i data-lucide="loader-2" class="w-3.5 h-3.5 text-[#A8402F] animate-spin" data-page-node-id="G3LWKaDRYmmVkycYoUueqH"></i>
+        <p class="text-[10.5px] text-[#78716C]" data-page-node-id="c8iLHkgWQE92ExggF5hFzI">正在为「沈」家男宝宝生成第二批 · 出处已逐条校验</p>
+      </div>
+      <!-- style filter -->
+      <div class="px-4 mt-3 flex gap-2 overflow-x-auto pb-1" data-page-node-id="XvBCh52AWoB37m9qzOXBAE">
+        <button class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#1C1917] text-white" data-page-node-id="p94vCcGSabMzBZFfBTQX8I">全部</button>
+        <button class="shrink-0 px-3.5 py-1.5 rounded-full text-xs bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9]" data-page-node-id="BHdP2yq3qGgsxObUD2CZlN">古风雅致</button>
+        <button class="shrink-0 px-3.5 py-1.5 rounded-full text-xs bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9]" data-page-node-id="BKCpfzlZ5Haw2ET0GSB3R9">典籍感</button>
+        <button class="shrink-0 px-3.5 py-1.5 rounded-full text-xs bg-white text-[#78716C] outline outline-1 outline-[#E7E2D9]" data-page-node-id="giwns8nprGdxQnm6HuGYfI">温柔诗意</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-4 pt-3 space-y-3" data-page-node-id="vPaL0IAoe7bAbbd9e1Hocp">
+        <!-- card 1 -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="4X1Ff8Bsm1aHMuOVy5gPoh">
+          <div class="flex items-start justify-between" data-page-node-id="uHyaNWuWDg0HkbrGaBQDep">
+            <div data-page-node-id="rJ1nYgDMHeN0wkR5RD0TkM">
+              <div class="flex items-baseline gap-3" data-page-node-id="c5MxbFRrJUTjvLKFG6zwOG">
+                <span class="serif text-[26px] font-bold" data-page-node-id="QrG8YHedWsCu1EyxwXuWS1">沈砚清</span>
+                <span class="text-xs text-[#A8A199] tracking-widest" data-page-node-id="Fumw0jxsdKNArM0lXSgqUt">SHĚN YÀN QĪNG</span>
+              </div>
+              <p class="text-[11px] text-[#78716C] mt-1.5" data-page-node-id="2iCSCjlfCtAtUCvc0i8V7g">砚：文房之要，静心笃学 · 清：清澈明朗</p>
+            </div>
+            <button class="p-1.5 rounded-full bg-[#FBF1EF] hover:bg-[#F5E0DC] transition" data-page-node-id="zmmacqHlZhZOmpajxzCGKX"><i data-lucide="heart" class="w-4 h-4 text-[#A8402F]" data-page-node-id="E5ZzP2d1WZBrtNNPxHrrro"></i></button>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2.5" data-page-node-id="dHtHQ5qqzldLih5f71obEH">
+            <span class="px-2 py-0.5 rounded-md bg-[#F3EEE6] text-[10px] text-[#57534E]" data-page-node-id="JVEI32awPPoTp50EAfht53">平仄 · 仄仄平</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#F3EEE6] text-[10px] text-[#57534E]" data-page-node-id="lwAJ9uEvm4XsJJrUcjiZSm">笔画 15-9-11</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#EEF3EE] text-[10px] text-[#4D6B54]" data-page-node-id="RuUwrZpwqiZzZQvcsM5lvp">重名度 低</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#FBF1EF] text-[10px] text-[#A8402F]" data-page-node-id="BA6HmQa0E4tTa6Pf1VBb6D">谐音检测 通过</span>
+          </div>
+          <p class="text-[10.5px] text-[#A8A199] mt-2 flex items-center gap-1" data-page-node-id="MxamERE3uYnR93Ceb1NwBN"><i data-lucide="book-open" class="w-3 h-3" data-page-node-id="WeYgC6UrlNR4AWETgvSoy0"></i>出自《全唐诗》「砚清秋水，笔走龙蛇」· 已校验</p>
+        </div>
+        <!-- card 2 -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="Gy8EAwDKTTTFo6EQMD6ht1">
+          <div class="flex items-start justify-between" data-page-node-id="BexTlkEUb5Ck5G20caewHV">
+            <div data-page-node-id="Lvu9fd1GgG9LNRdmzlDQBm">
+              <div class="flex items-baseline gap-3" data-page-node-id="nPGaxnJCEWCuufFlrNtAM2">
+                <span class="serif text-[26px] font-bold" data-page-node-id="zthLHvnpP5UEzIoNMr9JNE">沈亦楠</span>
+                <span class="text-xs text-[#A8A199] tracking-widest" data-page-node-id="kFsWfdnoiiF2aabY8Pj08y">SHĚN YÌ NÁN</span>
+              </div>
+              <p class="text-[11px] text-[#78716C] mt-1.5" data-page-node-id="SXKsHXpN5pFD2moaoLEGEI">楠：质坚而香，栋梁之材 · 亦：亦步亦趋不盲从</p>
+            </div>
+            <button class="p-1.5 rounded-full bg-[#FBF1EF] hover:bg-[#F5E0DC] transition" data-page-node-id="l1ZtyWILHOAFNXiOzNBcos"><i data-lucide="heart" class="w-4 h-4 text-[#A8402F] fill-[#A8402F]" data-page-node-id="6LF8R5lkXymcUFNKilRh9j"></i></button>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2.5" data-page-node-id="GR1nn21OjSVpt6hai1O1Iq">
+            <span class="px-2 py-0.5 rounded-md bg-[#F3EEE6] text-[10px] text-[#57534E]" data-page-node-id="XLb6QC8xYCcgUF92fbzVVG">平仄 · 仄仄平</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#F3EEE6] text-[10px] text-[#57534E]" data-page-node-id="oSQDM6pjLbBRPoKBB3kvQi">笔画 7-6-13</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#EEF3EE] text-[10px] text-[#4D6B54]" data-page-node-id="KQiphhlC5qIqPT7vdqg9aX">重名度 低</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#FBF1EF] text-[10px] text-[#A8402F]" data-page-node-id="8hQV1qNM2WoX68ogCDvlda">谐音检测 通过</span>
+          </div>
+          <p class="text-[10.5px] text-[#A8A199] mt-2 flex items-center gap-1" data-page-node-id="p1SprmaUMIorEReg729FkY"><i data-lucide="book-open" class="w-3 h-3" data-page-node-id="F9c6sYAbAz4qsiaKCUHghq"></i>楠木产于江南，《本草纲目》有载 · 已校验</p>
+        </div>
+        <!-- card 3 with warning -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="RwYFRms5GAxJmkoARl7IL3">
+          <div class="flex items-start justify-between" data-page-node-id="4rGVt8V9zKfRd1OtTiheWP">
+            <div data-page-node-id="6Agi95AXHBghPoSPEbcbR7">
+              <div class="flex items-baseline gap-3" data-page-node-id="Yy0EFsR66GBZsAhe1ubAHv">
+                <span class="serif text-[26px] font-bold" data-page-node-id="iMAVF6k0G2F6DSsaMIAY0F">沈子墨</span>
+                <span class="text-xs text-[#A8A199] tracking-widest" data-page-node-id="y9NsBiuFMz2UyketS7CFMF">SHĚN ZǏ MÒ</span>
+              </div>
+              <p class="text-[11px] text-[#78716C] mt-1.5" data-page-node-id="NxaCTry46LiLghAe22fcO2">墨：翰墨传家，才思泉涌</p>
+            </div>
+            <button class="p-1.5 rounded-full hover:bg-[#F3EEE6] transition" data-page-node-id="ZXYo6AZUeBnVDi5XVZ6nmE"><i data-lucide="heart" class="w-4 h-4 text-[#C9C2B6]" data-page-node-id="1nKsuk6GwzDD2PcHaa1MRf"></i></button>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2.5" data-page-node-id="GPwD46Bo0EPat6O1E5lsdx">
+            <span class="px-2 py-0.5 rounded-md bg-[#F3EEE6] text-[10px] text-[#57534E]" data-page-node-id="ZeFo97NBpV86E4ZVpM8Y6C">平仄 · 仄仄仄</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#FFF6E5] text-[10px] text-[#B07D1F]" data-page-node-id="1eolWQszBh1nrRQaxTu05Z">⚠ 重名度 偏高</span>
+            <span class="px-2 py-0.5 rounded-md bg-[#FFF6E5] text-[10px] text-[#B07D1F]" data-page-node-id="DUJLDn6qD5uFbbBjNByRyB">⚠ 「子墨」近年高频</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- bottom bar -->
+      <div class="px-4 pb-8 pt-2" data-page-node-id="FUkZjGb0spfIl8AgrXDKvB">
+        <div class="flex gap-2.5" data-page-node-id="GkltmM1Aclaqcmv9ovj4tG">
+          <button class="flex-1 rounded-2xl bg-white text-[#1C1917] py-3.5 text-sm font-medium outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition flex items-center justify-center gap-2" data-page-node-id="JKOu30eyneOuMGwmo6Z3vx"><i data-lucide="users" class="w-4 h-4" data-page-node-id="kKV7pjbliJpCbgD3KrPSHR"></i>选名夹 · 5</button>
+          <button class="flex-1 rounded-2xl bg-[#1C1917] text-white py-3.5 text-sm font-semibold hover:bg-[#33302C] transition" data-page-node-id="gGqVH5nbxXWmRzRASgWrQZ">换一批 · 免费 1 次</button>
+        </div>
+      </div>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="gXXwceuvkE2qkf4PRP2M6k"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="NDmS9yns5nWa3RE9bH2t4E"><span class="font-semibold text-[#1C1917]" data-page-node-id="zB6pLAHPRO1UNKbiI1kWqD">02 · 结果列表</span> — 客观标签代替评分，出处在地语料校验后才展示</p>
+  </section>
+
+  <!-- ============ SCREEN 3 · 名字详情 / 命名检测报告 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="4Xhnb2AzGkBeygY1FQObUI">
+    <div class="phone relative bg-[#F7F5F1] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="B7trCQmCdzR6fb4SjtEUqZ">
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="YCxrdq9YWsmkt7ZWR7vG7p">
+        <span data-page-node-id="p1OwUQnCKHQ6JtSPassgLZ">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="4diNDQ1yGopSGemkNo1mix"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="rYxH11aDzh2SIuXBHaCTrh"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="I1zDnkHMJDM1MEiMiauNLC"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="tGbjJ6YG1XHMV3qV0JxzUM"></i></div>
+      </div>
+      <div class="px-5 pt-2 flex items-center justify-between" data-page-node-id="1jmkESeDSgrKtL7ir7b29x">
+        <i data-lucide="chevron-left" class="w-5 h-5" data-page-node-id="IWJOXJQ3mJUnhbQLeW4vSy"></i>
+        <span class="serif text-[15px] font-semibold" data-page-node-id="XD1FguCfOoKuVUfRQ2mPRC">命名检测报告</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="MLQoFNLHBQKjxpEN7PAccF">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="vJ1ms1vEIZMQGuTrOtzfXG"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="DIpj28pK2xIlPUROInqQA2"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="FsVZo0oXsGoWBKN0aOFh6y"></i>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-5 pt-4" data-page-node-id="ZjkAf1HKDTWsEYHH5qjv2G">
+        <!-- hero -->
+        <div class="rounded-3xl bg-[#1C1917] text-[#F7F5F1] p-6 relative overflow-hidden" data-page-node-id="PwWymEptEeSf0mhgfmeHXp">
+          <div class="serif absolute -right-3 -top-6 text-[110px] text-white/5 font-black select-none" data-page-node-id="4hVn1lN7oXVHnKIRadGL8y">沈</div>
+          <p class="text-[10px] tracking-[0.3em] text-[#C9B08F]" data-page-node-id="PZkE3w8vJPW59OhwG2bFHe">SHĚN YÀN QĪNG</p>
+          <h3 class="serif text-[34px] font-bold mt-1 tracking-wide" data-page-node-id="Bwl08RvUPVnKaPUHgcxk86">沈砚清</h3>
+          <p class="text-[11px] text-white/60 mt-3 leading-5" data-page-node-id="5CGUVEsLX75usbGlDtHVG7">砚：文房之要，静心笃学；清：清澈明朗，<br data-page-node-id="yXqROAdP8a5mo3in5LcFni">行止有度。二字相合，取「沉心治学、清朗立身」之意。</p>
+          <div class="flex gap-2 mt-4" data-page-node-id="pfCl1TBxO3NXMGDdtzNmee">
+            <span class="px-2.5 py-1 rounded-full text-[10px] bg-white/10" data-page-node-id="4OfitaimfcKhczCDFVur5e">古风雅致</span>
+            <span class="px-2.5 py-1 rounded-full text-[10px] bg-white/10" data-page-node-id="xBC20DHmk7NIQqwJd6n3Bk">典籍感</span>
+          </div>
+        </div>
+
+        <!-- six dims -->
+        <p class="text-xs text-[#78716C] mt-5 mb-2.5 flex items-center gap-1.5" data-page-node-id="9DUjqGnMRFVG4qQqpIV6rd"><i data-lucide="scan-search" class="w-3.5 h-3.5 text-[#A8402F]" data-page-node-id="cyAyCD65ebkpwB61URrAHh"></i>六维客观参考（非评分，仅供决策）</p>
+
+        <!-- dim 1 典籍 -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9]" data-page-node-id="uMTXqUQPfRG0jUihooN66s">
+          <div class="flex items-center justify-between" data-page-node-id="Vku7aR2PyY3tiRk4guViWS">
+            <p class="text-xs font-semibold flex items-center gap-1.5" data-page-node-id="w8tu0vSBaUQUxg9NsZCjBQ"><i data-lucide="book-open" class="w-3.5 h-3.5 text-[#A8402F]" data-page-node-id="ZOTPCyZH0j2IheaYrcpJQv"></i>典籍出处</p>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#EEF3EE] text-[#4D6B54]" data-page-node-id="0nSOp5fjypEYxSUJsrF1Zc">语料已校验</span>
+          </div>
+          <p class="serif text-[13px] leading-6 text-[#57534E] mt-2" data-page-node-id="6LWJwpjjGpXO6rHkmE4msO">「秋水<em class="not-italic text-[#A8402F]" data-page-node-id="SmhF6idhZrw7pAZY9DQQZ9">砚</em>清，松风<em class="not-italic text-[#A8402F]" data-page-node-id="aOavousGOy53uQIlUQ23eC">清</em>入弦」</p>
+          <p class="text-[10px] text-[#A8A199] mt-1" data-page-node-id="fJKqWOH4Wb3JZ2eRC6iaIj">— 《全唐诗 · 卷一九〇》韦应物句（原句三元组已核对）</p>
+        </div>
+
+        <!-- dim 2 音律 -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9] mt-2.5" data-page-node-id="ZDH24BzXIRciwmawHvBDmp">
+          <p class="text-xs font-semibold flex items-center gap-1.5" data-page-node-id="ZRVXFBZHyf1dJlDzRfpd4q"><i data-lucide="audio-waveform" class="w-3.5 h-3.5 text-[#A8402F]" data-page-node-id="GRDYNydjlxsD92WQnAMANu"></i>音律 · 仄仄平，尾音上扬</p>
+          <div class="flex items-end gap-3 mt-3 h-14" data-page-node-id="72fg1AI5trvILwUGe0Wh1H">
+            <div class="flex-1 flex flex-col items-center gap-1" data-page-node-id="iDDVA5VXVH1HR2HZ8MaM0M"><div class="w-full rounded-md bg-[#E0DCD5]" style="height:18px" data-page-node-id="8kjHc1HCA4n6LXlStHOpWf"></div><span class="text-[10px] text-[#78716C]" data-page-node-id="0BNFHWbvcKLnxwDu2I1eJz">沈 仄</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1" data-page-node-id="alwgxlF1GcdNmcWSpyr8UP"><div class="w-full rounded-md bg-[#E0DCD5]" style="height:26px" data-page-node-id="PnkHOaXL6Mb1Gw0TgHRfPK"></div><span class="text-[10px] text-[#78716C]" data-page-node-id="dOfsK6XUzbSRmYtzSRyxgF">砚 仄</span></div>
+            <div class="flex-1 flex flex-col items-center gap-1" data-page-node-id="f4Hd4D7R6weqDGnsSUJdAD"><div class="w-full rounded-md bg-[#A8402F]" style="height:44px" data-page-node-id="4j48UbfTGBXQPjmy0VMC3M"></div><span class="text-[10px] text-[#A8402F] font-semibold" data-page-node-id="o2uf3BofTo61qEEF7KCEvx">清 平</span></div>
+          </div>
+          <p class="text-[10.5px] text-[#78716C] mt-2" data-page-node-id="AwTBGBllDFnwSk9bPkSa0T">声母 sh/y/q 无双声叠韵；三字连读不拗口，普通话与粤语发音均顺口。</p>
+        </div>
+
+        <!-- dim 3 谐音 -->
+        <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9] mt-2.5" data-page-node-id="55sxDMJCBb9UolwhMCCQbj">
+          <p class="text-xs font-semibold flex items-center gap-1.5" data-page-node-id="1DGSubN0erw4XJ8VOlFWIa"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#A8402F]" data-page-node-id="JwPsmCqRdKMiwKC4q4WD8D"></i>谐音与歧义检测</p>
+          <div class="mt-2.5 space-y-1.5" data-page-node-id="NT2xYNnWsVl1ZauM4yFuQH">
+            <div class="flex items-center justify-between text-[11px]" data-page-node-id="IVQM5pJwb7VMjmUJeZd7cc"><span class="text-[#57534E]" data-page-node-id="9c0gRPMjbZOtEPV5BgUQ3U">普通话</span><span class="flex items-center gap-1 text-[#4D6B54]" data-page-node-id="AXFx6rifeYJrlSrGcmu2mH"><i data-lucide="check" class="w-3 h-3" data-page-node-id="QmcUhQjxTt5ZpbhNNeC5TK"></i>无不雅谐音</span></div>
+            <div class="flex items-center justify-between text-[11px]" data-page-node-id="J3Co0wpfXhw25Z6nnWLT7u"><span class="text-[#57534E]" data-page-node-id="dCksoSC5Hq7S8BeIfdimg7">粤语（jyutping: san2 jin6 cing1）</span><span class="flex items-center gap-1 text-[#4D6B54]" data-page-node-id="OoKChE11wjmEnHrF2zKzXY"><i data-lucide="check" class="w-3 h-3" data-page-node-id="EUJSkgKyDr7ODlLZGmhz2m"></i>无歧义</span></div>
+            <div class="flex items-center justify-between text-[11px]" data-page-node-id="zT0NrmXD3QUQoGmBCohmGJ"><span class="text-[#57534E]" data-page-node-id="NSTYgzVwpD5pAtOxLsnfYX">英语近似（Yan-Ching）</span><span class="flex items-center gap-1 text-[#4D6B54]" data-page-node-id="NZvqbVlEzyCT8Pu8K5l8Na"><i data-lucide="check" class="w-3 h-3" data-page-node-id="kcztm1m21JDzeUWf9KPZsA"></i>无负面联想</span></div>
+          </div>
+        </div>
+
+        <!-- dim 4/5 -->
+        <div class="grid grid-cols-2 gap-2.5 mt-2.5" data-page-node-id="LEVMaK3udQyCwaqjOESQta">
+          <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9]" data-page-node-id="lbL4ot3h91emypqOiBnXNj">
+            <p class="text-xs font-semibold" data-page-node-id="GBUEwSvzVdJyYdOXZXsbXF">书写与输入</p>
+            <p class="text-[10.5px] text-[#78716C] mt-2 leading-4" data-page-node-id="yOUeEGcjhgwPKaS7AFsxBy">总 35 画，结构均衡；三字均为常用输入法一级字，打字成本低。</p>
+          </div>
+          <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9]" data-page-node-id="CeirByO4oYzyfSi5LUVpR7">
+            <p class="text-xs font-semibold" data-page-node-id="w1WZMIEOenKK9iyG2JLB7h">重名度参考</p>
+            <p class="text-[10.5px] text-[#78716C] mt-2 leading-4" data-page-node-id="CeiEA1ycxSlJ1vgVM702gx">「砚」字近年新生儿使用率低，重名风险低；全部用字在《通用规范汉字表》内，可上户口。</p>
+          </div>
+        </div>
+
+        <!-- actions -->
+        <div class="flex gap-2.5 mt-4 pb-4" data-page-node-id="R0riEobLrOSByVnkEPjPni">
+          <button class="flex-1 rounded-2xl bg-white py-3 text-sm font-medium outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition flex items-center justify-center gap-1.5" data-page-node-id="vt2RDJFi0GPG665v2dCr60"><i data-lucide="heart" class="w-4 h-4 text-[#A8402F]" data-page-node-id="dhs6SU5acHKHrVMVkbQGUz"></i>收入选名夹</button>
+          <button class="flex-1 rounded-2xl bg-[#A8402F] text-white py-3 text-sm font-semibold hover:bg-[#8F3527] transition flex items-center justify-center gap-1.5" data-page-node-id="3ZS6zwsokWGGAEtDecPFFy"><i data-lucide="file-down" class="w-4 h-4" data-page-node-id="KvPVK4tNUUavHsGWKW8zon"></i>生成说明书</button>
+        </div>
+        <p class="text-[10px] text-[#B3AC9F] leading-4 pb-6" data-page-node-id="TbBHBuU0gyHeiymAW7D4LE">本报告仅基于汉字字义、音律与传统典籍提供文化参考，不构成任何预测或决策依据。</p>
+      </div>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="GsGKcDGZdSfQp8HFmTWHj0"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="jeTDFSnDByTFjlG1COGowx"><span class="font-semibold text-[#1C1917]" data-page-node-id="yyUiBHDD5oUW2TYRlCMXIj">03 · 名字详情</span> — 「命名检测报告」替代打分；方言/英语谐音检测是竞品空白</p>
+  </section>
+
+  <!-- ============ SCREEN 4 · 家人共选 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="AfiGrN7tXbMnu0WDgZwl2e">
+    <div class="phone relative bg-[#F7F5F1] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="rSxGnF7XNLKCW0fBBpMmuN">
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="53MHoBtpzqnHeA8seAlQLD">
+        <span data-page-node-id="ofgpfxG5uBoY0GWC5bHH8w">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="lcCQYvjtBBcUorCmqeHLdz"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="TCsjPP7up1blRFJmzWacYw"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="fmWwLbUWfgDfvkmvQUXQFG"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="igj8rBOhhdm010rQez8Rdd"></i></div>
+      </div>
+      <div class="px-5 pt-2 flex items-center justify-between" data-page-node-id="8AcfEnOofokj2lvLXXymvu">
+        <i data-lucide="chevron-left" class="w-5 h-5" data-page-node-id="51Rkpp9bnaqKXA66DCU5As"></i>
+        <span class="serif text-[15px] font-semibold" data-page-node-id="ewJIq6FFUlh66QH3TTGWBX">家人共选</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="w6ZZWY2WJjbkVi74BDwfuy">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="ISKt551joP4dMHllaQ8Uc7"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="pmr98EYAE0G8ezVBXPawWC"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="VKF4BYyrPNGAdVbxCWZC7r"></i>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-5 pt-4" data-page-node-id="KQbrIZ8Z4kJqUQVpGp1KuC">
+        <!-- room card -->
+        <div class="rounded-3xl bg-white p-5 outline outline-1 outline-[#E7E2D9]" data-page-node-id="HIfQT4ReDipDoU58DCWdwn">
+          <div class="flex items-center justify-between" data-page-node-id="vLv0mLIfREtiJLhUQWpFk9">
+            <p class="text-xs text-[#78716C]" data-page-node-id="NAAXaaR06lxl5PfpbWWYSn">共选房间 · 沈家小宝贝</p>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#EEF3EE] text-[#4D6B54] flex items-center gap-1" data-page-node-id="njlpDF3eH45xWOMMGt38wG"><span class="w-1.5 h-1.5 rounded-full bg-[#4D6B54] animate-pulse" data-page-node-id="msGAHdPZM4AbTCnF8WgbpC"></span>进行中</span>
+          </div>
+          <div class="flex items-center mt-3" data-page-node-id="2NDnrlMWNUFCP5snkq7KbD">
+            <div class="flex -space-x-2" data-page-node-id="8AMcpcbEOJ4YOtKARn45Hp">
+              <span class="w-9 h-9 rounded-full bg-[#A8402F] text-white text-xs flex items-center justify-center outline outline-2 outline-white" data-page-node-id="cRPISfsbkjzifjzgOHEsBF">我</span>
+              <span class="w-9 h-9 rounded-full bg-[#4D6B54] text-white text-xs flex items-center justify-center outline outline-2 outline-white" data-page-node-id="wYVSsd2zcVAaPobDt1HWFY">爸</span>
+              <span class="w-9 h-9 rounded-full bg-[#B07D1F] text-white text-xs flex items-center justify-center outline outline-2 outline-white" data-page-node-id="C3bzDTWk1BbBLIBihFy60b">妈</span>
+              <span class="w-9 h-9 rounded-full bg-[#57534E] text-white text-xs flex items-center justify-center outline outline-2 outline-white" data-page-node-id="SUseina4BVkyIGIAYD9Wk4">爷</span>
+              <span class="w-9 h-9 rounded-full bg-white text-[#A8A199] text-[10px] flex items-center justify-center outline outline-1 outline-[#E0DCD5]" data-page-node-id="UYdNVU5sHB3DwnMk93TPiI">+3</span>
+            </div>
+            <span class="ml-auto text-[11px] text-[#78716C]" data-page-node-id="v8Ud2tOzyRwrLu7CtEY8w6">4/7 人已投票</span>
+          </div>
+        </div>
+
+        <!-- vote list -->
+        <div class="space-y-2.5 mt-4" data-page-node-id="houPL2pRdT2oRRIYqdbGPL">
+          <div class="bg-white rounded-2xl p-4 outline outline-2 outline-[#A8402F]" data-page-node-id="Zc7IEDwWMCNe8qumbGB5Sq">
+            <div class="flex items-center justify-between" data-page-node-id="pjOLEZ6GXvcEGDMNkTEIqW">
+              <span class="serif text-xl font-bold" data-page-node-id="xAe90VzOXrXPGZDD7Nzwst">沈砚清</span>
+              <span class="text-xs font-semibold text-[#A8402F]" data-page-node-id="wAHcscsaYMOhiYeF434x7n">4 票 · 领先</span>
+            </div>
+            <p class="text-[10.5px] text-[#78716C] mt-1" data-page-node-id="XIx27fnMsGYTZ1IAC2BwQp">爷爷：「带书卷气，我喜欢」</p>
+            <div class="flex gap-2 mt-2.5" data-page-node-id="mJy4ojK9Zmbx9GrnA250Pn">
+              <button class="flex-1 rounded-xl bg-[#A8402F] text-white py-2 text-xs font-medium" data-page-node-id="WehwqH32b2h0Y1AC9siAaB">👍 赞成</button>
+              <button class="flex-1 rounded-xl bg-[#F3EEE6] text-[#78716C] py-2 text-xs" data-page-node-id="c9sq4xQ9NPleDWCL4CGNEz">再想想</button>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9]" data-page-node-id="jGXgZRMC1SY4vG9yyihaJV">
+            <div class="flex items-center justify-between" data-page-node-id="q8fPikvm7ONVkaEVRXMjGv">
+              <span class="serif text-xl font-bold" data-page-node-id="NbFZvUYkY9I8OqRi6nkPuM">沈亦楠</span>
+              <span class="text-xs text-[#78716C]" data-page-node-id="BINAqUFTOWEFs1yHtTY2Eh">2 票</span>
+            </div>
+            <p class="text-[10.5px] text-[#78716C] mt-1" data-page-node-id="kCTibxmrT8zuh20dHa2CLd">妈妈：「楠木结实，健康长大就好」</p>
+            <div class="flex gap-2 mt-2.5" data-page-node-id="gcNE2uNjPIQoMwcyEXJXck">
+              <button class="flex-1 rounded-xl bg-white text-[#78716C] py-2 text-xs outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="HmmrBJbRmTmeOsO0MZTvEp">赞成</button>
+              <button class="flex-1 rounded-xl bg-[#F3EEE6] text-[#78716C] py-2 text-xs" data-page-node-id="APQvfOl1lAclUepos4y4HY">再想想</button>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-4 outline outline-1 outline-[#E7E2D9]" data-page-node-id="PQ29OtVVnlq9BioR2fd33m">
+            <div class="flex items-center justify-between" data-page-node-id="RMRe6UuTTHPni8K7LfESOp">
+              <span class="serif text-xl font-bold" data-page-node-id="rzWItpSjyHzXBuUwx4oQ1E">沈知行</span>
+              <span class="text-xs text-[#78716C]" data-page-node-id="nBf1ELPGmrJNmDbpR75Ag9">1 票</span>
+            </div>
+            <p class="text-[10.5px] text-[#78716C] mt-1" data-page-node-id="bqKBEwxuNVIEKKvXcPM3DS">爸爸：「知行合一，出自《传习录》」</p>
+            <div class="flex gap-2 mt-2.5" data-page-node-id="mOBibHbHAXBb69KdorlDut">
+              <button class="flex-1 rounded-xl bg-white text-[#78716C] py-2 text-xs outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition" data-page-node-id="ArnHW4IgpgUZPKBmZYeyqw">赞成</button>
+              <button class="flex-1 rounded-xl bg-[#F3EEE6] text-[#78716C] py-2 text-xs" data-page-node-id="BXkLcsx6FWaqQNr4q9HcZr">再想想</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 pb-8 pt-2" data-page-node-id="vsOYK9BddgW2cvXGUvHJwS">
+        <button class="w-full rounded-2xl bg-[#1C1917] text-white py-3.5 text-sm font-semibold hover:bg-[#33302C] transition flex items-center justify-center gap-2" data-page-node-id="uTSnRS6vPAGweetIiOrwUi"><i data-lucide="share-2" class="w-4 h-4" data-page-node-id="7Rfj1fGpIHIPDQxW8zBcD3"></i>分享到家庭群 · 已选 3 个候选</button>
+      </div>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="0xwYZYHzj0ZebVaXHjpDqg"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="LpOBVOQNVIkQbRsIjZoFdc"><span class="font-semibold text-[#1C1917]" data-page-node-id="IlAVqq6rWzCajSdXXxADvt">04 · 家人共选</span> — 无需登录的投票链接；分享靠内容而非利益诱导（合规 3.2.1）</p>
+  </section>
+
+  <!-- ============ SCREEN 5 · 名字卡片海报 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="FEQb5rThnVPvWvpB1iQB2r">
+    <div class="phone relative bg-[#EFE9DF] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="VmSrzyONTmoOZ94CPQVCjk">
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="uW4lEmcmxEF5jyrKm3dvEd">
+        <span data-page-node-id="Cc1qmS42q9CQ53pGGGMazX">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="yAS9k1DrPVYPoLhGjXhTBa"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="KVZZRuW3PiEVMz10kaa3iH"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="oUpAwSj0aFwvD2BJiaFxVB"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="UsQfhVBQSXJgOavvc3JxBz"></i></div>
+      </div>
+      <div class="px-5 pt-2 flex items-center justify-between" data-page-node-id="YYeJ2NsVwAH8SoTeXetMve">
+        <i data-lucide="chevron-left" class="w-5 h-5" data-page-node-id="0lPoMIlkcn5iwJwkFtB45z"></i>
+        <span class="serif text-[15px] font-semibold" data-page-node-id="NlGq9gdPXf72US9PPUHWyP">名字卡片</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="FsQR45CMaL6EiCCJy1zCSX">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="RfQZKgqHL258BynDvwwZpl"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="VhZkZvXpLICC065DEFE0CA"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="Dyi6EgE5kUhD6Tcn0bZN5Y"></i>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-6 pt-5" data-page-node-id="QE3MVOWZC2hh0fuhkkVVKj">
+        <!-- template switcher -->
+        <div class="flex gap-2 mb-4" data-page-node-id="3yGSgelFD8saYAX0Db71ia">
+          <button class="px-3 py-1.5 rounded-full text-[11px] bg-[#1C1917] text-white" data-page-node-id="Iy0hMJXFA6YxXV9kZAIQJT">墨纸</button>
+          <button class="px-3 py-1.5 rounded-full text-[11px] bg-white text-[#78716C] outline outline-1 outline-[#E0DCD5]" data-page-node-id="C9IwC0kZhY3A0Cix93TcuY">朱砂</button>
+          <button class="px-3 py-1.5 rounded-full text-[11px] bg-white text-[#78716C] outline outline-1 outline-[#E0DCD5]" data-page-node-id="BUZiXg2EYC6clQQP23PVWb">竹青</button>
+        </div>
+
+        <!-- poster -->
+        <div class="bg-[#F9F6F0] rounded-2xl p-7 shadow-lg outline outline-1 outline-[#E0D8CA] relative overflow-hidden" data-page-node-id="BsfrrzRvCnPzbmLLkN4U53">
+          <div class="serif absolute -left-2 -bottom-8 text-[150px] text-[#A8402F]/[0.06] font-black select-none" data-page-node-id="gLL5EmhJHbd9YzMNuLtRTf">名</div>
+          <div class="flex items-center gap-2" data-page-node-id="NEJeGCD923KB9xr7Vr4ptQ">
+            <span class="w-6 h-[2px] bg-[#A8402F]" data-page-node-id="5KTtWEQxBFzSLrc1hSsQ12"></span>
+            <p class="text-[10px] tracking-[0.35em] text-[#A8402F]" data-page-node-id="6a8nDQ9hQLhbkWvGItn6EO">命名记 · 二〇二六</p>
+          </div>
+          <h3 class="serif text-[42px] font-bold mt-6 tracking-[0.15em]" data-page-node-id="AU5HoeL5gxgMEe8aiBKOnJ">沈砚清</h3>
+          <p class="text-[11px] tracking-[0.3em] text-[#A8A199] mt-1" data-page-node-id="N7y7I8MHboOLmHB4b1JkNf">SHĚN · YÀN · QĪNG</p>
+          <div class="my-5 h-[1px] bg-gradient-to-r from-[#A8402F]/40 to-transparent" data-page-node-id="MoL6Gqm81Lp2g5oUzZHR9X"></div>
+          <p class="serif text-[15px] leading-8 text-[#44403C]" data-page-node-id="vVNN6kwBI1eu1mBfko0gon">「秋水砚清，松风清入弦」</p>
+          <p class="text-[10px] text-[#A8A199] mt-1" data-page-node-id="Auufn2FfAUPRgNDInkSApR">— 《全唐诗 · 卷一九〇》</p>
+          <p class="text-[11px] leading-6 text-[#78716C] mt-5" data-page-node-id="LV9Foy426BgJeOgYAIJXe6">愿此名伴你沉心笃学，<br data-page-node-id="A2ABiOtclpy08eNryNzs9W">行止清朗，不负来处。</p>
+          <div class="flex justify-between items-end mt-8" data-page-node-id="40FOnh9ordH9njQlmDbdkC">
+            <p class="text-[9px] text-[#B3AC9F]" data-page-node-id="SQKDGaw4JqewN4B7s0rfD6">爸爸妈妈寄语 · 家人共选 4/7 通过</p>
+            <div class="text-right" data-page-node-id="T8wU7rGkOkaUoHKSmhi8AJ">
+              <p class="text-[9px] text-[#B3AC9F]" data-page-node-id="vVx5NzxiQgiMvHxDLQ4ZNX">汉字美学 · 取名</p>
+              <div class="w-9 h-9 mt-1 rounded bg-[#1C1917] flex items-center justify-center" data-page-node-id="dZXG8inJJzi857JIJ3wfjn"><div class="w-4 h-4 outline outline-1 outline-[#F9F6F0] rounded-sm" data-page-node-id="lI2DEs9AIQJ9hUaW1huYeq"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- privacy note -->
+        <div class="flex items-start gap-2 mt-4 rounded-xl bg-white/70 px-3 py-2.5" data-page-node-id="cw9tII1stft0HBN9RIow6t">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-[#4D6B54] mt-0.5 shrink-0" data-page-node-id="zXlMSsejqgsXoYGN3ncO5C"></i>
+          <p class="text-[10px] leading-4 text-[#78716C]" data-page-node-id="9lupzHyqQoH3EfETA8F6bH">卡片按隐私白名单生成：不含出生日期、父母姓名等个人信息（平台规范 15.2.1）</p>
+        </div>
+      </div>
+
+      <div class="px-6 pb-8 pt-3 flex gap-2.5" data-page-node-id="DTiUy82iiuFr7mqMsvz1MS">
+        <button class="flex-1 rounded-2xl bg-white text-[#1C1917] py-3.5 text-sm font-medium outline outline-1 outline-[#E0DCD5] hover:outline-[#A8402F] transition flex items-center justify-center gap-1.5" data-page-node-id="3ovKcXBKZ7Jq03leGIobMP"><i data-lucide="download" class="w-4 h-4" data-page-node-id="eE6YBgCBQ764kqv63U4vxp"></i>保存相册</button>
+        <button class="flex-1 rounded-2xl bg-[#A8402F] text-white py-3.5 text-sm font-semibold hover:bg-[#8F3527] transition flex items-center justify-center gap-1.5" data-page-node-id="4RPeIa4lDh3d9iukdnsw09"><i data-lucide="send" class="w-4 h-4" data-page-node-id="Rhy7IFoRe2UIXVW9S9VH15"></i>发给家人</button>
+      </div>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="NFjUCM3Zmaudebys1F4rmo"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="Qevkq3LiR6hsH3ttUr4uaa"><span class="font-semibold text-[#1C1917]" data-page-node-id="MCBuUhJeISghrlfjdOqfzD">05 · 名字卡片海报</span> — 3 套模板 A/B；字段白名单强制脱敏；海报即裂变引擎</p>
+  </section>
+
+  <!-- ============ SCREEN 6 · 选名夹与解锁 ============ -->
+  <section class="flex flex-col items-center gap-4" data-page-node-id="sq6fjTzI2VGv3LsebMGI4E">
+    <div class="phone relative bg-[#F7F5F1] rounded-[44px] overflow-hidden shadow-2xl outline outline-[10px] outline-[#1C1917] outline-offset-[-1px] flex flex-col" data-page-node-id="eaaGP3tNCE1shSFy9RBEut">
+      <div class="flex justify-between items-center px-7 pt-4 text-[13px] font-semibold" data-page-node-id="2Yzc61CpQoe2r7wWcbGYjw">
+        <span data-page-node-id="qd70HGazBEgHrMWHvUmFGv">9:41</span>
+        <div class="flex gap-1.5 items-center" data-page-node-id="GCqrYT1F7BmEdGYBiB5rga"><i data-lucide="signal" class="w-4 h-4" data-page-node-id="5orI11gPnkFnjpWwEJZjBG"></i><i data-lucide="wifi" class="w-4 h-4" data-page-node-id="H1zw5NQvYx0GLVKyqJuwm4"></i><i data-lucide="battery-full" class="w-4 h-4" data-page-node-id="v8Tsd0En8BPf3i1plzBEKC"></i></div>
+      </div>
+      <!-- tab nav -->
+      <div class="px-5 pt-2 flex items-center justify-between" data-page-node-id="RNwzeZ9lW86BeE3iyjj1Hm">
+        <span class="serif text-[15px] font-semibold" data-page-node-id="5tZ5AJRzhDVjwxidjIKot4">我的选名夹</span>
+        <div class="capsule flex items-center gap-2 bg-white/70 rounded-full px-3 py-1 outline outline-1 outline-[#E0DCD5]" data-page-node-id="IRI6V5Q2bmIGeRgzHXwNRG">
+          <span class="w-3 h-3 rounded-full outline outline-1 outline-[#1C1917]" data-page-node-id="XS3DHb0VK6co2VKwovoewh"></span>
+          <span class="w-[1px] h-3 bg-[#D6D0C6]" data-page-node-id="1JT2zGHXDyB7Wumd6kTNma"></span>
+          <i data-lucide="ellipsis" class="w-3.5 h-3.5" data-page-node-id="i0NSX4vTwwX0mtULxJq6sB"></i>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto px-5 pt-4" data-page-node-id="DxnhyNXMTsFRkjBFjkD29C">
+        <!-- quota card -->
+        <div class="rounded-3xl bg-[#1C1917] text-[#F7F5F1] p-5" data-page-node-id="ldU00HrhgkVZYgLjtCcGYu">
+          <div class="flex items-center justify-between" data-page-node-id="47P1nDH9hCB6IcX3FdvZjy">
+            <div data-page-node-id="ul2e9WC86GCktcYD8jGhKz">
+              <p class="text-[11px] text-white/60" data-page-node-id="v59uKAdSXcA2GlZPhobKuF">免费额度已用完</p>
+              <p class="serif text-lg font-bold mt-1" data-page-node-id="DNqY03tQarq6PrcaBKlhL7">解锁完整候选与深度报告</p>
+            </div>
+            <i data-lucide="crown" class="w-6 h-6 text-[#C9B08F]" data-page-node-id="w1p8u9TpazDdGnRseZuxlQ"></i>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5 mt-4" data-page-node-id="v2dZ0FO5F6HIGPGCFqocyG">
+            <button class="rounded-xl bg-white text-[#1C1917] py-2.5 text-xs font-semibold hover:bg-[#F3EEE6] transition" data-page-node-id="R0Gm2nYmM5mPgPhIXVr4Hz">
+              <span class="block text-[15px]" data-page-node-id="Xu76RCkpJvqPQTg883FjcP">¥9.9</span><span class="block text-[9px] font-normal text-[#78716C] mt-0.5" data-page-node-id="T3eltd8GO3uTiXUJ5vVUU3">单次深度包</span>
+            </button>
+            <button class="rounded-xl outline outline-1 outline-[#C9B08F] text-[#C9B08F] py-2.5 text-xs font-semibold hover:bg-white/5 transition" data-page-node-id="pj35aSGwtbS5CnnXHVx4y5">
+              <span class="block text-[15px]" data-page-node-id="dxPBTmlWxMb9UKl4PUGvfr">¥19.9</span><span class="block text-[9px] font-normal mt-0.5" data-page-node-id="30V6ehpvRBGJpTEXbQPTwX">三次包 · 更划算</span>
+            </button>
+          </div>
+          <p class="text-[9px] text-white/40 mt-3" data-page-node-id="mHQ2gN59TDo17TCwR2Kmgj">含：完整候选 · 六维深度报告 · 命名说明书 · 家人共选</p>
+        </div>
+
+        <!-- alternative: watch ad -->
+        <button class="w-full mt-3 rounded-2xl bg-white px-4 py-3.5 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition flex items-center gap-3" data-page-node-id="EzNzQS3KfwMzhEYBRIlSl0">
+          <span class="w-9 h-9 rounded-xl bg-[#FBF1EF] flex items-center justify-center" data-page-node-id="2OjDCcVtqDi4Yf3YUtygVH"><i data-lucide="play" class="w-4 h-4 text-[#A8402F]" data-page-node-id="QWUboJE0HDFSyAmRhRU8ub"></i></span>
+          <span class="text-left" data-page-node-id="kjJuo2bM3aUdkTIyP2rpjF"><span class="block text-xs font-semibold" data-page-node-id="d0g369fSBZ01KGFNtsFSJd">看一段视频，免费换一批</span><span class="block text-[10px] text-[#A8A199] mt-0.5" data-page-node-id="2AcASSVaWtJNZlONawu4fL">约 30 秒，今日还剩 1 次</span></span>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-[#C9C2B6] ml-auto" data-page-node-id="tgfHm4eIomycFHAmE58ott"></i>
+        </button>
+
+        <!-- collected names -->
+        <div class="flex items-center justify-between mt-6 mb-2.5" data-page-node-id="xe5HbCgJdavaQ758j4B73a">
+          <p class="text-xs text-[#78716C]" data-page-node-id="yj1NJgj0IDyIqBM5CN4sR9">已收藏 · 5 个</p>
+          <button class="text-[11px] text-[#A8402F] font-medium" data-page-node-id="c8OdprromGyztxA2xdmjLD">发起家人共选</button>
+        </div>
+        <div class="space-y-2" data-page-node-id="iZx9iAkbaX8qIpjFqyrms7">
+          <div class="bg-white rounded-xl px-4 py-3 outline outline-1 outline-[#E7E2D9] flex items-center justify-between" data-page-node-id="lXKumsE6Ix3etcJCJJp6ai">
+            <div class="flex items-baseline gap-2.5" data-page-node-id="2HH4IVS9leNhgPe9SELjBO"><span class="serif text-lg font-bold" data-page-node-id="TfZJqG2N9PVvBKTtB0plcC">沈砚清</span><span class="text-[10px] text-[#A8A199]" data-page-node-id="DUwJUXRdSGat9J7v7ybMM1">古风雅致</span></div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#FBF1EF] text-[#A8402F]" data-page-node-id="DfKiBrB4t4Ls0Dw4Purz1n">爷爷已赞</span>
+          </div>
+          <div class="bg-white rounded-xl px-4 py-3 outline outline-1 outline-[#E7E2D9] flex items-center justify-between" data-page-node-id="83qj48R3fq7p9CD2eM1eFm">
+            <div class="flex items-baseline gap-2.5" data-page-node-id="je4Hnik1ohapjrFjOytmJL"><span class="serif text-lg font-bold" data-page-node-id="zE9F36ltVLD7mSFVS2Hfp3">沈亦楠</span><span class="text-[10px] text-[#A8A199]" data-page-node-id="JdNw1qG6p2owtIfk0AQsOI">自然清新</span></div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#EEF3EE] text-[#4D6B54]" data-page-node-id="XCG4l5XfCHtIYkB4NqtOy6">妈妈已赞</span>
+          </div>
+          <div class="bg-white rounded-xl px-4 py-3 outline outline-1 outline-[#E7E2D9] flex items-center justify-between" data-page-node-id="BB649hb5HiPvBNQnvHMg3t">
+            <div class="flex items-baseline gap-2.5" data-page-node-id="lOAyszq2FXF7kbc1gQ498N"><span class="serif text-lg font-bold" data-page-node-id="S3M9lGF8D1MT5DjVds2VYt">沈知行</span><span class="text-[10px] text-[#A8A199]" data-page-node-id="5Ckpb86ycH4AGuzD8NWrdF">典籍感</span></div>
+            <span class="text-[10px] text-[#A8A199]" data-page-node-id="F7JG7Wx1qP8gUHDxhlC7x1">待家人查看</span>
+          </div>
+        </div>
+
+        <!-- privacy entry -->
+        <button class="w-full mt-4 mb-4 rounded-xl bg-white px-4 py-3 outline outline-1 outline-[#E7E2D9] hover:outline-[#A8402F] transition flex items-center gap-2.5" data-page-node-id="dsS2c8q4HMu5yUzA4S9JaY">
+          <i data-lucide="shield" class="w-4 h-4 text-[#57534E]" data-page-node-id="EVSfiY37QRTqoGaj1uXL5Q"></i>
+          <span class="text-xs text-[#57534E]" data-page-node-id="MkDsSg2MIbj4LVPofhPpku">隐私与数据</span>
+          <span class="ml-auto text-[10px] text-[#A8A199]" data-page-node-id="XOlonlps0rTe3RMvcjFgU5">删除我的全部数据 ›</span>
+        </button>
+      </div>
+
+      <!-- tab bar -->
+      <div class="border-t border-[#E7E2D9] bg-white/80 backdrop-blur px-8 pt-2.5 pb-7 grid grid-cols-4 text-[10px] text-[#A8A199]" data-page-node-id="GJmJEb2Z0Zs26ExRazhzTr">
+        <button class="flex flex-col items-center gap-1 text-[#A8402F]" data-page-node-id="nxtlv5SoK38p7h3K4wdOhA"><i data-lucide="home" class="w-5 h-5" data-page-node-id="mRotrznzj6R2jegBtFWGX1"></i>取名</button>
+        <button class="flex flex-col items-center gap-1 hover:text-[#1C1917] transition" data-page-node-id="9jq42ezFv6Mt80jDR7Defk"><i data-lucide="cat" class="w-5 h-5" data-page-node-id="N3aGH1gxRjej2GTYVAFNfe"></i>灵感小铺</button>
+        <button class="flex flex-col items-center gap-1 text-[#1C1917]" data-page-node-id="VYJwpM0R5ppYxwXis2tdP2"><i data-lucide="folder-heart" class="w-5 h-5" data-page-node-id="N1YMdFaT2bQVr7tP8Am8Sx"></i>选名夹</button>
+        <button class="flex flex-col items-center gap-1 hover:text-[#1C1917] transition" data-page-node-id="HDYYLoHO6zUbbETAHfZCAW"><i data-lucide="user" class="w-5 h-5" data-page-node-id="ELuVIILgDxrAl0BtYu1zD0"></i>我的</button>
+      </div>
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-[#1C1917]/70" data-page-node-id="VckIq4mK04EHnFdyJGl7Dl"></div>
+    </div>
+    <p class="text-sm text-[#78716C]" data-page-node-id="NWIvK75IFxSSJTzos1E6Zl"><span class="font-semibold text-[#1C1917]" data-page-node-id="oKFe1hSNXBFBnGPJ5E9bgM">06 · 选名夹与解锁</span> — 免费 2 批 → 激励视频/¥9.9 深度包；「灵感小铺」承接韩系日系等风格</p>
+  </section>
+
+</main>
+
+<footer class="max-w-[1400px] mx-auto px-8 pb-16" data-page-node-id="AZnSJfLcNOdeCyuKkJqPqb">
+  <div class="border-t border-[#D6D0C6] pt-6 text-xs text-[#78716C] leading-6" data-page-node-id="B10E7OqMmp1R7lZPNH83rS">
+    <p class="font-semibold text-[#1C1917]" data-page-node-id="jcgLsUUTjLCHyvhdfeC8cY">设计说明</p>
+    <p data-page-node-id="0jNNBlBATmCGJ0oJUAUDv0">· 配色取「宣纸 + 墨 + 朱砂」：底 #F7F5F1 / 墨 #1C1917 / 朱砂 #A8402F；名字用衬线字体（Noto Serif SC），UI 用系统黑体，强化"汉字美学"气质。</p>
+    <p data-page-node-id="y8Uhha081vSitPxNeqh9Sr">· 合规内嵌：AI 生成标识横幅（屏 01）、免责声明全链路（屏 01/03）、海报字段白名单脱敏（屏 05）、数据自助删除入口（屏 06）、生辰仅为可选（屏 01）、无任何评分/吉凶语义（全程）。</p>
+    <p data-page-node-id="kG3Jrq5BmJEcB31FerauPd">· 商业化路径：免费 2 批 → 激励视频 +1 批 → ¥9.9/¥19.9 深度包（虚拟支付），广告位不遮挡核心内容。</p>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+</script>
+</body>
+</html>

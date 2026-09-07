@@ -1,0 +1,41 @@
+/* style-chips 样式 */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #f4f1e8;
+  border: 2rpx solid #e3ddcc;
+  transition: all 0.15s ease;
+}
+
+.chip--on {
+  background: #2f3a2f;
+  border-color: #2f3a2f;
+}
+
+.chip--on .chip-emoji,
+.chip--on .chip-label {
+  color: #f7f4ec;
+}
+
+.chip--tap {
+  opacity: 0.85;
+}
+
+.chip-emoji {
+  font-size: 24rpx;
+  margin-right: 8rpx;
+  color: #8a8368;
+}
+
+.chip-label {
+  font-size: 26rpx;
+  color: #4a4536;
+}

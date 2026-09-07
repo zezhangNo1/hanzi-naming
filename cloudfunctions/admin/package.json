@@ -1,0 +1,9 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "description": "管理云函数：词库/语料更新（不开放前端调用，仅控制台与云函数间调用）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

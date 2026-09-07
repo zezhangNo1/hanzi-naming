@@ -1,0 +1,101 @@
+<!-- index 页 — 首页输入（T03）：首屏 3 项必填 + 渐进折叠卡 -->
+<view class="page">
+  <!-- AI 生成标识横幅（合规固定要素） -->
+  <aigc-banner />
+
+  <view class="hero">
+    <text class="hero-title font-serif">好名字，从字义与音律开始</text>
+    <text class="hero-sub">基于通用规范汉字表白名单与四维音律规则生成候选</text>
+  </view>
+
+  <!-- ① 姓氏 -->
+  <view class="field-card">
+    <text class="field-label">宝宝姓氏</text>
+    <input
+      class="field-input {{surnameError ? 'field-input--err' : ''}}"
+      placeholder="请输入 1 个汉字"
+      maxlength="2"
+      value="{{surname}}"
+      bindinput="onSurnameInput"
+    />
+    <text wx:if="{{surnameError}}" class="field-error">{{surnameError}}</text>
+  </view>
+
+  <!-- ② 性别 -->
+  <view class="field-card">
+    <text class="field-label">宝宝性别</text>
+    <view class="gender-row">
+      <view class="gender-btn {{gender === 'male' ? 'gender-btn--on' : ''}}" data-gender="male" bindtap="onGenderTap">
+        <text>男宝</text>
+      </view>
+      <view class="gender-btn {{gender === 'female' ? 'gender-btn--on' : ''}}" data-gender="female" bindtap="onGenderTap">
+        <text>女宝</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ③ 风格（可跳过 = 不限） -->
+  <view class="field-card">
+    <text class="field-label">风格偏好<text class="field-optional">（可多选，不选即不限）</text></text>
+    <style-chips value="{{styles}}" bindchange="onStylesChange" />
+  </view>
+
+  <!-- 渐进折叠卡：字辈 -->
+  <progressive-card title="字辈用字" subtitle="如「承」字辈，将优先组合">
+    <input class="field-input" placeholder="请输入字辈用字（选填）" maxlength="1" value="{{generationChar}}" bindinput="onGenerationCharInput" />
+  </progressive-card>
+
+  <!-- 渐进折叠卡：避讳字 -->
+  <progressive-card title="避讳用字" subtitle="需避开的字，如长辈名用字">
+    <input class="field-input" placeholder="多个字用空格或顿号隔开（选填）" value="{{avoidCharsInput}}" bindinput="onAvoidCharsInput" />
+  </progressive-card>
+
+  <!-- 渐进折叠卡：寄语 -->
+  <progressive-card title="期望寄语" subtitle="一句话描述对孩子的期待">
+    <input class="field-input" placeholder="如：希望沉心笃学（选填）" maxlength="50" value="{{wishes}}" bindinput="onWishesInput" />
+  </progressive-card>
+
+  <!-- 渐进折叠卡：方言谐音检测 -->
+  <progressive-card title="方言谐音检测" subtitle="检测候选名在方言中的歧义">
+    <view class="chips">
+      <view
+        wx:for="{{dialectChips}}"
+        wx:key="key"
+        class="chip {{dialects.indexOf(item.key) > -1 ? 'chip--on' : ''}} {{item.enabled ? '' : 'chip--disabled'}}"
+        data-key="{{item.key}}"
+        bindtap="onDialectTap"
+      >
+        <text class="chip-label">{{item.label}}</text>
+        <text wx:if="{{!item.enabled}}" class="chip-disabled-tag">即将支持</text>
+      </view>
+    </view>
+  </progressive-card>
+
+  <!-- 渐进折叠卡：生辰（暂未开放） -->
+  <progressive-card title="宝宝生辰" subtitle="暂未开放">
+    <view class="birth-row" bindtap="onBirthItemTap">
+      <text class="birth-text">生辰为敏感信息，需单独授权后填写</text>
+      <text class="birth-tag">暂未开放</text>
+    </view>
+  </progressive-card>
+
+  <!-- 提交按钮 -->
+  <button class="submit-btn {{submitting ? 'submit-btn--loading' : ''}}" bindtap="onSubmit" disabled="{{submitting}}">
+    {{submitting ? '正在生成…' : '开始取名'}}
+  </button>
+
+  <!-- 免费额度提示 -->
+  <text class="quota-hint">免费生成 {{2}} 批 · 看广告可多换 {{1}} 批</text>
+
+  <!-- 免责声明（合规统一文案） -->
+  <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
+
+  <!-- 解锁卡（2001 触发；B4 完整商业化解锁卡） -->
+  <view class="quota-mask" wx:if="{{showQuotaCard}}" bindtap="onQuotaCardClose">
+    <view class="quota-card" catchtap="">
+      <text class="quota-title">免费批次已用完</text>
+      <text class="quota-desc">看一次广告可再换 1 批候选（即将上线），或升级深度生成</text>
+      <button class="quota-btn" bindtap="onQuotaCardClose">知道了</button>
+    </view>
+  </view>
+</view>

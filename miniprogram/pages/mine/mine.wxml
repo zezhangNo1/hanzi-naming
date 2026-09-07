@@ -1,0 +1,6 @@
+<!-- mine 页占位 -->
+<view class="page-pad">
+  <view class="placeholder-card">
+    <text class="font-serif">我的 · 占位页</text>
+  </view>
+</view>

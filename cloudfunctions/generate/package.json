@@ -1,0 +1,9 @@
+{
+  "name": "generate",
+  "version": "0.1.0",
+  "description": "起名主流程云函数：LLM 生成 + 规则层 + 过滤流水线",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

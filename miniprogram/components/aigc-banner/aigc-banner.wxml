@@ -1,0 +1,4 @@
+<!-- aigc-banner：AI 生成标识（固定横幅，不可关闭） -->
+<view class="aigc">
+  <text class="aigc-text">{{text}}</text>
+</view>

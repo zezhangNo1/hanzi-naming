@@ -1,0 +1,9 @@
+{
+  "name": "vote",
+  "version": "0.1.0",
+  "description": "家人共选云函数：房间创建/匿名投票/结果查询",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

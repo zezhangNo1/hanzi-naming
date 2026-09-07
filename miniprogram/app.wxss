@@ -1,0 +1,50 @@
+/**
+ * app.wxss — 全局样式：色板变量 + 衬线字体定义
+ * 配色来自原型稿：宣纸底 / 墨色文字 / 朱砂点缀
+ */
+page {
+  /* ===== 色板变量 ===== */
+  --paper: #F7F4EC;          /* 宣纸：全局底色 */
+  --paper-deep: #EFEAE0;     /* 宣纸加深：卡片分隔/阴影底 */
+  --ink: #1C1C1C;            /* 墨：主文字 */
+  --ink-60: rgba(28, 28, 28, 0.6);   /* 墨 60%：次级文字 */
+  --ink-30: rgba(28, 28, 28, 0.3);   /* 墨 30%：占位/描边 */
+  --cinnabar: #B03A2E;       /* 朱砂：强调、按钮、收藏标记 */
+  --cinnabar-soft: rgba(176, 58, 46, 0.08); /* 朱砂浅底 */
+
+  /* ===== 字体定义 ===== */
+  --font-serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", serif; /* 名字衬线字体 */
+  --font-sans: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif; /* 正文无衬线 */
+
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* ===== 通用工具类（占位阶段仅提供基础能力） ===== */
+
+/* 名字专用衬线字体 */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* 朱砂强调色 */
+.color-cinnabar {
+  color: var(--cinnabar);
+}
+
+/* 页面安全内边距容器 */
+.page-pad {
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+/* 占位卡片样式 */
+.placeholder-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.04);
+}

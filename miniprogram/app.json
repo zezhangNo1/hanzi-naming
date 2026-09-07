@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/result/result",
+    "pages/detail/detail",
+    "pages/vote/vote",
+    "pages/poster/poster",
+    "pages/folder/folder",
+    "pages/inspiration/inspiration",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F7F4EC",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "汉字美学",
+    "backgroundColor": "#F7F4EC",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "requiredPrivateInfos": [],
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,14 @@
+<!-- style-chips：8 风格多选（选中态 accent 高亮） -->
+<view class="chips">
+  <view
+    wx:for="{{styles}}"
+    wx:key="key"
+    class="chip {{value.indexOf(item.key) > -1 ? 'chip--on' : ''}}"
+    data-key="{{item.key}}"
+    bindtap="onToggle"
+    hover-class="chip--tap"
+  >
+    <text class="chip-emoji">{{item.emoji}}</text>
+    <text class="chip-label">{{item.key}}</text>
+  </view>
+</view>

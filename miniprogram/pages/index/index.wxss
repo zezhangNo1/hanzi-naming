@@ -1,0 +1,232 @@
+/* index 页样式（全局色板与字体见 app.wxss） */
+.page {
+  padding: 24rpx 32rpx 60rpx;
+  background: #f7f4ec;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 标题区 */
+.hero {
+  padding: 12rpx 8rpx 28rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title {
+  font-size: 44rpx;
+  color: #2f3a2f;
+  font-weight: 600;
+  letter-spacing: 4rpx;
+}
+
+.hero-sub {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #a09778;
+}
+
+/* 输入卡 */
+.field-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  border: 2rpx solid #eee8d8;
+  padding: 26rpx 28rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  font-size: 28rpx;
+  color: #3d382b;
+  font-weight: 500;
+  margin-bottom: 18rpx;
+}
+
+.field-optional {
+  font-size: 22rpx;
+  color: #b0a889;
+  font-weight: 400;
+}
+
+.field-input {
+  background: #faf8f0;
+  border-radius: 12rpx;
+  padding: 18rpx 22rpx;
+  font-size: 30rpx;
+  color: #2f3a2f;
+}
+
+.field-input--err {
+  border: 2rpx solid #c0574f;
+}
+
+.field-error {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #c0574f;
+}
+
+/* 性别 */
+.gender-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.gender-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: 14rpx;
+  background: #f4f1e8;
+  border: 2rpx solid #e3ddcc;
+  font-size: 28rpx;
+  color: #4a4536;
+}
+
+.gender-btn--on {
+  background: #2f3a2f;
+  border-color: #2f3a2f;
+  color: #f7f4ec;
+}
+
+/* 方言 chips（复用 style-chips 视觉） */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #f4f1e8;
+  border: 2rpx solid #e3ddcc;
+}
+
+.chip--on {
+  background: #2f3a2f;
+  border-color: #2f3a2f;
+}
+
+.chip--on .chip-label {
+  color: #f7f4ec;
+}
+
+.chip--disabled {
+  opacity: 0.45;
+}
+
+.chip-label {
+  font-size: 26rpx;
+  color: #4a4536;
+}
+
+.chip-disabled-tag {
+  margin-left: 8rpx;
+  font-size: 18rpx;
+  color: #b0a889;
+}
+
+/* 生辰 */
+.birth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.birth-text {
+  font-size: 24rpx;
+  color: #8a8368;
+}
+
+.birth-tag {
+  font-size: 20rpx;
+  color: #a09778;
+  border: 2rpx solid #ddd5be;
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  margin-top: 36rpx;
+  background: #2f3a2f;
+  color: #f7f4ec;
+  font-size: 32rpx;
+  border-radius: 999rpx;
+  padding: 8rpx 0;
+  letter-spacing: 8rpx;
+}
+
+.submit-btn--loading {
+  opacity: 0.7;
+}
+
+.quota-hint {
+  display: block;
+  text-align: center;
+  margin-top: 18rpx;
+  font-size: 22rpx;
+  color: #a09778;
+}
+
+/* 免责声明 */
+.disclaimer {
+  display: block;
+  text-align: center;
+  margin-top: 24rpx;
+  font-size: 20rpx;
+  color: #b5ac8e;
+  line-height: 1.6;
+}
+
+/* 解锁卡（2001 最小面板） */
+.quota-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.quota-card {
+  width: 560rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 44rpx 36rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quota-title {
+  font-size: 34rpx;
+  color: #2f3a2f;
+  font-weight: 600;
+}
+
+.quota-desc {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+  color: #8a8368;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.quota-btn {
+  margin-top: 32rpx;
+  width: 100%;
+  background: #2f3a2f;
+  color: #f7f4ec;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+}

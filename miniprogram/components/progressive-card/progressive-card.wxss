@@ -1,0 +1,59 @@
+/* progressive-card 样式 */
+.pcard {
+  background: #ffffff;
+  border-radius: 20rpx;
+  border: 2rpx solid #eee8d8;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.pcard-head {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 28rpx;
+}
+
+.pcard-head--tap {
+  background: #faf8f0;
+}
+
+.pcard-titles {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.pcard-title {
+  font-size: 28rpx;
+  color: #3d382b;
+  font-weight: 500;
+}
+
+.pcard-badge {
+  margin-left: 12rpx;
+  font-size: 20rpx;
+  color: #a09778;
+  border: 2rpx solid #ddd5be;
+  border-radius: 8rpx;
+  padding: 2rpx 10rpx;
+}
+
+.pcard-subtitle {
+  font-size: 24rpx;
+  color: #b0a889;
+  margin-right: 16rpx;
+  max-width: 320rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pcard-arrow {
+  font-size: 24rpx;
+  color: #a09778;
+}
+
+.pcard-body {
+  padding: 4rpx 28rpx 28rpx;
+  border-top: 2rpx solid #f4efe2;
+}

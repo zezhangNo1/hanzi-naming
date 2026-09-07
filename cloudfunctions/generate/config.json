@@ -1,0 +1,14 @@
+{
+  "timeout": 60,
+  "envVariables": {
+    "_NOTE": "LLM_API_KEY / LLM_BASE_URL / LLM_MODEL 通过云开发控制台配置，严禁写入本文件",
+    "_NOTE_TYPE": "JSON 中环境变量只能是字符串：FREE_BATCH_LIMIT / AD_BATCH_LIMIT 代码取用时需 parseInt 再做数值比较",
+    "FREE_BATCH_LIMIT": "2",
+    "AD_BATCH_LIMIT": "1"
+  },
+  "permissions": {
+    "openapi": [
+      "security.msgSecCheck"
+    ]
+  }
+}

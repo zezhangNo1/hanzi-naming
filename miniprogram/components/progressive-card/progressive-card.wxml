@@ -1,0 +1,14 @@
+<!-- progressive-card：默认收起的选填折叠卡 -->
+<view class="pcard {{expanded ? 'pcard--open' : ''}}">
+  <view class="pcard-head" bindtap="onToggle" hover-class="pcard-head--tap">
+    <view class="pcard-titles">
+      <text class="pcard-title">{{title}}</text>
+      <text wx:if="{{optional}}" class="pcard-badge">选填</text>
+    </view>
+    <text class="pcard-subtitle" wx:if="{{subtitle && !expanded}}">{{subtitle}}</text>
+    <text class="pcard-arrow">{{expanded ? '收起' : '展开'}}</text>
+  </view>
+  <view class="pcard-body" wx:if="{{expanded}}">
+    <slot></slot>
+  </view>
+</view>

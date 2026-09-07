@@ -1,0 +1,6 @@
+<!-- detail 页占位 -->
+<view class="page-pad">
+  <view class="placeholder-card">
+    <text class="font-serif">名字报告 · 占位页</text>
+  </view>
+</view>
