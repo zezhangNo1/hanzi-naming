@@ -24,15 +24,34 @@ Component({
     /** 当前选中风格数组（外部受控） */
     value: {
       type: Array,
-      value: []
+      value: [],
+      observer(val) {
+        // WXML 绑定不支持函数调用（indexOf 等），用对象映射表达选中态
+        this.setData({ selectedMap: this._toMap(val) });
+      }
     }
   },
 
   data: {
-    styles: STYLE_LIST
+    styles: STYLE_LIST,
+    /** 选中态映射：{ 风格名: true }，供 WXML 查表 */
+    selectedMap: {}
+  },
+
+  lifetimes: {
+    attached() {
+      this.setData({ selectedMap: this._toMap(this.data.value) });
+    }
   },
 
   methods: {
+    /** 选中数组 → 查表对象 */
+    _toMap(arr) {
+      const map = {};
+      (arr || []).forEach((k) => { map[k] = true; });
+      return map;
+    },
+
     /** 点击 chip：切换选中态并外抛 */
     onToggle(e) {
       const key = e.currentTarget.dataset.key;
@@ -43,7 +62,7 @@ Component({
       } else {
         current.splice(idx, 1);
       }
-      this.setData({ value: current });
+      this.setData({ value: current, selectedMap: this._toMap(current) });
       this.triggerEvent('change', { value: current });
     }
   }

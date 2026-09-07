@@ -70,7 +70,13 @@ function call(name, action, data = {}) {
         // 网络失败 / 云函数不存在 / 超时等：统一 code = -1
         const errMsg = (err && err.errMsg) || '网络异常';
         console.error('[request] 云函数调用失败：', name, action, errMsg);
-        toast('网络异常，请检查网络后重试');
+        // 云环境未就绪（-501000 Environment invalid 等）：给出可操作的提示
+        if (/(-501000|Environment invalid|envCheckError|cloud function execution error)/i.test(errMsg) ||
+            (err && err.errCode === -501000)) {
+          toast('云开发环境未就绪：请在工具内开通「云开发」并部署云函数');
+        } else {
+          toast('网络异常，请检查网络后重试');
+        }
         reject({ code: NETWORK_ERROR_CODE, msg: errMsg, raw: err });
       });
   });

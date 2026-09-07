@@ -1,6 +1,50 @@
-<!-- result 页占位 -->
-<view class="page-pad">
-  <view class="placeholder-card">
-    <text class="font-serif">生成结果 · 占位页</text>
+<!-- result 页：生成结果列表（B2 最小验证版） -->
+<view class="page">
+
+  <!-- 降级标记（3001：规则引擎兜底生成，正常展示） -->
+  <view wx:if="{{degraded}}" class="degraded-banner">
+    <text>规则模式生成 · 仅供参考</text>
   </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="state-box">
+    <text class="state-title font-serif">正在为宝宝精心取名…</text>
+    <text class="state-sub">通常只需几秒钟</text>
+  </view>
+
+  <!-- 失败/超时 -->
+  <view wx:elif="{{loadFailed}}" class="state-box">
+    <text class="state-title font-serif">生成没有成功</text>
+    <text class="state-sub">可能是网络波动，稍后再试一次</text>
+    <view class="btn-row">
+      <button class="btn btn--primary" bindtap="onRetryTap">重试</button>
+      <button class="btn" bindtap="onBackToEdit">返回调整条件</button>
+    </view>
+  </view>
+
+  <!-- 候选列表 -->
+  <block wx:elif="{{candidates.length > 0}}">
+    <view class="candidate" wx:for="{{candidates}}" wx:key="id">
+      <view class="candidate-head">
+        <text class="candidate-name font-serif">{{item.name}}</text>
+        <text class="candidate-pinyin">{{item.pinyin}}</text>
+      </view>
+      <view class="candidate-tags">
+        <text wx:if="{{item.tones}}" class="tag">平仄 {{item.tones}}</text>
+        <text wx:if="{{item.strokes}}" class="tag">总笔画 {{item.strokes}}</text>
+        <text wx:if="{{item.style}}" class="tag">{{item.style}}</text>
+      </view>
+      <text class="candidate-meaning">{{item.meaning}}</text>
+    </view>
+
+    <!-- 底部额度与操作 -->
+    <view class="footer">
+      <text class="quota">剩余额度：免费 {{quota.freeLeft}} · 广告 {{quota.adLeft}} · 付费 {{quota.paidLeft}}</text>
+      <button class="btn btn--primary btn--block {{regenerating ? 'btn--disabled' : ''}}" bindtap="onRegenerate">
+        {{regenerating ? '正在生成…' : '换一批'}}
+      </button>
+      <button class="btn btn--block" bindtap="onBackToEdit">返回调整条件</button>
+      <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
+    </view>
+  </block>
 </view>

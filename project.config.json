@@ -5,7 +5,7 @@
   "compileType": "miniprogram",
   "appid": "wx9fa9820c3550351b",
   "projectname": "hanzi-naming",
-  "libVersion": "3.7.12",
+  "libVersion": "3.6.6",
   "setting": {
     "es6": true,
     "enhance": true,

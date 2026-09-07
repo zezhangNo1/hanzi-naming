@@ -8,7 +8,7 @@
  */
 module.exports = {
   /** 云开发环境 ID 占位：部署前替换，如 "hanzi-dev-8g0xxx" */
-  CLOUD_ENV: 'CLOUD_ENV_PLACEHOLDER',
+  CLOUD_ENV: 'cloud1-d7g7dev8ec78ed7b5',
 
   /** 小程序版本号（与提审版本对齐，便于埋点分析分版本观察） */
   VERSION: '0.1.0',

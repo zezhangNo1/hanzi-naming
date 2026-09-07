@@ -14,9 +14,9 @@
     <input
       class="field-input {{surnameError ? 'field-input--err' : ''}}"
       placeholder="请输入 1 个汉字"
-      maxlength="2"
       value="{{surname}}"
       bindinput="onSurnameInput"
+      bindblur="onSurnameBlur"
     />
     <text wx:if="{{surnameError}}" class="field-error">{{surnameError}}</text>
   </view>
@@ -42,7 +42,7 @@
 
   <!-- 渐进折叠卡：字辈 -->
   <progressive-card title="字辈用字" subtitle="如「承」字辈，将优先组合">
-    <input class="field-input" placeholder="请输入字辈用字（选填）" maxlength="1" value="{{generationChar}}" bindinput="onGenerationCharInput" />
+    <input class="field-input" placeholder="请输入字辈用字（选填）" value="{{generationChar}}" bindinput="onGenerationCharInput" bindblur="onGenerationCharBlur" />
   </progressive-card>
 
   <!-- 渐进折叠卡：避讳字 -->
@@ -52,7 +52,7 @@
 
   <!-- 渐进折叠卡：寄语 -->
   <progressive-card title="期望寄语" subtitle="一句话描述对孩子的期待">
-    <input class="field-input" placeholder="如：希望沉心笃学（选填）" maxlength="50" value="{{wishes}}" bindinput="onWishesInput" />
+    <input class="field-input" placeholder="如：希望沉心笃学（选填）" value="{{wishes}}" bindinput="onWishesInput" bindblur="onWishesBlur" />
   </progressive-card>
 
   <!-- 渐进折叠卡：方言谐音检测 -->
@@ -61,7 +61,7 @@
       <view
         wx:for="{{dialectChips}}"
         wx:key="key"
-        class="chip {{dialects.indexOf(item.key) > -1 ? 'chip--on' : ''}} {{item.enabled ? '' : 'chip--disabled'}}"
+        class="chip {{dialectMap[item.key] ? 'chip--on' : ''}} {{item.enabled ? '' : 'chip--disabled'}}"
         data-key="{{item.key}}"
         bindtap="onDialectTap"
       >

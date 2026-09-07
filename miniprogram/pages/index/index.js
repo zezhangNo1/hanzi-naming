@@ -34,6 +34,8 @@ Page({
     avoidCharsInput: '',
     wishes: '',
     dialects: [],
+    /** 方言选中态映射（WXML 不支持函数调用，查表用） */
+    dialectMap: {},
     dialectChips: DIALECT_CHIPS,
     // 状态
     submitting: false,
@@ -57,6 +59,12 @@ Page({
     });
   },
 
+  /** 失焦归一化：多个字时取第一个字（输入期不做截断，避免打断输入法拼音组合） */
+  onSurnameBlur(e) {
+    const chars = Array.from((e.detail.value || '').trim());
+    this.setData({ surname: chars[0] || '' });
+  },
+
   onGenderTap(e) {
     this.setData({ gender: e.currentTarget.dataset.gender });
   },
@@ -66,8 +74,14 @@ Page({
   },
 
   onGenerationCharInput(e) {
-    // 字辈仅取首字
-    this.setData({ generationChar: Array.from((e.detail.value || '').trim())[0] || '' });
+    // 输入期不截断（避免打断拼音组合），失焦/提交时归一化
+    this.setData({ generationChar: (e.detail.value || '').trim() });
+  },
+
+  /** 失焦归一化：仅取第一个字 */
+  onGenerationCharBlur(e) {
+    const first = Array.from((e.detail.value || '').trim())[0] || '';
+    this.setData({ generationChar: first });
   },
 
   onAvoidCharsInput(e) {
@@ -78,6 +92,11 @@ Page({
     this.setData({ wishes: e.detail.value || '' });
   },
 
+  /** 失焦归一化：截断到 50 字 */
+  onWishesBlur(e) {
+    this.setData({ wishes: (e.detail.value || '').slice(0, 50) });
+  },
+
   onDialectTap(e) {
     const key = e.currentTarget.dataset.key;
     const chip = DIALECT_CHIPS.find((d) => d.key === key);
@@ -85,7 +104,9 @@ Page({
     const current = this.data.dialects.slice();
     const idx = current.indexOf(key);
     if (idx === -1) current.push(key); else current.splice(idx, 1);
-    this.setData({ dialects: current });
+    const map = {};
+    current.forEach((k) => { map[k] = true; });
+    this.setData({ dialects: current, dialectMap: map });
   },
 
   /** 生辰：B2 仅展示「暂未开放」，不做授权弹窗（B4 接入 user.setBirthConsent） */
@@ -112,9 +133,11 @@ Page({
 
     // constraints 序列化（对齐 name_jobs.constraints schema）
     const avoidChars = Array.from(this.data.avoidCharsInput.replace(/[\s,，、]/g, ''));
+    // 字辈未失焦时在提交侧归一化（仅取首字）
+    const genChar = Array.from(this.data.generationChar.trim())[0] || '';
     const constraints = {
       birth: null, // B2 生辰未开放，恒 null
-      generationChar: this.data.generationChar || '',
+      generationChar: genChar,
       avoidChars: avoidChars,
       wishes: this.data.wishes.slice(0, 50),
       dialects: this.data.dialects.slice()

@@ -31,26 +31,37 @@ function solve(input) {
   // 姓氏元数据：拼音/声调/笔画取自 hanzi-strokes；释义取 hanzi-core（若有）
   const surnameMeta = buildSurnameMeta(input.surname);
 
-  // 避讳过滤 + 姓字回避（解空间内不含避讳字与姓氏本身）
+  // 字池来源：人名精选字池（正向白名单，v0.2 起替代 hanzi-core 全量粗标池——
+  // 粗标按部首打标签混入奴/奸/钓/钙等不宜入名字，逐字黑名单不可穷尽）。
+  // 元数据（拼音/笔画/声调/意象/释义）回查 hanzi-core，缺失时退 hanzi-strokes + 通用释义。
+  // 过滤：避讳字、姓氏本身、名字适用性黑名单（字辈字豁免）。
   const pool = [];
-  for (const entry of loader.hanziCore.chars) {
-    if (entry.char === input.surname) continue;
-    if (avoidSet.has(entry.char)) continue;
+  const poolChars = new Set();
+  for (const charKey of Object.keys(loader.namePoolMap)) {
+    if (charKey === input.surname) continue;
+    if (avoidSet.has(charKey)) continue;
+    if (loader.nameBlockSet.has(charKey) && charKey !== generationChar) continue;
+    if (loader.redlineSingleCharSet.has(charKey)) continue; // 字形本身是红线词（吉/凶等）不入名
+    const core = loader.coreMap[charKey];
+    const meta = core || loader.strokesMap[charKey];
+    if (!meta || !meta.pinyin || !meta.strokes) continue; // 无拼音/笔画的字无法参与组合
+    poolChars.add(charKey);
     pool.push({
-      char: entry.char,
-      strokes: entry.strokes,
-      pinyin: entry.pinyin,
-      tone: entry.tone,
-      freqLevel: entry.freqLevel,
-      imageryTags: entry.imageryTags,
-      meaning: entry.meaning,
+      char: charKey,
+      strokes: meta.strokes,
+      pinyin: meta.pinyin,
+      tone: meta.tone,
+      freqLevel: core ? core.freqLevel : 'mid',
+      imageryTags: core ? core.imageryTags : [],
+      meaning: core ? core.meaning : '人名常用字，寓意美好',
+      genderAffinity: loader.namePoolMap[charKey], // m|f|n，引擎性别偏置用
       possibleQuotes: [] // B3：语料索引接入后填充 3-5 条佳句
     });
   }
 
-  // 字辈字强制入池（绕过避讳过滤不成立——避讳优先级高于字辈，二者冲突时避讳胜出）
-  if (generationChar && !avoidSet.has(generationChar) && !loader.coreMap[generationChar]) {
-    // 字辈字不在精选库时，从全量笔画库补入（仍须在白名单内）
+  // 字辈字强制入池（避讳优先级高于字辈，二者冲突时避讳胜出；
+  // 字辈字不在精选池时从全量笔画库补入，仍须在白名单内）
+  if (generationChar && !avoidSet.has(generationChar) && !poolChars.has(generationChar)) {
     const meta = loader.strokesMap[generationChar];
     if (meta && loader.whitelistSet.has(generationChar)) {
       pool.push({
@@ -61,6 +72,7 @@ function solve(input) {
         freqLevel: 'mid',
         imageryTags: ['自然'],
         meaning: '字辈用字',
+        genderAffinity: 'n',
         possibleQuotes: []
       });
     }

@@ -18,10 +18,17 @@ App({
       console.error('当前基础库过低，无法使用云能力，请升级基础库 ≥ 2.2.3');
       return;
     }
-    wx.cloud.init({
-      env: CLOUD_ENV,
-      traceUser: true
-    });
+    if (!CLOUD_ENV || CLOUD_ENV.indexOf('PLACEHOLDER') > -1) {
+      // 未配置环境 ID：使用默认环境（开发者工具「云开发」控制台中创建的第一个环境）
+      console.warn('[cloud] config/env.js 的 CLOUD_ENV 尚未配置，正在使用默认云环境。'
+        + '正式开发请开通云开发后，将环境 ID 填入 miniprogram/config/env.js');
+      wx.cloud.init({ traceUser: true });
+    } else {
+      wx.cloud.init({
+        env: CLOUD_ENV,
+        traceUser: true
+      });
+    }
 
     // 2. 埋点底座初始化（隐私授权同意后才会真正上报，见 tracker.setConsent）
     tracker.init();

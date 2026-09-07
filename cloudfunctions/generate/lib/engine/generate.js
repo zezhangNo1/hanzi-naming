@@ -41,14 +41,23 @@ function generate(input) {
   const topN = p.generate.topN;
 
   // 1. 基础过滤：同姓字回避（名中不重复用姓字，避免姓=名歧义）
-  const base = (input.pool || []).filter((c) => c.char !== input.surname && c.strokes > 0 && c.pinyin);
+  //    + 笔画下限（minCharStrokes：滤掉丁/乃/丫/丸类 1-2 画怪字，默认 3 画起）
+  const minStrokes = (p.generate && p.generate.minCharStrokes) || 1;
+  const base = (input.pool || []).filter((c) =>
+    c.char !== input.surname && c.strokes >= minStrokes && c.strokes > 0 && c.pinyin);
 
-  // 2. 单字预筛分：风格加权 + 字频 + 性别偏置，分位置取 top 池
-  const scored = base.map((c) => ({
-    entry: c,
-    styleScore: score.charStyleScore(input.styles, c.imageryTags, p.styles, p.genderBias, input.gender),
-    freqScore: freq.freqScore(c.freqLevel, p.freq)
-  }));
+  // 2. 单字预筛分：风格加权 + 字频 + 性别偏置 + 精选池性别亲和，分位置取 top 池
+  //    性别亲和：精选池标注 m/f/n，与请求性别一致 +1.5、相反 -1、中性 0
+  const scored = base.map((c) => {
+    const aff = c.genderAffinity
+      ? (c.genderAffinity === input.gender ? 1.5 : -1)
+      : 0;
+    return {
+      entry: c,
+      styleScore: score.charStyleScore(input.styles, c.imageryTags, p.styles, p.genderBias, input.gender) + aff,
+      freqScore: freq.freqScore(c.freqLevel, p.freq)
+    };
+  });
 
   scored.sort((a, b) => (b.styleScore + b.freqScore) - (a.styleScore + a.freqScore));
   let posPool = scored.slice(0, POOL_SIZE);
@@ -112,14 +121,25 @@ function generate(input) {
     }
   }
 
-  // 4. 排序 + 批次分段（batch=1 取前 topN；换一批顺移分段，池不足取模回绕）
+  // 4. 排序 + 多样性约束选取 + 批次分段
+  //    贪心选取：同一名字用字在整批候选中出现不超过 maxSameCharInList 次
+  //    （字辈字豁免——指定字辈时该字必须出现在每个候选中），
+  //    防止单个高频字霸占整批（历史 bug：30 个候选全带"万"）。
   combos.sort((x, y) => y._internalScore - x._internalScore || (x.name < y.name ? -1 : 1));
+  const maxSameChar = (p.generate && p.generate.maxSameCharInList) || topN;
   const start = (batch - 1) * topN;
   const picked = [];
-  if (combos.length > 0) {
-    for (let i = 0; picked.length < topN && i < combos.length; i++) {
-      picked.push(combos[(start + i) % combos.length]);
-    }
+  const charUsed = {};
+  const charCount = (ch) => charUsed[ch] || 0;
+  const capFor = (ch) => (ch === generationChar ? Infinity : maxSameChar);
+  for (let i = 0; picked.length < topN && i < combos.length * 2; i++) {
+    const combo = combos[(start + i) % combos.length];
+    if (picked.indexOf(combo) !== -1) continue; // 取模回绕后防重复收录
+    if (charCount(combo.first.char) >= capFor(combo.first.char)) continue;
+    if (charCount(combo.second.char) >= capFor(combo.second.char)) continue;
+    picked.push(combo);
+    charUsed[combo.first.char] = (charUsed[combo.first.char] || 0) + 1;
+    charUsed[combo.second.char] = (charUsed[combo.second.char] || 0) + 1;
   }
 
   // 5. 组装 candidates（schema 对齐；分值字段到此为止，不再外传）

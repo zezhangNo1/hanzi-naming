@@ -8,7 +8,9 @@
     "topN": 30,
     "nameLength": 2,
     "maxWriteCost": 40,
-    "maxSameCandidatesRatio": 0.2
+    "maxSameCandidatesRatio": 0.2,
+    "minCharStrokes": 3,
+    "maxSameCharInList": 6
   },
   "tones": {
     "pingTones": [1, 2],
@@ -29,9 +31,9 @@
   },
   "freq": {
     "duplicateMap": { "high": "high", "mid": "mid", "low": "low" },
-    "lowDuplicateBonus": 2,
-    "midDuplicateBonus": 1,
-    "highDuplicatePenalty": 1
+    "lowDuplicateBonus": -1.5,
+    "midDuplicateBonus": 2,
+    "highDuplicatePenalty": 0.5
   },
   "styles": {
     "weights": {
@@ -48,9 +50,9 @@
     "tagUnionMode": "union"
   },
   "genderBias": {
-    "note": "性别气质粗调（粗标 v0）：女宝轻提温柔系、男宝轻压女部字；正式版以热名榜性别分布校准",
-    "male": { "温柔": -1.5 },
-    "female": { "刚毅": -1.5, "力量": -1 }
+    "note": "性别气质粗调（粗标 v0）：正向提气质系字 + 负向压反气质字，幅度 ±1 避免压过字频基础质量分；正式版以热名榜性别分布校准",
+    "male": { "刚毅": 1, "力量": 0.5, "高远": 0.5, "温柔": -1 },
+    "female": { "温柔": 1, "草木": 0.5, "水泽": 0.5, "刚毅": -1, "力量": -0.5 }
   },
   "score": {
     "surnameFitWeight": 1.0,

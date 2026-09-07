@@ -3,7 +3,7 @@
   <view
     wx:for="{{styles}}"
     wx:key="key"
-    class="chip {{value.indexOf(item.key) > -1 ? 'chip--on' : ''}}"
+    class="chip {{selectedMap[item.key] ? 'chip--on' : ''}}"
     data-key="{{item.key}}"
     bindtap="onToggle"
     hover-class="chip--tap"

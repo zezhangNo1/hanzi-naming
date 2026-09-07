@@ -11,11 +11,16 @@ const cloud = require('wx-server-sdk');
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database();
-const cloudContext = cloud.getWXContext();
 
 const quota = require('./lib/quota');
 const cache = require('./lib/cache');
 const pipeline = require('./lib/pipeline');
+const { ensureCollections } = require('./lib/ensure-collections');
+
+/** 每次请求内调用 getWXContext 获取调用方身份（模块顶层调用拿不到 OPENID，严禁上移） */
+function wxOpenid() {
+  return (cloud.getWXContext() || {}).OPENID || '';
+}
 
 /** 统一响应包装 */
 function ok(data) {
@@ -44,7 +49,10 @@ async function handleCreate(event) {
   const constraints = normalizeConstraints(event.constraints);
   const source = ['free', 'ad', 'paid'].includes(event.source) ? event.source : 'free';
   const batch = Math.max(1, parseInt(event.batch, 10) || 1);
-  const openid = cloudContext.OPENID;
+  const openid = wxOpenid();
+
+  // 0. 首次调用时确保集合存在（users/name_jobs/candidates/block_log），避免 5000
+  await ensureCollections(['users', 'name_jobs', 'candidates', 'block_log']);
 
   // 1. 输入校验（姓氏 1 字）
   if (!isValidSurname(surname)) {
@@ -135,7 +143,7 @@ async function handlePoll(event) {
   if (!jobId || typeof jobId !== 'string') {
     return fail(1001, '缺少 jobId');
   }
-  const openid = cloudContext.OPENID;
+  const openid = wxOpenid();
   const found = await db.collection('name_jobs').doc(jobId).get().catch(() => null);
   if (!found || !found.data) {
     return fail(1001, '任务不存在');
@@ -204,7 +212,8 @@ exports.main = async (event, context) => {
   try {
     return await handler(event, context);
   } catch (err) {
+    // 开发阶段临时在 msg 中附带错误信息便于定位（提审前移除 debug 字段，避免内部信息外泄）
     console.error('[generate] 处理失败：', action, err);
-    return fail(5000, '服务内部错误');
+    return fail(5000, '服务内部错误: ' + ((err && err.message) || '未知') + ' | ' + String((err && err.stack) || err).slice(0, 300));
   }
 };

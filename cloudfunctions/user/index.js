@@ -5,9 +5,15 @@
  * 鉴权：openid 从 context.OPENID 取（云开发自动注入），前端绝不传身份字段。
  */
 const cloud = require('wx-server-sdk');
+const { ensureCollection } = require('./lib/ensure-collections');
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database();
+
+/** 每次请求内调用 getWXContext 获取调用方身份（SCF 的 context 参数不含 OPENID） */
+function wxOpenid() {
+  return (cloud.getWXContext() || {}).OPENID || '';
+}
 
 /** 单次 track 上报最大事件数（与 tracker.js BATCH_MAX 一致） */
 const TRACK_BATCH_MAX = 50;
@@ -31,7 +37,7 @@ async function handlePing(event, context) {
  * - invalid 标记透传自 tracker.js schema 校验结果（缺参事件仍上报，便于发现参数漂移）。
  */
 async function handleTrack(event, context) {
-  const openid = context.OPENID || '';
+  const openid = wxOpenid();
   const events = Array.isArray(event.events) ? event.events : [];
   if (events.length === 0) {
     return { code: 1001, msg: 'events 不能为空', data: null };
@@ -50,7 +56,8 @@ async function handleTrack(event, context) {
       createdAt: now
     };
   });
-  // 批量写入（云函数端 add 支持数组一次性插入）
+  // 集合不存在时自动创建（首例写入兜底），再批量写入（云函数端 add 支持数组一次性插入）
+  await ensureCollection('events');
   await db.collection('events').add({ data: docs });
   return { code: 0, msg: 'ok', data: { count: docs.length } };
 }
@@ -91,7 +98,8 @@ exports.main = async (event, context) => {
   try {
     return await handler(event, context);
   } catch (err) {
+    // 开发阶段临时在 msg 中附带错误信息便于定位（提审前移除 debug 字段）
     console.error('[user] 处理失败：', action, err);
-    return { code: 5000, msg: '服务内部错误', data: null };
+    return { code: 5000, msg: '服务内部错误: ' + ((err && err.message) || '未知'), debug: String((err && err.stack) || err), data: null };
   }
 };

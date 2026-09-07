@@ -20,16 +20,18 @@ const freq = require('./freq');
  * @returns {number} 风格分
  */
 function charStyleScore(styles, tags, styleParams, genderBiasParams, gender) {
-  if (!styles || styles.length === 0) return 0;
   let score = 0;
-  for (const styleName of styles) {
-    const weights = styleParams.weights[styleName];
-    if (!weights) continue;
-    for (const tag of tags || []) {
-      score += weights[tag] !== undefined ? weights[tag] : styleParams.defaultWeight;
+  // 风格加权（未选风格时跳过，但性别偏置仍然生效）
+  if (styles && styles.length > 0) {
+    for (const styleName of styles) {
+      const weights = styleParams.weights[styleName];
+      if (!weights) continue;
+      for (const tag of tags || []) {
+        score += weights[tag] !== undefined ? weights[tag] : styleParams.defaultWeight;
+      }
     }
   }
-  // 性别气质粗调（粗标 v0）
+  // 性别气质粗调（粗标 v0）：独立于风格，选了性别就必须生效
   if (genderBiasParams && gender && genderBiasParams[gender]) {
     for (const tag of tags || []) {
       const bias = genderBiasParams[gender][tag];
