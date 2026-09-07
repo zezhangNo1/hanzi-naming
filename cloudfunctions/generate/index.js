@@ -77,6 +77,7 @@ async function handleCreate(event) {
       cached: true,
       candidates: cands,
       degraded: !!cached.degraded,
+      engineVersion: cache.ENGINE_VERSION,
       quota: q
     });
   }
@@ -129,6 +130,7 @@ async function handleCreate(event) {
     status: 'done',
     cached: false,
     degraded: result.degraded,
+    engineVersion: cache.ENGINE_VERSION,
     quota: q
   });
 }
@@ -160,6 +162,7 @@ async function handlePoll(event) {
       status: 'done',
       candidates: cands,
       degraded: !!job.degraded,
+      engineVersion: cache.ENGINE_VERSION,
       quota: q
     });
   }

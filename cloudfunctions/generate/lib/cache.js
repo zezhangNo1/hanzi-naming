@@ -10,12 +10,20 @@
 const crypto = require('crypto');
 
 /**
+ * 引擎版本号：参与缓存指纹计算。
+ * 引擎/字池/参数有任何影响输出的变更时必须 +1，使历史缓存自然失效，
+ * 避免「云端已更新但同参请求永远命中旧结果」。
+ */
+const ENGINE_VERSION = 'v3-pool-20260907';
+
+/**
  * 计算任务指纹
  * @param {Object} input { surname, gender, styles, constraints, batch }
  * @returns {string} md5 指纹
  */
 function jobHash(input) {
   const normalized = JSON.stringify({
+    v: ENGINE_VERSION,
     s: input.surname,
     g: input.gender,
     st: (input.styles || []).slice().sort(),
@@ -49,5 +57,6 @@ async function lookup(db, openid, hash) {
 
 module.exports = {
   jobHash: jobHash,
-  lookup: lookup
+  lookup: lookup,
+  ENGINE_VERSION: ENGINE_VERSION
 };
