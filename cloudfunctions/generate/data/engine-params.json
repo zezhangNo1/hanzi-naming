@@ -10,7 +10,15 @@
     "maxWriteCost": 40,
     "maxSameCandidatesRatio": 0.2,
     "minCharStrokes": 3,
-    "maxSameCharInList": 6
+    "maxSameCharInList": 4,
+    "maxSameFirstInList": 3,
+    "minTagVariety": 6,
+    "tagFillPerTag": 8,
+    "tagFillMax": 20
+  },
+  "exploration": {
+    "note": "受控探索扰动：组合总分按 |score| * jitterRatio * U(-1,1) 抖动后再排序，打破同参数永远同批；0 = 关闭",
+    "jitterRatio": 0.06
   },
   "tones": {
     "pingTones": [1, 2],

@@ -6,7 +6,8 @@
  * 数据更新后需重跑：node sync-data.js（后续 B3 可挂 CI）。
  *
  * 同步清单：whitelist-8105.json / hanzi-core.json / hanzi-strokes.json /
- *           redline-llm.json / engine-params.json
+ *           redline-llm.json / engine-params.json / name-blocklist.json /
+ *           name-pool.json / quotes-index.json
  */
 'use strict';
 
@@ -22,7 +23,10 @@ const FILES = [
   'hanzi-core.json',
   'hanzi-strokes.json',
   'redline-llm.json',
-  'engine-params.json'
+  'engine-params.json',
+  'name-blocklist.json',
+  'name-pool.json',
+  'quotes-index.json'
 ];
 
 function main() {

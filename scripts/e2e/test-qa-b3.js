@@ -194,7 +194,7 @@ async function main() {
   check('Q6a 版本变化 → 同参 jobHash 不同', h1 !== h2, h1 + ' vs ' + h2);
   check('Q6b 同版本同参 hash 稳定', h1 === cache.jobHash(Object.assign({}, input)));
   check('Q6c batch 变化 → hash 变化', h1 !== cache.jobHash(Object.assign({}, input, { batch: 2 })));
-  check('Q6d 当前版本号为 v4-llm-20260908', cache.ENGINE_VERSION === 'v4-llm-20260908', cache.ENGINE_VERSION);
+  check('Q6d 当前版本号为 v5-distinct-20260908', cache.ENGINE_VERSION === 'v5-distinct-20260908', cache.ENGINE_VERSION);
 
   // ===== Q7 内部字段外泄（LLM 路径，落库前对象）=====
   console.log('\n【Q7】内部字段外泄扫描（LLM 恶意附加字段）');

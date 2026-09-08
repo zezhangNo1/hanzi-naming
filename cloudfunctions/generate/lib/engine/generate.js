@@ -31,6 +31,7 @@ const POOL_SIZE = 60;
  *   - pool: 字池数组 [{ char, strokes, pinyin, tone, freqLevel, imageryTags, meaning }]
  *   - params: engine-params.json 内容
  *   - batch: 批次号（从 1 起）
+ *   - rng: 可选随机函数（缺省 Math.random；测试注入 seeded RNG 保证可复现）
  * @returns {{ candidates: Object[], poolSize: number }}
  */
 function generate(input) {
@@ -39,6 +40,9 @@ function generate(input) {
   const generationChar = constraints.generationChar || '';
   const batch = Math.max(1, input.batch || 1);
   const topN = p.generate.topN;
+  // 受控探索：RNG 可注入（测试传 mulberry32 等 seeded RNG）；未注入走 Math.random
+  const rng = typeof input.rng === 'function' ? input.rng : Math.random;
+  const jitterRatio = (p.exploration && p.exploration.jitterRatio) || 0;
 
   // 1. 基础过滤：同姓字回避（名中不重复用姓字，避免姓=名歧义）
   //    + 笔画下限（minCharStrokes：滤掉丁/乃/丫/丸类 1-2 画怪字，默认 3 画起）
@@ -78,6 +82,41 @@ function generate(input) {
     }
   }
 
+  // 位置池意象覆盖：首标签（imageryTags[0]）种类过少时（< minTagVariety，默认 6），
+  // 从 scored 剩余部分按「每标签最多补 tagFillPerTag（默认 8）字」换入池尾名额
+  // （字辈保底位不参与替换），防止单一意象霸占位置池导致候选同质化。
+  const minTagVariety = (p.generate && p.generate.minTagVariety) || 6;
+  const tagFillPerTag = (p.generate && p.generate.tagFillPerTag) || 8;
+  const tagFillMax = (p.generate && p.generate.tagFillMax) || 20;
+  const firstTagOf = (s) => (s.entry.imageryTags && s.entry.imageryTags[0]) || '无';
+  {
+    const tagSet = new Set(posPool.map(firstTagOf));
+    if (tagSet.size < minTagVariety) {
+      const inPool = new Set(posPool.map((s) => s.entry.char));
+      const fillCount = {};
+      const fillers = [];
+      for (let i = 0; i < scored.length && fillers.length < tagFillMax; i++) {
+        const s = scored[i];
+        if (inPool.has(s.entry.char) || s.entry.char === generationChar) continue;
+        const t = firstTagOf(s);
+        if ((fillCount[t] || 0) >= tagFillPerTag) continue;
+        fillCount[t] = (fillCount[t] || 0) + 1;
+        fillers.push(s);
+        tagSet.add(t);
+      }
+      if (fillers.length > 0) {
+        // 从池尾向前替换非字辈名额（保底位不挤掉），池规模维持 POOL_SIZE
+        let fi = 0;
+        const genInPool = generationChar
+          ? posPool.some((s) => s.entry.char === generationChar) : false;
+        for (let i = posPool.length - 1; i >= 0 && fi < fillers.length; i--) {
+          if (genInPool && posPool[i].entry.char === generationChar) continue;
+          posPool[i] = fillers[fi++];
+        }
+      }
+    }
+  }
+
   // 3. 组合 + 全名四维评分
   const surnameMeta = input.surnameMeta || { pinyin: '', tone: 0, strokes: 0 };
   const combos = [];
@@ -109,6 +148,10 @@ function generate(input) {
         generationCharHit: !!generationChar
       }, p.score);
 
+      // 受控探索扰动：总分按比例加均匀抖动（保持正负号语义 |score| 缩放），
+      // 打破纯确定性贪心的「同参数永远同批」；rng 可注入保证测试可复现
+      const jittered = internal + Math.abs(internal) * jitterRatio * (rng() * 2 - 1);
+
       combos.push({
         name: name,
         first: a.entry,
@@ -116,31 +159,56 @@ function generate(input) {
         pyArr: pyArr,
         toneArr: toneArr,
         strokeArr: strokeArr,
-        _internalScore: internal
+        _internalScore: jittered
       });
     }
   }
 
   // 4. 排序 + 多样性约束选取 + 批次分段
-  //    贪心选取：同一名字用字在整批候选中出现不超过 maxSameCharInList 次
-  //    （字辈字豁免——指定字辈时该字必须出现在每个候选中），
-  //    防止单个高频字霸占整批（历史 bug：30 个候选全带"万"）。
+  //    贪心选取三重约束：
+  //    a) 同一字（含名次字位置）整批出现 ≤ maxSameCharInList（默认 4）；
+  //    b) 同一名首字整批出现 ≤ maxSameFirstInList（默认 3）——首字决定名字
+  //       第一观感，收得更紧（历史痛点：候选首字 妙/婉/如 扎堆）；
+  //    c) 字辈字豁免——指定字辈时该字必须出现在每个候选中。
   combos.sort((x, y) => y._internalScore - x._internalScore || (x.name < y.name ? -1 : 1));
   const maxSameChar = (p.generate && p.generate.maxSameCharInList) || topN;
-  const start = (batch - 1) * topN;
-  const picked = [];
-  const charUsed = {};
-  const charCount = (ch) => charUsed[ch] || 0;
+  const maxSameFirst = (p.generate && p.generate.maxSameFirstInList) || maxSameChar;
   const capFor = (ch) => (ch === generationChar ? Infinity : maxSameChar);
-  for (let i = 0; picked.length < topN && i < combos.length * 2; i++) {
-    const combo = combos[(start + i) % combos.length];
-    if (picked.indexOf(combo) !== -1) continue; // 取模回绕后防重复收录
-    if (charCount(combo.first.char) >= capFor(combo.first.char)) continue;
-    if (charCount(combo.second.char) >= capFor(combo.second.char)) continue;
-    picked.push(combo);
-    charUsed[combo.first.char] = (charUsed[combo.first.char] || 0) + 1;
-    charUsed[combo.second.char] = (charUsed[combo.second.char] || 0) + 1;
+  const capForFirst = (ch) => (ch === generationChar ? Infinity : maxSameFirst);
+
+  // 单段贪心选取：从 segIndex*topN 起扫描组合，批内多样性三重配额（每段重置），
+  // 并排除低批次已收录的组合（跨批不相交）。
+  const lowerBatchCombos = new Set();
+  const walkSegment = (segIndex) => {
+    const segCharUsed = {};
+    const segFirstUsed = {};
+    const segPicked = [];
+    const segStart = segIndex * topN;
+    for (let i = 0; segPicked.length < topN && i < combos.length * 2; i++) {
+      const combo = combos[(segStart + i) % combos.length];
+      if (segPicked.indexOf(combo) !== -1) continue; // 取模回绕后防重复收录
+      if (lowerBatchCombos.has(combo)) continue;     // 跨批去重：低批次已收录
+      if ((segCharUsed[combo.first.char] || 0) >= capFor(combo.first.char)) continue;
+      if ((segCharUsed[combo.second.char] || 0) >= capFor(combo.second.char)) continue;
+      if ((segFirstUsed[combo.first.char] || 0) >= capForFirst(combo.first.char)) continue;
+      segPicked.push(combo);
+      segCharUsed[combo.first.char] = (segCharUsed[combo.first.char] || 0) + 1;
+      segCharUsed[combo.second.char] = (segCharUsed[combo.second.char] || 0) + 1;
+      segFirstUsed[combo.first.char] = (segFirstUsed[combo.first.char] || 0) + 1;
+    }
+    return segPicked;
+  };
+
+  // 批次配额接续：batch=N 前先模拟低批次（1..N-1）的贪心选取（只登记已收录组合、
+  // 不产出候选），使本批从「低批次未收录的组合」继续选取——批间候选因此不相交
+  // （仅当组合池耗尽触发取模回绕时才允许重名）。全程确定性。
+  // 组合池容量护栏：模拟段数不超过组合池可容纳的不相交批数，防止大 batch 空转。
+  const maxDisjointSegs = Math.ceil(combos.length / topN);
+  const simSegs = Math.min(batch - 1, maxDisjointSegs);
+  for (let s = 0; s < simSegs; s++) {
+    for (const combo of walkSegment(s)) lowerBatchCombos.add(combo);
   }
+  const picked = walkSegment(Math.min(batch - 1, maxDisjointSegs));
 
   // 5. 组装 candidates（schema 对齐；分值字段到此为止，不再外传）
   const styleLabel = (input.styles && input.styles.length > 0) ? input.styles[0] : '不限';

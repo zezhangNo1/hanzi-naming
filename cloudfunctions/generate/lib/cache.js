@@ -14,7 +14,7 @@ const crypto = require('crypto');
  * 引擎/字池/参数有任何影响输出的变更时必须 +1，使历史缓存自然失效，
  * 避免「云端已更新但同参请求永远命中旧结果」。
  */
-const ENGINE_VERSION = 'v4-llm-20260908';
+const ENGINE_VERSION = 'v5-distinct-20260908';
 
 /**
  * 计算任务指纹

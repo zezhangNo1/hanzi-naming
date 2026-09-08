@@ -49,6 +49,13 @@ for (const g of ['m', 'f', 'n']) {
 }
 
 /**
+ * 人名精选字池人工精标 cats（v0.3）：字 → imageryTags 数组。
+ * 对 hanzi-core 部首粗标不准的头部名字用字做人工精标（仅限 tagVocab 18 类）；
+ * solver 合并 imageryTags 时优先取本表，未精标字回退 hanzi-core 粗标。
+ */
+const namePoolCats = namePool.cats || {};
+
+/**
  * 语料索引：key → 条目（quote-verify 回查的唯一合法来源）
  */
 const quotesByKey = {};
@@ -73,6 +80,7 @@ module.exports = {
   redlineSingleCharSet: redlineSingleCharSet,
   namePool: namePool,
   namePoolMap: namePoolMap,
+  namePoolCats: namePoolCats,
   hanziCore: hanziCore,
   coreMap: coreMap,
   strokesMap: strokesMap,

@@ -46,13 +46,19 @@ function solve(input) {
     const meta = core || loader.strokesMap[charKey];
     if (!meta || !meta.pinyin || !meta.strokes) continue; // 无拼音/笔画的字无法参与组合
     poolChars.add(charKey);
+    // 意象标签合并：字池 v0.3 人工精标 cats 优先（粗标按部首打标签不准），
+    // 未精标字回退 hanzi-core 粗标
+    const cats = loader.namePoolCats[charKey];
+    const imageryTags = (cats && cats.length > 0)
+      ? cats
+      : (core ? core.imageryTags : []);
     pool.push({
       char: charKey,
       strokes: meta.strokes,
       pinyin: meta.pinyin,
       tone: meta.tone,
       freqLevel: core ? core.freqLevel : 'mid',
-      imageryTags: core ? core.imageryTags : [],
+      imageryTags: imageryTags,
       meaning: core ? core.meaning : '人名常用字，寓意美好',
       genderAffinity: loader.namePoolMap[charKey], // m|f|n，引擎性别偏置用
       possibleQuotes: loader.quotesByChar[charKey] || [] // 语料索引倒排：该字可引的名句 key（B3）
