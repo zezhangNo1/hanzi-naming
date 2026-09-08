@@ -13,6 +13,7 @@ const redlineLlm = require('../data/redline-llm.json');
 const engineParams = require('../data/engine-params.json');
 const nameBlocklist = require('../data/name-blocklist.json');
 const namePool = require('../data/name-pool.json');
+const quotesIndex = require('../data/quotes-index.json');
 
 /** 白名单 Set（O(1) 查询） */
 const whitelistSet = new Set(whitelist.chars.map((c) => c.char));
@@ -47,6 +48,23 @@ for (const g of ['m', 'f', 'n']) {
   }
 }
 
+/**
+ * 语料索引：key → 条目（quote-verify 回查的唯一合法来源）
+ */
+const quotesByKey = {};
+for (const q of quotesIndex.quotes || []) {
+  quotesByKey[q.key] = q;
+}
+
+/** 语料倒排：字 → 引用该字的语料 key 数组（solver 填 possibleQuotes 用） */
+const quotesByChar = {};
+for (const q of quotesIndex.quotes || []) {
+  for (const ch of q.chars || []) {
+    if (!quotesByChar[ch]) quotesByChar[ch] = [];
+    quotesByChar[ch].push(q.key);
+  }
+}
+
 module.exports = {
   whitelist: whitelist,
   whitelistSet: whitelistSet,
@@ -59,5 +77,8 @@ module.exports = {
   coreMap: coreMap,
   strokesMap: strokesMap,
   redlineLlm: redlineLlm,
-  engineParams: engineParams
+  engineParams: engineParams,
+  quotesIndex: quotesIndex,
+  quotesByKey: quotesByKey,
+  quotesByChar: quotesByChar
 };

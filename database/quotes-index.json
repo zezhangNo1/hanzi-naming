@@ -1,0 +1,686 @@
+{
+  "metadata": {
+    "name": "典籍名句语料索引（B3 quotes-index）",
+    "version": "v1.0",
+    "source": "人工核校的真实经典名句（诗经/楚辞/论语/道德经/庄子/唐诗/宋词/古文），禁止编造；LLM 出处引用（quoteRef.key）的唯一合法来源",
+    "rule": "chars = 句中适合入名的字（去重）；quote-verify 过滤器以 key + (author,title,sentence) 三元组逐一回查本表"
+  },
+  "quotes": [
+    {
+      "key": "shijing-guanju",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "关雎",
+      "sentence": "关关雎鸠，在河之洲",
+      "chars": [
+        "洲"
+      ]
+    },
+    {
+      "key": "shijing-jianjia",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "蒹葭",
+      "sentence": "蒹葭苍苍，白露为霜",
+      "chars": [
+        "苍",
+        "露",
+        "霜"
+      ]
+    },
+    {
+      "key": "shijing-taoyao",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "桃夭",
+      "sentence": "桃之夭夭，灼灼其华",
+      "chars": [
+        "桃",
+        "华"
+      ]
+    },
+    {
+      "key": "shijing-luming",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "鹿鸣",
+      "sentence": "呦呦鹿鸣，食野之苹",
+      "chars": [
+        "鸣",
+        "苹"
+      ]
+    },
+    {
+      "key": "shijing-mugua",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "木瓜",
+      "sentence": "投我以木桃，报之以琼瑶",
+      "chars": [
+        "琼",
+        "瑶",
+        "桃"
+      ]
+    },
+    {
+      "key": "shijing-caiwei",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "采薇",
+      "sentence": "昔我往矣，杨柳依依",
+      "chars": [
+        "杨",
+        "柳",
+        "依"
+      ]
+    },
+    {
+      "key": "shijing-zijin",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "子衿",
+      "sentence": "青青子衿，悠悠我心",
+      "chars": [
+        "悠"
+      ]
+    },
+    {
+      "key": "shijing-heming",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "鹤鸣",
+      "sentence": "鹤鸣于九皋，声闻于野",
+      "chars": [
+        "鹤",
+        "鸣"
+      ]
+    },
+    {
+      "key": "shijing-zhanlu",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "湛露",
+      "sentence": "湛湛露斯，匪阳不晞",
+      "chars": [
+        "湛",
+        "露"
+      ]
+    },
+    {
+      "key": "shijing-shuoren",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "硕人",
+      "sentence": "巧笑倩兮，美目盼兮",
+      "chars": [
+        "笑",
+        "倩",
+        "盼"
+      ]
+    },
+    {
+      "key": "shijing-sigan",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "斯干",
+      "sentence": "如竹苞矣，如松茂矣",
+      "chars": [
+        "竹",
+        "松",
+        "茂"
+      ]
+    },
+    {
+      "key": "shijing-tianbao",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "天保",
+      "sentence": "如月之恒，如日之升",
+      "chars": [
+        "恒",
+        "升"
+      ]
+    },
+    {
+      "key": "shijing-tianbao2",
+      "lang": "zh-classical",
+      "author": "诗经",
+      "title": "天保",
+      "sentence": "如松柏之茂，无不尔或承",
+      "chars": [
+        "松",
+        "柏",
+        "承"
+      ]
+    },
+    {
+      "key": "chuci-lisao",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "离骚",
+      "sentence": "路漫漫其修远兮，吾将上下而求索",
+      "chars": [
+        "修",
+        "远"
+      ]
+    },
+    {
+      "key": "chuci-lisao2",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "离骚",
+      "sentence": "扈江离与辟芷兮，纫秋兰以为佩",
+      "chars": [
+        "芷",
+        "兰"
+      ]
+    },
+    {
+      "key": "chuci-lisao3",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "离骚",
+      "sentence": "朝饮木兰之坠露兮，夕餐秋菊之落英",
+      "chars": [
+        "兰",
+        "菊",
+        "英",
+        "露"
+      ]
+    },
+    {
+      "key": "chuci-yunzhongjun",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "九歌·云中君",
+      "sentence": "浴兰汤兮沐芳，华采衣兮若英",
+      "chars": [
+        "兰",
+        "芳",
+        "英"
+      ]
+    },
+    {
+      "key": "chuci-shejiang",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "九章·涉江",
+      "sentence": "与天地兮同寿，与日月兮齐光",
+      "chars": [
+        "齐",
+        "光"
+      ]
+    },
+    {
+      "key": "chuci-dongjun",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "九歌·东君",
+      "sentence": "青云衣兮白霓裳，举长矢兮射天狼",
+      "chars": [
+        "霓",
+        "云"
+      ]
+    },
+    {
+      "key": "chuci-shaosiming",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "九歌·少司命",
+      "sentence": "秋兰兮青青，绿叶兮紫茎",
+      "chars": [
+        "兰",
+        "青"
+      ]
+    },
+    {
+      "key": "chuci-yufu",
+      "lang": "zh-classical",
+      "author": "屈原",
+      "title": "渔父",
+      "sentence": "沧浪之水清兮，可以濯吾缨",
+      "chars": [
+        "沧",
+        "浪",
+        "清"
+      ]
+    },
+    {
+      "key": "lunyu-liren",
+      "lang": "zh-classical",
+      "author": "论语",
+      "title": "里仁",
+      "sentence": "德不孤，必有邻",
+      "chars": [
+        "德",
+        "邻"
+      ]
+    },
+    {
+      "key": "lunyu-yongye",
+      "lang": "zh-classical",
+      "author": "论语",
+      "title": "雍也",
+      "sentence": "知者乐水，仁者乐山",
+      "chars": [
+        "知",
+        "仁",
+        "山",
+        "水"
+      ]
+    },
+    {
+      "key": "lunyu-shuer",
+      "lang": "zh-classical",
+      "author": "论语",
+      "title": "述而",
+      "sentence": "志于道，据于德，依于仁，游于艺",
+      "chars": [
+        "德",
+        "仁",
+        "艺"
+      ]
+    },
+    {
+      "key": "lunyu-taibo",
+      "lang": "zh-classical",
+      "author": "论语",
+      "title": "泰伯",
+      "sentence": "士不可以不弘毅，任重而道远",
+      "chars": [
+        "弘",
+        "毅"
+      ]
+    },
+    {
+      "key": "lunyu-zihan",
+      "lang": "zh-classical",
+      "author": "论语",
+      "title": "子罕",
+      "sentence": "岁寒，然后知松柏之后凋也",
+      "chars": [
+        "松",
+        "柏"
+      ]
+    },
+    {
+      "key": "laozi-8",
+      "lang": "zh-classical",
+      "author": "老子",
+      "title": "道德经",
+      "sentence": "上善若水，水善利万物而不争",
+      "chars": [
+        "善",
+        "水"
+      ]
+    },
+    {
+      "key": "laozi-41",
+      "lang": "zh-classical",
+      "author": "老子",
+      "title": "道德经",
+      "sentence": "大音希声，大象无形",
+      "chars": [
+        "希",
+        "声"
+      ]
+    },
+    {
+      "key": "zhuangzi-xiaoyaoyou",
+      "lang": "zh-classical",
+      "author": "庄子",
+      "title": "逍遥游",
+      "sentence": "其翼若垂天之云",
+      "chars": [
+        "翼",
+        "云"
+      ]
+    },
+    {
+      "key": "zhuangzi-xiaoyaoyou2",
+      "lang": "zh-classical",
+      "author": "庄子",
+      "title": "逍遥游",
+      "sentence": "抟扶摇而上者九万里",
+      "chars": [
+        "扶",
+        "摇"
+      ]
+    },
+    {
+      "key": "zhuangzi-qiushui",
+      "lang": "zh-classical",
+      "author": "庄子",
+      "title": "秋水",
+      "sentence": "秋水时至，百川灌河",
+      "chars": [
+        "秋",
+        "水"
+      ]
+    },
+    {
+      "key": "libo-songshaofu",
+      "lang": "zh-classical",
+      "author": "王勃",
+      "title": "送杜少府之任蜀州",
+      "sentence": "海内存知己，天涯若比邻",
+      "chars": [
+        "存",
+        "知"
+      ]
+    },
+    {
+      "key": "libo-jingyesi",
+      "lang": "zh-classical",
+      "author": "李白",
+      "title": "静夜思",
+      "sentence": "床前明月光，疑是地上霜",
+      "chars": [
+        "明",
+        "霜"
+      ]
+    },
+    {
+      "key": "libo-wanlushan",
+      "lang": "zh-classical",
+      "author": "李白",
+      "title": "望庐山瀑布",
+      "sentence": "飞流直下三千尺，疑是银河落九天",
+      "chars": [
+        "银",
+        "河",
+        "飞"
+      ]
+    },
+    {
+      "key": "libo-xinglunan",
+      "lang": "zh-classical",
+      "author": "李白",
+      "title": "行路难",
+      "sentence": "长风破浪会有时，直挂云帆济沧海",
+      "chars": [
+        "风",
+        "云",
+        "帆",
+        "济"
+      ]
+    },
+    {
+      "key": "libo-xuanzhou",
+      "lang": "zh-classical",
+      "author": "李白",
+      "title": "宣州谢朓楼饯别校书叔云",
+      "sentence": "俱怀逸兴壮思飞，欲上青天揽明月",
+      "chars": [
+        "逸",
+        "思"
+      ]
+    },
+    {
+      "key": "dufu-chunye",
+      "lang": "zh-classical",
+      "author": "杜甫",
+      "title": "春夜喜雨",
+      "sentence": "随风潜入夜，润物细无声",
+      "chars": [
+        "润"
+      ]
+    },
+    {
+      "key": "dufu-wangyue",
+      "lang": "zh-classical",
+      "author": "杜甫",
+      "title": "望岳",
+      "sentence": "会当凌绝顶，一览众山小",
+      "chars": [
+        "凌"
+      ]
+    },
+    {
+      "key": "dufu-yuye",
+      "lang": "zh-classical",
+      "author": "杜甫",
+      "title": "月夜忆舍弟",
+      "sentence": "露从今夜白，月是故乡明",
+      "chars": [
+        "露",
+        "明"
+      ]
+    },
+    {
+      "key": "wangwei-shanju",
+      "lang": "zh-classical",
+      "author": "王维",
+      "title": "山居秋暝",
+      "sentence": "明月松间照，清泉石上流",
+      "chars": [
+        "松",
+        "泉",
+        "清",
+        "明"
+      ]
+    },
+    {
+      "key": "zhangjiuling-wangyue",
+      "lang": "zh-classical",
+      "author": "张九龄",
+      "title": "望月怀远",
+      "sentence": "海上生明月，天涯共此时",
+      "chars": [
+        "明",
+        "月"
+      ]
+    },
+    {
+      "key": "liuyuxi-qiuci",
+      "lang": "zh-classical",
+      "author": "刘禹锡",
+      "title": "秋词",
+      "sentence": "晴空一鹤排云上，便引诗情到碧霄",
+      "chars": [
+        "鹤",
+        "云",
+        "晴"
+      ]
+    },
+    {
+      "key": "dumu-shanxing",
+      "lang": "zh-classical",
+      "author": "杜牧",
+      "title": "山行",
+      "sentence": "停车坐爱枫林晚，霜叶红于二月花",
+      "chars": [
+        "枫",
+        "霜"
+      ]
+    },
+    {
+      "key": "wangchangling-ronglou",
+      "lang": "zh-classical",
+      "author": "王昌龄",
+      "title": "芙蓉楼送辛渐",
+      "sentence": "一片冰心在玉壶",
+      "chars": [
+        "冰",
+        "心",
+        "玉"
+      ]
+    },
+    {
+      "key": "baijuyi-fudegucao",
+      "lang": "zh-classical",
+      "author": "白居易",
+      "title": "赋得古原草送别",
+      "sentence": "野火烧不尽，春风吹又生",
+      "chars": [
+        "春",
+        "风"
+      ]
+    },
+    {
+      "key": "caocao-guancanghai",
+      "lang": "zh-classical",
+      "author": "曹操",
+      "title": "观沧海",
+      "sentence": "日月之行，若出其中；星汉灿烂，若出其里",
+      "chars": [
+        "星",
+        "汉",
+        "灿"
+      ]
+    },
+    {
+      "key": "caocao-guisuishou",
+      "lang": "zh-classical",
+      "author": "曹操",
+      "title": "龟虽寿",
+      "sentence": "老骥伏枥，志在千里",
+      "chars": [
+        "骥"
+      ]
+    },
+    {
+      "key": "taoyuanming-yinjiu",
+      "lang": "zh-classical",
+      "author": "陶渊明",
+      "title": "饮酒",
+      "sentence": "采菊东篱下，悠然见南山",
+      "chars": [
+        "悠",
+        "然",
+        "菊"
+      ]
+    },
+    {
+      "key": "wenzitian-lingding",
+      "lang": "zh-classical",
+      "author": "文天祥",
+      "title": "过零丁洋",
+      "sentence": "人生自古谁无死，留取丹心照汗青",
+      "chars": [
+        "丹",
+        "心"
+      ]
+    },
+    {
+      "key": "yuqian-shihui",
+      "lang": "zh-classical",
+      "author": "于谦",
+      "title": "石灰吟",
+      "sentence": "粉骨碎身浑不怕，要留清白在人间",
+      "chars": [
+        "清",
+        "白"
+      ]
+    },
+    {
+      "key": "luyou-shanxi",
+      "lang": "zh-classical",
+      "author": "陆游",
+      "title": "游山西村",
+      "sentence": "山重水复疑无路，柳暗花明又一村",
+      "chars": [
+        "柳",
+        "明"
+      ]
+    },
+    {
+      "key": "sushi-shuidiao",
+      "lang": "zh-classical",
+      "author": "苏轼",
+      "title": "水调歌头",
+      "sentence": "但愿人长久，千里共婵娟",
+      "chars": [
+        "婵",
+        "娟",
+        "久"
+      ]
+    },
+    {
+      "key": "sushi-dingfengbo",
+      "lang": "zh-classical",
+      "author": "苏轼",
+      "title": "定风波",
+      "sentence": "一蓑烟雨任平生",
+      "chars": [
+        "烟",
+        "雨"
+      ]
+    },
+    {
+      "key": "sushi-yinhu",
+      "lang": "zh-classical",
+      "author": "苏轼",
+      "title": "饮湖上初晴后雨",
+      "sentence": "水光潋滟晴方好，山色空蒙雨亦奇",
+      "chars": [
+        "晴",
+        "雨"
+      ]
+    },
+    {
+      "key": "xinqiji-qingyuan",
+      "lang": "zh-classical",
+      "author": "辛弃疾",
+      "title": "青玉案·元夕",
+      "sentence": "蓦然回首，那人却在，灯火阑珊处",
+      "chars": [
+        "珊"
+      ]
+    },
+    {
+      "key": "yuefei-manjianghong",
+      "lang": "zh-classical",
+      "author": "岳飞",
+      "title": "满江红",
+      "sentence": "三十功名尘与土，八千里路云和月",
+      "chars": [
+        "云",
+        "月"
+      ]
+    },
+    {
+      "key": "qinguan-queqiao",
+      "lang": "zh-classical",
+      "author": "秦观",
+      "title": "鹊桥仙",
+      "sentence": "金风玉露一相逢，便胜却人间无数",
+      "chars": [
+        "金",
+        "玉",
+        "露"
+      ]
+    },
+    {
+      "key": "zhoudunyi-ailian",
+      "lang": "zh-classical",
+      "author": "周敦颐",
+      "title": "爱莲说",
+      "sentence": "出淤泥而不染，濯清涟而不妖",
+      "chars": [
+        "清",
+        "涟"
+      ]
+    },
+    {
+      "key": "wangbo-tengwangge",
+      "lang": "zh-classical",
+      "author": "王勃",
+      "title": "滕王阁序",
+      "sentence": "落霞与孤鹜齐飞，秋水共长天一色",
+      "chars": [
+        "霞"
+      ]
+    },
+    {
+      "key": "liji-daxue",
+      "lang": "zh-classical",
+      "author": "礼记",
+      "title": "大学",
+      "sentence": "苟日新，日日新，又日新",
+      "chars": [
+        "新"
+      ]
+    }
+  ]
+}

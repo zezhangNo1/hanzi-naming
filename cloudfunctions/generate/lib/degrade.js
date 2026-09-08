@@ -20,7 +20,7 @@ function runDegenerate(input) {
   return {
     candidates: result.candidates,
     degraded: true,
-    reason: 'B2 默认降级路径：规则引擎直出'
+    reason: '智能通道繁忙，已用精选字库快速出名单'
   };
 }
 

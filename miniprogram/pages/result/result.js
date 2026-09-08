@@ -13,6 +13,7 @@
 
 const request = require('../../utils/request');
 const tracker = require('../../utils/tracker');
+var filterClient = require('../../utils/filter-client');
 
 /** 轮询参数 */
 const POLL_INTERVAL_MS = 1500;
@@ -124,21 +125,34 @@ Page({
 
   _applyResult(res) {
     const list = (res.candidates || []).map((c, idx) => {
+      const rawName = c.name || '';
+      const rawMeaning = c.meaning
+        || (Array.isArray(c.chars) ? c.chars.map((ch) => ch.char + '：' + (ch.meaning || '')).join('；') : '');
+      // 客户端兜底扫描（防御双保险）：红线词命中 → 占位展示，不下发原文
+      if (filterClient.scanRedline(rawName + rawMeaning)) {
+        return {
+          id: (c._id || '') + '_' + idx,
+          name: filterClient.PLACEHOLDER_TEXT,
+          pinyin: '',
+          tones: '',
+          meaning: '',
+          strokes: 0,
+          style: ''
+        };
+      }
       const pinyin = Array.isArray(c.pinyin) ? c.pinyin.join(' ') : (c.pinyin || '');
       const tones = Array.isArray(c.tones)
         ? c.tones.map((t) => TONE_LABELS[t] || '').join(' ')
         : '';
-      const meaning = c.meaning
-        || (Array.isArray(c.chars) ? c.chars.map((ch) => ch.char + '：' + (ch.meaning || '')).join('；') : '');
       const strokes = Array.isArray(c.chars)
         ? c.chars.reduce((sum, ch) => sum + ((ch && ch.strokes) || 0), 0)
         : 0;
       return {
         id: (c._id || '') + '_' + idx, // 列表 key（_id 可能缺省）
-        name: c.name || '',
+        name: rawName,
         pinyin: pinyin,
         tones: tones,
-        meaning: meaning,
+        meaning: rawMeaning,
         strokes: strokes,
         style: STYLE_LABELS[c.style] || ''
       };

@@ -1,9 +1,11 @@
 /**
  * redline.js — 红线词过滤兜底（T05 过滤流水线第 1 层，B2 服务端兜底实现）
  *
- * 数据源：redline-llm.json（与 PRD 3.2 逐词一致的 31 词）。
+ * 数据源：redline-llm.json（v1.1，29 词；单字「吉/凶」已移除——寓意文案中
+ * 的「平安吉祥」属正常祝福，名字用字层面的吉/凶由名字适用性黑名单兜住）。
  * 规则（交接包第五节）：对候选名 + 寓意文案逐词扫描，命中 → 丢弃该候选 → 记 block_log。
  * 降级模式文案由模板生成，理论不命中；此层为兜底防线（拦截率目标 100%）。
+ * 落库统一走 filter/log.js（本模块不再自带 logBlocked 实现）。
  */
 'use strict';
 
@@ -41,26 +43,7 @@ function filterCandidates(candidates) {
   return { passed: passed, blocked: blocked };
 }
 
-/**
- * 落 block_log（合规元指标数据源，交接包第二节 schema）
- * @param {Object} db 云数据库实例
- * @param {string} jobId 任务 id
- * @param {Array<{name:string, word:string}>} blocked 拦截明细
- */
-async function logBlocked(db, jobId, blocked) {
-  if (!blocked || blocked.length === 0) return;
-  const docs = blocked.map((b) => ({
-    jobId: jobId,
-    stage: 'redline',
-    detail: '命中词：' + b.word,
-    raw: b.name,
-    createdAt: Date.now()
-  }));
-  await db.collection('block_log').add({ data: docs });
-}
-
 module.exports = {
   hit: hit,
-  filterCandidates: filterCandidates,
-  logBlocked: logBlocked
+  filterCandidates: filterCandidates
 };

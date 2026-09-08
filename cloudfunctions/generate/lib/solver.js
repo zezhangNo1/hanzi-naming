@@ -55,7 +55,7 @@ function solve(input) {
       imageryTags: core ? core.imageryTags : [],
       meaning: core ? core.meaning : '人名常用字，寓意美好',
       genderAffinity: loader.namePoolMap[charKey], // m|f|n，引擎性别偏置用
-      possibleQuotes: [] // B3：语料索引接入后填充 3-5 条佳句
+      possibleQuotes: loader.quotesByChar[charKey] || [] // 语料索引倒排：该字可引的名句 key（B3）
     });
   }
 
@@ -75,6 +75,7 @@ function solve(input) {
         genderAffinity: 'n',
         possibleQuotes: []
       });
+      poolChars.add(generationChar); // 同步登记，保证下方 llmPool 注入条件对生僻字辈同样成立
     }
   }
 
@@ -86,6 +87,14 @@ function solve(input) {
     }))
     .sort((a, b) => b.s - a.s || (a.c.char < b.c.char ? -1 : 1));
   const llmPool = ranked.slice(0, 90).map((x) => x.c);
+
+  // 字辈字强制进入 LLM 候选字集：否则 prompt 规则 1（只能用候选字集）与
+  // 规则 5（第二字必须字辈字）自相矛盾。去重追加（避讳冲突时仍以避讳胜出）。
+  if (generationChar && !avoidSet.has(generationChar) && poolChars.has(generationChar)
+    && !llmPool.some((c) => c.char === generationChar)) {
+    const genEntry = pool.find((c) => c.char === generationChar);
+    if (genEntry) llmPool.push(genEntry);
+  }
 
   return {
     pool: pool,
