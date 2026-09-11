@@ -2,7 +2,7 @@
   "metadata": {
     "name": "人名精选字池（正向白名单）",
     "version": "v0.3",
-    "note": "v0.2 反其道人工精选 414 字修复粗标混入不宜字问题；v0.3 针对生成同质化扩容至 600+ 字（新增字全部 ⊆ hanzi-core ∩ 白名单、远离黑名单/红线，元数据直接回查 hanzi-core；v0.2 遗留 129 字不在 hanzi-core，其拼音/笔画/声调由 solver 回查 hanzi-strokes 兜底、释义用通用占位），并对头部常用名用字人工精标 cats（tagVocab 18 类，imageryTags 合并时优先于 hanzi-core 粗标）。依据 T17 反馈通道持续增补。",
+    "note": "v0.2 反其道人工精选 414 字修复粗标混入不宜字问题；v0.3 针对生成同质化扩容至 600+ 字（新增字全部 ⊆ hanzi-core ∩ 白名单、远离黑名单/红线）；v0.2 遗留的 129 字已于 2026-09-11 补全 hanzi-core 人工释义条目（此前释义为通用占位），并对头部常用名用字人工精标 cats（tagVocab 18 类，imageryTags 合并时优先于 hanzi-core 粗标）。依据 T17 反馈通道持续增补。",
     "usage": "chars 分 m/f/n 三组；solver 取并集构池，性别亲和度供引擎偏置；cats 为人工精标意象（可选覆盖）"
   },
   "chars": {
