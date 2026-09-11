@@ -1,0 +1,50 @@
+/* tone-chart 样式：平=宣纸深底墨字，仄=朱砂浅底朱砂字 */
+.tc-row {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+}
+
+.tc-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 152rpx;
+  padding: 18rpx 0;
+  border-radius: 16rpx;
+}
+
+.tc-block--ping {
+  background: var(--paper-deep, #EFEAE0);
+}
+
+.tc-block--ze {
+  background: var(--cinnabar-soft, rgba(176, 58, 46, 0.08));
+}
+
+.tc-py {
+  font-size: 26rpx;
+  color: var(--ink, #1C1C1C);
+}
+
+.tc-tone {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+}
+
+.tc-block--ping .tc-tone {
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}
+
+.tc-block--ze .tc-tone {
+  color: var(--cinnabar, #B03A2E);
+}
+
+.tc-summary {
+  display: block;
+  margin-top: 18rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}

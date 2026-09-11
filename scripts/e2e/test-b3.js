@@ -15,6 +15,7 @@
  * mock wx-server-sdk（NODE_PATH）无 openapi → seccheck 走 warn 分支不抛错。
  */
 const path = require('path');
+require('./mock-sdk-bind'); // wx-server-sdk → 本地 mock（云函数目录内的真实依赖会遮蔽 NODE_PATH）
 const ROOT = path.join(__dirname, '..', '..');
 const GEN = path.join(ROOT, 'cloudfunctions', 'generate');
 

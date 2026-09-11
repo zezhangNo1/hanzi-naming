@@ -24,7 +24,8 @@
 
   <!-- 候选列表 -->
   <block wx:elif="{{candidates.length > 0}}">
-    <view class="candidate" wx:for="{{candidates}}" wx:key="id">
+    <view class="candidate" wx:for="{{candidates}}" wx:key="id"
+          data-cid="{{item.cid}}" bindtap="onCandidateTap" hover-class="candidate--tap">
       <view class="candidate-head">
         <text class="candidate-name font-serif">{{item.name}}</text>
         <text class="candidate-pinyin">{{item.pinyin}}</text>

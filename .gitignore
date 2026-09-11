@@ -1,3 +1,5 @@
 
 # 云函数本地依赖（部署用「所有文件」方式，不入库）
 cloudfunctions/*/node_modules/
+# e2e 临时产物
+tmp-qa/

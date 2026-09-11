@@ -1,7 +1,8 @@
 /**
- * user 云函数 — 用户数据与埋点服务（骨架）
- * 已实现：ping（连通性自检）、track（埋点批量写入 events 集合）。
- * 待实现（T0x 用户数据任务）：collect / uncollect / listFolder / setBirthConsent / feedback / deleteMyData。
+ * user 云函数 — 用户数据与埋点服务
+ * 已实现：ping（连通性自检）、track（埋点批量写入 events 集合）、
+ *         collect/uncollect（收藏，favorites 集合）、feedback（报告反馈，feedbacks 集合）。
+ * 待实现（T0x 用户数据任务）：listFolder / setBirthConsent / deleteMyData。
  * 鉴权：openid 从 context.OPENID 取（云开发自动注入），前端绝不传身份字段。
  */
 const cloud = require('wx-server-sdk');
@@ -71,20 +72,95 @@ function notImplemented(action) {
   };
 }
 
+/** 反馈 type 白名单（T08 报告页反馈入口；处置流 T17 扩展） */
+const FEEDBACK_TYPES = ['meaning', 'quote', 'homophone', 'other'];
+
+/**
+ * collect：收藏候选名（幂等，重复收藏只更新备注）
+ * 入参：{ candidateId, note? }；favorites 集合：{ _openid, candidateId, note, createdAt, updatedAt }
+ */
+async function handleCollect(event) {
+  const openid = wxOpenid();
+  const candidateId = typeof event.candidateId === 'string' ? event.candidateId.trim() : '';
+  const note = typeof event.note === 'string' ? event.note.slice(0, 100) : '';
+  if (!candidateId) {
+    return { code: 1001, msg: '缺少 candidateId', data: null };
+  }
+  await ensureCollection('favorites');
+  const found = await db.collection('favorites')
+    .where({ _openid: openid, candidateId: candidateId })
+    .limit(1)
+    .get()
+    .catch(() => ({ data: [] }));
+  const now = Date.now();
+  const exist = found && found.data && found.data.length > 0 ? found.data[0] : null;
+  if (exist) {
+    await db.collection('favorites').doc(exist._id).update({
+      data: { note: note, updatedAt: now }
+    });
+  } else {
+    await db.collection('favorites').add({
+      data: { _openid: openid, candidateId: candidateId, note: note, createdAt: now, updatedAt: now }
+    });
+  }
+  return { code: 0, msg: 'ok', data: { candidateId: candidateId, collected: true } };
+}
+
+/**
+ * uncollect：取消收藏 { candidateId }
+ */
+async function handleUncollect(event) {
+  const openid = wxOpenid();
+  const candidateId = typeof event.candidateId === 'string' ? event.candidateId.trim() : '';
+  if (!candidateId) {
+    return { code: 1001, msg: '缺少 candidateId', data: null };
+  }
+  await db.collection('favorites')
+    .where({ _openid: openid, candidateId: candidateId })
+    .remove()
+    .catch(() => {});
+  return { code: 0, msg: 'ok', data: { candidateId: candidateId, collected: false } };
+}
+
+/**
+ * feedback：报告解析反馈落库 { candidateId, type, comment? }
+ * feedbacks 集合：{ _openid, candidateId, type, comment, createdAt }
+ */
+async function handleFeedback(event) {
+  const openid = wxOpenid();
+  const candidateId = typeof event.candidateId === 'string' ? event.candidateId.trim() : '';
+  const type = FEEDBACK_TYPES.indexOf(event.type) !== -1 ? event.type : '';
+  const comment = typeof event.comment === 'string' ? event.comment.slice(0, 200) : '';
+  if (!candidateId || !type) {
+    return { code: 1001, msg: 'candidateId 或 type 参数不合法', data: null };
+  }
+  await ensureCollection('feedbacks');
+  await db.collection('feedbacks').add({
+    data: {
+      _openid: openid,
+      candidateId: candidateId,
+      type: type,
+      comment: comment,
+      createdAt: Date.now()
+    }
+  });
+  return { code: 0, msg: 'ok', data: { candidateId: candidateId, accepted: true } };
+}
+
 /** action 路由表（接口契约见交接包 3.5） */
 const ACTIONS = {
   ping: handlePing,
   track: handleTrack,
   // 收藏 { candidateId, note }（WNKU 口径数据源）
-  collect: (e) => notImplemented('collect'),
+  collect: handleCollect,
   // 取消收藏 { candidateId }
-  uncollect: (e) => notImplemented('uncollect'),
+  uncollect: handleUncollect,
   // 收藏列表（含家人投票状态）
   listFolder: (e) => notImplemented('listFolder'),
   // 生辰授权单独记录 { consent }
   setBirthConsent: (e) => notImplemented('setBirthConsent'),
   // 反馈 { candidateId, type, comment }
-  feedback: (e) => notImplemented('feedback'),
+  feedback: handleFeedback,
   // 硬删除本人全部数据（15.3.9；orders 保留必要支付记录并脱敏）
   deleteMyData: (e) => notImplemented('deleteMyData')
 };

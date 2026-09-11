@@ -1,4 +1,9 @@
 {
-  "navigationBarTitleText": "名字报告",
-  "usingComponents": {}
+  "navigationBarTitleText": "命名检测报告",
+  "usingComponents": {
+    "tone-chart": "/components/tone-chart/tone-chart",
+    "quote-card": "/components/quote-card/quote-card",
+    "homophone-panel": "/components/homophone-panel/homophone-panel",
+    "report-feedback": "/components/report-feedback/report-feedback"
+  }
 }

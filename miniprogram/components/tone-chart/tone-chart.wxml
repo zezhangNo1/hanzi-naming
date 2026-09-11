@@ -1,0 +1,10 @@
+<!-- tone-chart：逐字平仄色块（平=宣纸深、仄=朱砂浅） -->
+<view class="tc">
+  <view class="tc-row">
+    <view wx:for="{{items}}" wx:key="key" class="tc-block tc-block--{{item.tone}}">
+      <text class="tc-py">{{item.pinyin}}</text>
+      <text class="tc-tone">{{item.label}}</text>
+    </view>
+  </view>
+  <text class="tc-summary">声调组合：{{summary}}</text>
+</view>

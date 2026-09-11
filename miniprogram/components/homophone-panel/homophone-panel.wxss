@@ -1,0 +1,78 @@
+/* homophone-panel 样式：三段检测行 + warn 态替代建议 */
+.hp-row {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid rgba(28, 28, 28, 0.05);
+}
+
+.hp-row:last-of-type {
+  border-bottom: none;
+}
+
+.hp-name {
+  width: 120rpx;
+  font-size: 26rpx;
+  color: var(--ink, #1C1C1C);
+}
+
+.hp-chip {
+  margin-right: 20rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+}
+
+.hp-chip--pass {
+  background: rgba(28, 28, 28, 0.05);
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}
+
+.hp-chip--warn {
+  background: var(--cinnabar-soft, rgba(176, 58, 46, 0.08));
+  color: var(--cinnabar, #B03A2E);
+}
+
+.hp-chip--fail {
+  background: var(--cinnabar, #B03A2E);
+  color: #FFFFFF;
+}
+
+.hp-chip--none {
+  background: rgba(28, 28, 28, 0.03);
+  color: var(--ink-30, rgba(28, 28, 28, 0.3));
+}
+
+.hp-desc {
+  flex: 1;
+  font-size: 24rpx;
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}
+
+/* warn 替代区 */
+.hp-alt {
+  margin-top: 16rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+  background: var(--cinnabar-soft, rgba(176, 58, 46, 0.08));
+}
+
+.hp-alt-title {
+  font-size: 24rpx;
+  color: var(--cinnabar, #B03A2E);
+}
+
+.hp-alt-row {
+  margin-top: 14rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.hp-alt-chip {
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  background: #FFFFFF;
+  font-size: 28rpx;
+  color: var(--ink, #1C1C1C);
+}

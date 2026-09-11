@@ -1,0 +1,17 @@
+<!-- quote-card：典籍出处（已校验三元组）或显式无出处降级 -->
+<view wx:if="{{title || sentence}}" class="qc">
+  <view class="qc-head">
+    <text class="qc-badge">语料校验通过</text>
+    <text wx:if="{{title}}" class="qc-title font-serif">《{{title}}》</text>
+    <text wx:if="{{author}}" class="qc-author">{{author}}</text>
+  </view>
+  <view class="qc-sentence" bindtap="onToggleExpand">
+    <text class="qc-text font-serif">{{expanded ? sentence : preview}}</text>
+    <text wx:if="{{expandable}}" class="qc-toggle">{{expanded ? '收起' : '展开原句'}}</text>
+  </view>
+</view>
+
+<view wx:else class="qc qc--empty">
+  <text class="qc-empty-title">本候选暂无可校验出处</text>
+  <text class="qc-empty-sub">出处仅收录可对照的真实典籍原文</text>
+</view>

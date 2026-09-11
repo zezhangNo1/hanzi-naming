@@ -34,6 +34,9 @@
   background: #FFFFFF;
   box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.05);
 }
+.candidate--tap {
+  background: #FDFBF5;
+}
 .candidate-head {
   display: flex;
   flex-direction: column;

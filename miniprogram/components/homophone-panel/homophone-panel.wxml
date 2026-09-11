@@ -1,0 +1,15 @@
+<!-- homophone-panel：普通话/粤语/英语三段检测结果 -->
+<view class="hp">
+  <view wx:for="{{rows}}" wx:key="key" class="hp-row">
+    <text class="hp-name">{{item.name}}</text>
+    <text class="hp-chip hp-chip--{{item.cls}}">{{item.label}}</text>
+    <text class="hp-desc">{{item.desc}}</text>
+  </view>
+
+  <view wx:if="{{hasWarn && altItems.length > 0}}" class="hp-alt">
+    <text class="hp-alt-title">可参考同风格候选</text>
+    <view class="hp-alt-row">
+      <text wx:for="{{altItems}}" wx:key="key" class="hp-alt-chip font-serif">{{item.name}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+<!-- report-feedback：解析不准确反馈入口 -->
+<view class="rf {{flagged ? 'rf--done' : ''}}" bindtap="onTap" hover-class="rf--tap">
+  <text class="rf-text">{{flagged ? '已反馈 · 感谢你的帮助' : '这条解析不准确？告诉我们'}}</text>
+</view>

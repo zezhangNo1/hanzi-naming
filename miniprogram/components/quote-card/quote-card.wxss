@@ -1,0 +1,70 @@
+/* quote-card 样式：宣纸深底 + 衬线原句，校验徽标朱砂描边 */
+.qc {
+  padding: 24rpx;
+  border-radius: 16rpx;
+  background: var(--paper-deep, #EFEAE0);
+}
+
+.qc-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.qc-badge {
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid rgba(176, 58, 46, 0.4);
+  color: var(--cinnabar, #B03A2E);
+  font-size: 20rpx;
+}
+
+.qc-title {
+  font-size: 28rpx;
+  color: var(--ink, #1C1C1C);
+}
+
+.qc-author {
+  font-size: 24rpx;
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}
+
+.qc-sentence {
+  margin-top: 16rpx;
+}
+
+.qc-text {
+  display: block;
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: rgba(28, 28, 28, 0.85);
+}
+
+.qc-toggle {
+  display: inline-block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--cinnabar, #B03A2E);
+}
+
+/* 无出处降级态 */
+.qc--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  border-radius: 16rpx;
+  background: rgba(28, 28, 28, 0.03);
+}
+
+.qc-empty-title {
+  font-size: 26rpx;
+  color: var(--ink-60, rgba(28, 28, 28, 0.6));
+}
+
+.qc-empty-sub {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: var(--ink-30, rgba(28, 28, 28, 0.3));
+}

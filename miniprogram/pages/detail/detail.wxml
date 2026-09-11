@@ -1,6 +1,121 @@
-<!-- detail 页占位 -->
-<view class="page-pad">
-  <view class="placeholder-card">
-    <text class="font-serif">名字报告 · 占位页</text>
+<!-- detail 页：命名检测报告（六维全客观数据，文案对照 redline-ui 词表零命中） -->
+<view class="page">
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="state-box">
+    <text class="state-title font-serif">正在整理这份名字的资料…</text>
   </view>
+
+  <!-- 加载失败 -->
+  <view wx:elif="{{loadFailed}}" class="state-box">
+    <text class="state-title font-serif">报告加载失败</text>
+    <text class="state-sub">可能是网络波动，稍后再试一次</text>
+    <view class="btn-row">
+      <button class="btn btn--primary" bindtap="onRetryTap">重试</button>
+      <button class="btn" bindtap="onBackTap">返回</button>
+    </view>
+  </view>
+
+  <!-- 报告主体 -->
+  <block wx:elif="{{name}}">
+    <!-- 标题区 -->
+    <view class="report-head">
+      <text class="report-title font-serif">命名检测报告</text>
+      <text class="report-sub">全部信息来自字义、音律与典籍的客观校验 · 不构成任何建议</text>
+    </view>
+
+    <!-- 名字卡 -->
+    <view class="name-card">
+      <text class="name font-serif">{{name}}</text>
+      <text class="pinyin">{{pinyinText}}</text>
+      <view class="name-tags">
+        <text wx:if="{{styleLabel}}" class="tag">{{styleLabel}}</text>
+      </view>
+      <text wx:if="{{meaning}}" class="name-meaning">{{meaning}}</text>
+    </view>
+
+    <!-- ① 字义 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">字义</text>
+      </view>
+      <view class="char-cards">
+        <view wx:for="{{charCards}}" wx:key="key" class="char-card">
+          <view class="char-char-row">
+            <text class="char-char font-serif">{{item.char}}</text>
+            <text wx:if="{{item.isSurname}}" class="char-surname-mark">姓</text>
+          </view>
+          <text class="char-strokes">{{item.strokes}} 画</text>
+          <text class="char-meaning">{{item.meaning}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ② 音律 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">音律</text>
+      </view>
+      <tone-chart pinyin="{{pinyin}}" tones="{{tones}}" />
+    </view>
+
+    <!-- ③ 典籍出处 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">典籍出处</text>
+      </view>
+      <quote-card quote="{{quote}}" />
+    </view>
+
+    <!-- ④ 谐音检测 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">谐音检测</text>
+      </view>
+      <homophone-panel checks="{{checks}}" alternatives="{{alternatives}}" detail="{{homophoneDetail}}" />
+    </view>
+
+    <!-- ⑤ 书写笔画 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">书写笔画</text>
+      </view>
+      <view class="kv-row">
+        <text class="kv-label">全名合计</text>
+        <text class="kv-value">{{writeCost}} 画</text>
+      </view>
+      <view class="kv-row">
+        <text class="kv-label">逐字笔画</text>
+        <text class="kv-value">{{strokesText}}</text>
+      </view>
+    </view>
+
+    <!-- ⑥ 重名度参考 -->
+    <view class="section">
+      <view class="section-head">
+        <text class="section-bar"></text>
+        <text class="section-title">重名度参考</text>
+      </view>
+      <view class="kv-row">
+        <text class="kv-label">重名度</text>
+        <text class="kv-value kv-value--{{duplicateCls}}">{{duplicateLabel}}</text>
+      </view>
+      <text class="dup-desc">{{duplicateDesc}}</text>
+    </view>
+
+    <!-- 操作区 -->
+    <view class="actions">
+      <button class="btn btn--block {{collected ? '' : 'btn--primary'}} {{collectBusy ? 'btn--disabled' : ''}}" bindtap="onCollectTap">
+        {{collected ? '已收藏 · 点击取消' : '收藏此名'}}
+      </button>
+      <report-feedback candidateId="{{candidateId}}" bind:flagged="onFlagged" />
+    </view>
+
+    <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
+  </block>
 </view>

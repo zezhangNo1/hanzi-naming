@@ -173,6 +173,73 @@ async function handlePoll(event) {
   return ok({ status: 'pending', candidates: [], degraded: false, quota: q });
 }
 
+/**
+ * action: getDetail — 名字详情报告数据（T08 详情页）
+ * 入参：{ candidateId }
+ * 出参：{ candidate, alternatives, homophoneDetail, collected }
+ *   - candidate：候选文档（脱敏：剥离 _openid/jobId 与一切内部过渡字段）；
+ *   - alternatives：同 jobId 同风格的其他候选（谐音 warn 时的同风格替代参考，≤6 个）；
+ *   - homophoneDetail：服务端复跑谐音检测得到的提示文案（仅 warn/fail 有值）；
+ *   - collected：当前用户是否已收藏（favorites 集合，未建集合时视为未收藏）。
+ * 鉴权：候选文档 _openid 必须等于调用方，否则按「不存在」处理（不泄露他人数据）。
+ */
+async function handleGetDetail(event) {
+  const candidateId = typeof event.candidateId === 'string' ? event.candidateId.trim() : '';
+  if (!candidateId) {
+    return fail(1001, '缺少 candidateId');
+  }
+  const openid = wxOpenid();
+  const found = await db.collection('candidates').doc(candidateId).get().catch(() => null);
+  if (!found || !found.data) {
+    return fail(1001, '候选不存在');
+  }
+  const doc = found.data;
+  if (doc._openid !== openid) {
+    return fail(1001, '候选不存在');
+  }
+
+  // 同风格替代：同 jobId 的其他候选，风格一致优先（≤6 个，仅 name/pinyin）
+  const altFound = await db.collection('candidates')
+    .where({ jobId: doc.jobId, style: doc.style })
+    .limit(10)
+    .get()
+    .catch(() => ({ data: [] }));
+  const alternatives = (altFound.data || [])
+    .filter((x) => x._id !== candidateId && x.name && x.name !== doc.name)
+    .slice(0, 6)
+    .map((x) => ({ name: x.name, pinyin: Array.isArray(x.pinyin) ? x.pinyin : [] }));
+
+  // 服务端复跑谐音检测，为 warn 态补提示文案（检测词表属服务端数据，不下发前端）
+  const homophone = require('./lib/filter/homophone');
+  const homo = homophone.check(sanitizeCandidate(doc));
+
+  // 收藏态：favorites 由 user 云函数 collect 落库；集合未建/查询失败按未收藏处理
+  const fav = await db.collection('favorites')
+    .where({ _openid: openid, candidateId: candidateId })
+    .limit(1)
+    .get()
+    .catch(() => null);
+  const collected = !!(fav && fav.data && fav.data.length > 0);
+
+  return ok({
+    candidate: sanitizeCandidate(doc),
+    alternatives: alternatives,
+    homophoneDetail: homo && homo.detail ? homo.detail : null,
+    collected: collected
+  });
+}
+
+/** 候选文档脱敏：剥离身份/任务关联与内部过渡字段（红线：输出不携带分值） */
+function sanitizeCandidate(doc) {
+  const c = Object.assign({}, doc);
+  delete c._openid;
+  delete c.jobId;
+  delete c.score;
+  delete c._internalScore;
+  delete c.quoteRef;
+  return c;
+}
+
 /** 规范化 constraints（对齐 name_jobs schema，全部可选） */
 function normalizeConstraints(raw) {
   const c = raw && typeof raw === 'object' ? raw : {};
@@ -203,7 +270,8 @@ async function loadCandidates(candidateIds) {
 /** action 路由表（接口契约见交接包 3.1） */
 const ACTIONS = {
   create: handleCreate,
-  poll: handlePoll
+  poll: handlePoll,
+  getDetail: handleGetDetail
 };
 
 exports.main = async (event, context) => {

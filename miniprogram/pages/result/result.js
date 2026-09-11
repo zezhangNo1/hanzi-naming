@@ -149,6 +149,7 @@ Page({
         : 0;
       return {
         id: (c._id || '') + '_' + idx, // 列表 key（_id 可能缺省）
+        cid: c._id || '',              // 候选文档 id（详情页 getDetail 入参）
         name: rawName,
         pinyin: pinyin,
         tones: tones,
@@ -205,6 +206,15 @@ Page({
   onBackToEdit() {
     wx.navigateBack({
       fail: () => wx.reLaunch({ url: '/pages/index/index' })
+    });
+  },
+
+  /** 点击候选卡 → 命名检测报告（T08 详情页） */
+  onCandidateTap(e) {
+    const cid = e.currentTarget.dataset.cid;
+    if (!cid) return;
+    wx.navigateTo({
+      url: '/pages/detail/detail?candidateId=' + encodeURIComponent(cid)
     });
   }
 });
