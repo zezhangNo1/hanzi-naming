@@ -33,13 +33,32 @@ const MAX_ATTEMPTS = 3;
 const MAX_FILL_SEGMENTS = 10;
 
 /**
+ * 跨批确定性种子键：openid + 与批次无关的请求签名。
+ * 引擎据此派生同序列 RNG（受控探索），使 batch N 模拟低批次选取时精确复现
+ * 其真实输出，跨批不相交不因扰动漂移；不同用户种子不同，扰动多样性保留。
+ * constraints 键序/数组顺序归一（avoidChars 乱序输入同签名）。
+ */
+function seedKeyOf(job) {
+  const canon = (v) => {
+    if (Array.isArray(v)) return v.slice().sort().join(',');
+    if (v && typeof v === 'object') {
+      return Object.keys(v).sort().map((k) => k + ':' + canon(v[k])).join(';');
+    }
+    return String(v == null ? '' : v);
+  };
+  return [job.openid || '', job.surname || '', job.gender || '',
+    (job.styles || []).join(','), canon(job.constraints || {})].join('|');
+}
+
+/**
  * 执行一次生成任务
- * @param {Object} job { jobId, surname, gender, styles, constraints, source, batch }
+ * @param {Object} job { jobId, openid, surname, gender, styles, constraints, source, batch }
  * @returns {Promise<{ status: 'done', candidateIds: string[], degraded: boolean, llmUsed: boolean, attemptCount: number, latencyMs: number }>}
  */
 async function run(job) {
   const startedAt = Date.now();
   const constraints = job.constraints || {};
+  const seedKey = seedKeyOf(job);
 
   // 3. 白名单解空间筛选
   const solved = solver.solve({
@@ -112,7 +131,8 @@ async function run(job) {
         constraints: constraints,
         pool: solved.pool,
         params: loader.engineParams,
-        batch: seg
+        batch: seg,
+        seedKey: seedKey
       });
       const fr = await filter.runAll(deg.candidates, filterCtx);
       for (const c of fr.passed) {
@@ -135,7 +155,8 @@ async function run(job) {
         constraints: constraints,
         pool: solved.pool,
         params: loader.engineParams,
-        batch: seg
+        batch: seg,
+        seedKey: seedKey
       });
       const fr = await filter.runAll(deg.candidates, filterCtx);
       for (const c of fr.passed) {

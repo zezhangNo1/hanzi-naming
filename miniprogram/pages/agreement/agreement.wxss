@@ -1,0 +1,51 @@
+/* agreement 页样式：宣纸底长文阅读 */
+.page {
+  min-height: 100vh;
+  padding: 40rpx 40rpx 80rpx;
+  box-sizing: border-box;
+  background: var(--paper, #F7F4EC);
+}
+
+.doc-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+.doc-title {
+  font-size: 40rpx;
+  color: var(--ink, #1C1C1C);
+}
+.doc-version {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: rgba(28, 28, 28, 0.45);
+}
+
+.doc-section {
+  margin-bottom: 36rpx;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.04);
+}
+.doc-h {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--ink, #1C1C1C);
+}
+.doc-p {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: rgba(28, 28, 28, 0.75);
+}
+
+.doc-foot {
+  display: block;
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(28, 28, 28, 0.4);
+}

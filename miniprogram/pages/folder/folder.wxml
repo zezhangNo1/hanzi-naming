@@ -1,6 +1,51 @@
-<!-- folder 页占位 -->
-<view class="page-pad">
-  <view class="placeholder-card">
-    <text class="font-serif">选名夹 · 占位页</text>
+<!-- folder 页：选名夹（收藏列表，T09） -->
+<view class="page">
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="state-box">
+    <text class="state-title font-serif">正在打开选名夹…</text>
   </view>
+
+  <!-- 失败 -->
+  <view wx:elif="{{loadFailed}}" class="state-box">
+    <text class="state-title font-serif">选名夹没有打开</text>
+    <text class="state-sub">可能是网络波动，稍后再试一次</text>
+    <view class="btn-row">
+      <button class="btn btn--primary" bindtap="onRetryTap">重试</button>
+      <button class="btn" bindtap="onGoNamingTap">回首页</button>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:elif="{{list.length === 0}}" class="state-box">
+    <text class="state-title font-serif">选名夹还是空的</text>
+    <text class="state-sub">在命名检测报告里点「收藏」，喜欢的名字都会收进来</text>
+    <button class="btn btn--primary state-btn" bindtap="onGoNamingTap">去起名</button>
+  </view>
+
+  <!-- 收藏列表 -->
+  <block wx:else>
+    <view class="count-line">共收藏 {{list.length}} 个名字</view>
+
+    <view class="candidate" wx:for="{{list}}" wx:key="cid"
+          data-cid="{{item.cid}}" bindtap="onCardTap" hover-class="candidate--tap">
+      <view class="candidate-head">
+        <text class="candidate-name font-serif">{{item.name}}</text>
+        <text class="candidate-pinyin">{{item.pinyin}}</text>
+      </view>
+      <view class="candidate-tags">
+        <text wx:if="{{item.tones}}" class="tag">平仄 {{item.tones}}</text>
+        <text wx:if="{{item.style}}" class="tag">{{item.style}}</text>
+        <text wx:if="{{item.dup}}" class="tag">{{item.dup}}</text>
+      </view>
+      <text wx:if="{{item.meaning}}" class="candidate-meaning">{{item.meaning}}</text>
+      <text wx:if="{{item.note}}" class="candidate-note">备注：{{item.note}}</text>
+      <view class="candidate-foot">
+        <text class="foot-hint">点击查看命名检测报告</text>
+        <text class="foot-remove" data-cid="{{item.cid}}" catchtap="onUncollectTap">移出</text>
+      </view>
+    </view>
+
+    <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
+  </block>
 </view>

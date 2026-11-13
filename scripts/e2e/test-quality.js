@@ -60,7 +60,7 @@ function mulberry32(seed) {
   };
 }
 
-/** 构建引擎输入（solver 出池 → engine.generate），rng 可注入 */
+/** 构建引擎输入（solver 出池 → engine.generate），rng/seedKey 可注入 */
 function runEngine(opts) {
   const input = {
     surname: opts.surname || '沈',
@@ -80,6 +80,7 @@ function runEngine(opts) {
   input.pool = solved.pool;
   input.surnameMeta = solved.surnameMeta;
   if (opts.rng) input.rng = opts.rng;
+  if (opts.seedKey != null) input.seedKey = opts.seedKey;
   return engine.generate(input);
 }
 
@@ -138,14 +139,29 @@ console.log('\n[3] 扰动有效性（Math.random 5 次）');
 }
 
 // ===== d) 批间去重 =====
-console.log('\n[4] 批间去重（batch=1 vs batch=2）');
+// seedKey 路径对齐生产 pipeline（openid+参数签名 → 确定性扰动）：
+// batch N 模拟低批次选取可精确复现，批间不相交恢复为硬保证（池耗尽回绕除外）。
+console.log('\n[4] 批间去重（seedKey 确定性路径）');
 {
-  const opts = { surname: '沈', gender: 'female', styles: ['温柔诗意'] };
-  const b1 = new Set(runEngine(Object.assign({}, opts, { batch: 1 })).candidates.map((x) => x.name));
-  const b2 = new Set(runEngine(Object.assign({}, opts, { batch: 2 })).candidates.map((x) => x.name));
-  let overlap = 0;
-  for (const n of b1) if (b2.has(n)) overlap++;
-  check('重名 <20%（' + overlap + '/30）', overlap < 0.2 * 30, '实际 ' + overlap);
+  const base = { surname: '沈', gender: 'female', styles: ['温柔诗意'], seedKey: 'openid_qa|沈|female|温柔诗意' };
+  const b1 = new Set(runEngine(Object.assign({}, base, { batch: 1 })).candidates.map((x) => x.name));
+  const b2 = new Set(runEngine(Object.assign({}, base, { batch: 2 })).candidates.map((x) => x.name));
+  const b3 = new Set(runEngine(Object.assign({}, base, { batch: 3 })).candidates.map((x) => x.name));
+  let o12 = 0, o13 = 0, o23 = 0;
+  for (const n of b1) { if (b2.has(n)) o12++; if (b3.has(n)) o13++; }
+  for (const n of b2) if (b3.has(n)) o23++;
+  check('batch1 vs batch2 重名 0（' + o12 + '/30）', o12 === 0, '实际 ' + o12);
+  check('batch1/2/3 两两不相交（' + o13 + '/' + o23 + '）', o13 === 0 && o23 === 0);
+
+  // 同 seedKey 跨调用完全一致（低批次模拟可信的前提）
+  const r1 = JSON.stringify(runEngine(Object.assign({}, base, { batch: 2 })));
+  const r2 = JSON.stringify(runEngine(Object.assign({}, base, { batch: 2 })));
+  check('同 seedKey 跨调用完全一致', r1 === r2);
+
+  // 不同 seedKey（不同用户）扰动仍生效：batch1 结果不应完全相同
+  const other = runEngine(Object.assign({}, base, { batch: 1, seedKey: 'openid_qq|沈|female|温柔诗意' }));
+  const sameCnt = other.candidates.filter((x) => b1.has(x.name)).length;
+  check('不同 seedKey 批次结果不完全相同（扰动跨用户生效）', sameCnt < 30, '重合 ' + sameCnt + '/30');
 }
 
 // ===== e) 回归 =====

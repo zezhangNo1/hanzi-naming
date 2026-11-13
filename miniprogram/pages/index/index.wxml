@@ -87,8 +87,20 @@
   <!-- 免费额度提示 -->
   <text class="quota-hint">免费生成 {{2}} 批 · 看广告可多换 {{1}} 批</text>
 
+  <!-- 选名夹入口 -->
+  <view class="folder-entry" bindtap="onFolderTap">
+    <text class="folder-entry-text">选名夹 · 回看收藏的名字</text>
+  </view>
+
   <!-- 免责声明（合规统一文案） -->
   <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
+
+  <!-- 协议入口（提审合规） -->
+  <view class="agreement-links">
+    <text class="agreement-link" bindtap="onTermsTap">《用户协议》</text>
+    <text class="agreement-sep">与</text>
+    <text class="agreement-link" bindtap="onPrivacyTap">《隐私政策》</text>
+  </view>
 
   <!-- 解锁卡（2001 触发；B4 完整商业化解锁卡） -->
   <view class="quota-mask" wx:if="{{showQuotaCard}}" bindtap="onQuotaCardClose">

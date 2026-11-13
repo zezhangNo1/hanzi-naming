@@ -209,6 +209,11 @@ Page({
     });
   },
 
+  /** 选名夹入口（T09） */
+  onFolderTap() {
+    wx.navigateTo({ url: '/pages/folder/folder' });
+  },
+
   /** 点击候选卡 → 命名检测报告（T08 详情页） */
   onCandidateTap(e) {
     const cid = e.currentTarget.dataset.cid;

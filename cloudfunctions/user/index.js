@@ -1,8 +1,9 @@
 /**
  * user 云函数 — 用户数据与埋点服务
  * 已实现：ping（连通性自检）、track（埋点批量写入 events 集合）、
- *         collect/uncollect（收藏，favorites 集合）、feedback（报告反馈，feedbacks 集合）。
- * 待实现（T0x 用户数据任务）：listFolder / setBirthConsent / deleteMyData。
+ *         collect/uncollect（收藏，favorites 集合）、listFolder（选名夹列表，T09）、
+ *         feedback（报告反馈，feedbacks 集合）。
+ * 待实现（T0x 用户数据任务）：setBirthConsent / deleteMyData。
  * 鉴权：openid 从 context.OPENID 取（云开发自动注入），前端绝不传身份字段。
  */
 const cloud = require('wx-server-sdk');
@@ -123,6 +124,68 @@ async function handleUncollect(event) {
 }
 
 /**
+ * listFolder：选名夹列表（T09）
+ * 入参：{ limit? }（默认 50，1-100）
+ * 出参：{ total, list: [{ candidateId, note, collectedAt, candidate }] }
+ * - favorites 按 updatedAt 倒序（最近操作在前；查询后服务端再排一次，不依赖 DB 排序实现）；
+ * - candidate 为候选摘要，脱敏口径与 generate.getDetail 一致（剥离 _openid/jobId 与分值内部字段）；
+ * - 候选文档已不存在（历史数据被清理）时跳过该行，不阻断列表；
+ * - 防御：候选 _openid 必须等于调用方（正常收藏只会来自本人候选，此处双保险）。
+ */
+async function handleListFolder(event) {
+  const openid = wxOpenid();
+  const limit = Math.min(Math.max(parseInt(event.limit, 10) || 50, 1), 100);
+  const found = await db.collection('favorites')
+    .where({ _openid: openid })
+    .limit(limit)
+    .get()
+    .catch(() => ({ data: [] }));
+  const favs = (found && found.data) || [];
+  if (favs.length === 0) {
+    return { code: 0, msg: 'ok', data: { total: 0, list: [] } };
+  }
+  // 最近操作在前（updatedAt 兜底 createdAt；同刻稳定序用 candidateId）
+  favs.sort((a, b) => ((b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0))
+    || String(a.candidateId).localeCompare(String(b.candidateId)));
+  // 查询侧已 limit；此处再截一次防驱动实现差异
+  const paged = favs.slice(0, limit);
+
+  // 批量拉候选文档（where-in 上限 100 内；limit 已被夹到 ≤100）
+  const ids = favs.map((f) => f.candidateId).filter(Boolean);
+  const candFound = await db.collection('candidates')
+    .where({ _id: db.command.in(ids) })
+    .limit(100)
+    .get()
+    .catch(() => ({ data: [] }));
+  const byId = {};
+  for (const doc of (candFound && candFound.data) || []) byId[doc._id] = doc;
+
+  const list = [];
+  for (const f of paged) {
+    const doc = byId[f.candidateId];
+    if (!doc || doc._openid !== openid) continue;
+    list.push({
+      candidateId: f.candidateId,
+      note: f.note || '',
+      collectedAt: f.updatedAt || f.createdAt || 0,
+      candidate: sanitizeCandidate(doc)
+    });
+  }
+  return { code: 0, msg: 'ok', data: { total: list.length, list: list } };
+}
+
+/** 候选摘要脱敏：与 generate/index.js sanitizeCandidate 同口径（红线：输出不携带分值） */
+function sanitizeCandidate(doc) {
+  const c = Object.assign({}, doc);
+  delete c._openid;
+  delete c.jobId;
+  delete c.score;
+  delete c._internalScore;
+  delete c.quoteRef;
+  return c;
+}
+
+/**
  * feedback：报告解析反馈落库 { candidateId, type, comment? }
  * feedbacks 集合：{ _openid, candidateId, type, comment, createdAt }
  */
@@ -155,8 +218,8 @@ const ACTIONS = {
   collect: handleCollect,
   // 取消收藏 { candidateId }
   uncollect: handleUncollect,
-  // 收藏列表（含家人投票状态）
-  listFolder: (e) => notImplemented('listFolder'),
+  // 收藏列表 { limit? }（含候选摘要；家人投票状态 T10 扩展）
+  listFolder: handleListFolder,
   // 生辰授权单独记录 { consent }
   setBirthConsent: (e) => notImplemented('setBirthConsent'),
   // 反馈 { candidateId, type, comment }
@@ -174,8 +237,7 @@ exports.main = async (event, context) => {
   try {
     return await handler(event, context);
   } catch (err) {
-    // 开发阶段临时在 msg 中附带错误信息便于定位（提审前移除 debug 字段）
     console.error('[user] 处理失败：', action, err);
-    return { code: 5000, msg: '服务内部错误: ' + ((err && err.message) || '未知'), debug: String((err && err.stack) || err), data: null };
+    return { code: 5000, msg: '服务内部错误', data: null };
   }
 };

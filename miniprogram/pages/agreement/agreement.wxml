@@ -1,0 +1,14 @@
+<!-- agreement 页：用户协议 / 隐私政策（type=terms|privacy） -->
+<view class="page">
+  <view class="doc-head">
+    <text class="doc-title font-serif">{{title}}</text>
+    <text class="doc-version">{{version}}</text>
+  </view>
+
+  <view class="doc-section" wx:for="{{sections}}" wx:key="h">
+    <text class="doc-h">{{item.h}}</text>
+    <text class="doc-p" wx:for="{{item.p}}" wx:for-item="para" wx:key="*this">{{para}}</text>
+  </view>
+
+  <text class="doc-foot">如有疑问，欢迎通过小程序「意见反馈」与我们联系。</text>
+</view>

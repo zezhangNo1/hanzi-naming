@@ -285,6 +285,7 @@ exports.main = async (event, context) => {
   } catch (err) {
     // 开发阶段临时在 msg 中附带错误信息便于定位（提审前移除 debug 字段，避免内部信息外泄）
     console.error('[generate] 处理失败：', action, err);
-    return fail(5000, '服务内部错误: ' + ((err && err.message) || '未知') + ' | ' + String((err && err.stack) || err).slice(0, 300));
+    // 完整堆栈只进云端日志；客户端仅回固定文案（提审合规：不外泄内部结构）
+    return fail(5000, '服务内部错误');
   }
 };

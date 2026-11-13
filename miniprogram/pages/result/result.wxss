@@ -97,6 +97,14 @@
 .btn--block { width: 100%; }
 .btn--disabled { opacity: 0.6; }
 
+/* 选名夹入口链接 */
+.folder-link {
+  margin-bottom: 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--cinnabar, #B03A2E);
+}
+
 .btn::after { border: none; }
 
 .disclaimer {

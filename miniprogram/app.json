@@ -3,9 +3,10 @@
     "pages/index/index",
     "pages/result/result",
     "pages/detail/detail",
+    "pages/folder/folder",
+    "pages/agreement/agreement",
     "pages/vote/vote",
     "pages/poster/poster",
-    "pages/folder/folder",
     "pages/inspiration/inspiration",
     "pages/mine/mine"
   ],

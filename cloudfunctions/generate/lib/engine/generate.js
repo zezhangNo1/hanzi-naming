@@ -20,6 +20,27 @@ const score = require('./score');
 /** 每个位置（名首字/名次字）预筛池大小：控制组合规模在毫秒级 */
 const POOL_SIZE = 60;
 
+/** 字符串 → 32 位种子（FNV-1a；seedKey 确定性扰动用） */
+function hashSeed(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/** seeded RNG（mulberry32）：同种子同序列 */
+function mulberry32(seed) {
+  let a = seed | 0;
+  return function () {
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 /**
  * 降级模式生成入口
  * @param {Object} input
@@ -40,8 +61,14 @@ function generate(input) {
   const generationChar = constraints.generationChar || '';
   const batch = Math.max(1, input.batch || 1);
   const topN = p.generate.topN;
-  // 受控探索：RNG 可注入（测试传 mulberry32 等 seeded RNG）；未注入走 Math.random
-  const rng = typeof input.rng === 'function' ? input.rng : Math.random;
+  // 受控探索：RNG 三级优先——注入 rng（测试）> seedKey（生产：openid+参数签名，
+  // 同用户同参数跨调用同序列，batch N 模拟低批次选取可精确复现 → 跨批不相交
+  // 不再受扰动破坏）> Math.random（无身份上下文的调用方）。
+  // 若改用纯随机，batch>1 的 lowerBatchCombos 模拟与低批次真实输出漂移，
+  // 批间会出现 ~20% 重名（test-quality [4] 曾概率性失败的原因）。
+  const rng = typeof input.rng === 'function'
+    ? input.rng
+    : (input.seedKey != null ? mulberry32(hashSeed(String(input.seedKey))) : Math.random);
   const jitterRatio = (p.exploration && p.exploration.jitterRatio) || 0;
 
   // 1. 基础过滤：同姓字回避（名中不重复用姓字，避免姓=名歧义）

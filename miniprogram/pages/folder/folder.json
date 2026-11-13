@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "选名夹",
+  "enablePullDownRefresh": true,
   "usingComponents": {}
 }

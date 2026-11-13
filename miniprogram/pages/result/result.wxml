@@ -45,6 +45,7 @@
         {{regenerating ? '正在生成…' : '换一批'}}
       </button>
       <button class="btn btn--block" bindtap="onBackToEdit">返回调整条件</button>
+      <text class="folder-link" bindtap="onFolderTap">选名夹 · 回看收藏的名字 ›</text>
       <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
     </view>
   </block>
