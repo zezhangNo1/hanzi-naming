@@ -6,14 +6,20 @@
  * 进程内缓存避免重复调用（云函数实例热启动时只建一次）。
  */
 const cloud = require('wx-server-sdk');
-const db = cloud.database();
+// 惰性获取 db：真实 sdk 在 cloud.init() 之前调用 database() 会抛错致模块加载崩溃
+// （-504002）；mock sdk 不校验顺序，本地测试无法暴露，故改为首次使用时获取
+let _db = null;
+function db() {
+  if (!_db) _db = cloud.database();
+  return _db;
+}
 
 const ensured = {};
 
 async function ensureCollection(name) {
   if (ensured[name]) return;
   try {
-    await db.createCollection(name);
+    await db().createCollection(name);
     console.log('[ensure-collection] 已创建集合：', name);
   } catch (err) {
     // 集合已存在 / 无权限等：已存在属正常路径，其余错误打日志但不阻断业务（后续 add 会给出真实错误）

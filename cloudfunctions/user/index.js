@@ -7,9 +7,11 @@
  * 鉴权：openid 从 context.OPENID 取（云开发自动注入），前端绝不传身份字段。
  */
 const cloud = require('wx-server-sdk');
-const { ensureCollection } = require('./lib/ensure-collections');
-
+// 铁律：init 必须先于 ensure-collections 的 require（其模块顶层调用 cloud.database()，
+// 真实 sdk 在 init 前调用会抛「Cloud API isn't enabled」→ 模块加载失败 → 云函数进程
+// 崩溃（-504002），mock sdk 不校验 init 顺序，故本地测试无法暴露此类问题）
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
+const { ensureCollection } = require('./lib/ensure-collections');
 const db = cloud.database();
 
 /** 每次请求内调用 getWXContext 获取调用方身份（SCF 的 context 参数不含 OPENID） */
