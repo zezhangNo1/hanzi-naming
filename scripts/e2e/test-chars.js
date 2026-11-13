@@ -34,6 +34,9 @@ async function main() {
   const chars = board.chars || [];
   check('1b 返回 groups 与 chars', groups.length === 6 && chars.length > 500,
     'groups=' + groups.length + ' chars=' + chars.length);
+  check('1c meta 携带字库版本与总数（前端版本身份标识）',
+    board.meta && board.meta.version === 'v0.5' && board.meta.count === chars.length,
+    JSON.stringify(board.meta));
 
   console.log('\n[2] 分组定义完备性');
   const TAG_VOCAB = ['品德', '文采', '自然', '水泽', '草木', '山岳', '光亮', '美玉', '心性', '刚毅',

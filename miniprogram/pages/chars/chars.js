@@ -86,10 +86,14 @@ Page({
     }
   },
 
-  /** 挂载看板并预计算分组 chips 计数 */
+  /** 挂载看板并预计算分组 chips 计数（boardLine 标识云端字库版本，旧云端一眼可辨） */
   _applyBoard(board) {
     const groups = board.groups || [];
     const allChars = board.chars || [];
+    const meta = board.meta || null;
+    const boardLine = meta && meta.version
+      ? ('字库 ' + meta.version + ' · ' + meta.count + ' 字')
+      : '云端字库版本待更新（generate 云函数重新部署后生效）';
     const groupChips = [{ key: 'all', label: '全部', count: allChars.length }].concat(
       groups.map((g) => ({
         key: g.key,
@@ -102,6 +106,7 @@ Page({
       loadFailed: false,
       groups: groups,
       allChars: allChars,
+      boardLine: boardLine,
       groupChips: groupChips
     });
     this._refilter();

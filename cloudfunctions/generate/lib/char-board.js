@@ -76,7 +76,12 @@ function buildBoard(loader) {
     || (a.strokes - b.strokes)
     || (a.char < b.char ? -1 : 1));
 
-  cached = { groups: GROUPS, chars: chars };
+  // meta 供前端展示字库版本（云端未重新部署时版本落后，一眼可辨）
+  const meta = {
+    version: (loader.namePool && loader.namePool.metadata && loader.namePool.metadata.version) || '',
+    count: chars.length
+  };
+  cached = { groups: GROUPS, chars: chars, meta: meta };
   return cached;
 }
 
