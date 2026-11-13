@@ -7180,11 +7180,12 @@
       "strokes": 6,
       "pinyin": "zhōu",
       "tone": 1,
-      "freqLevel": "mid",
+      "freqLevel": "low",
       "imageryTags": [
-        "自然"
+        "水泽",
+        "灵动"
       ],
-      "meaning": "规范汉字，音形均衡，可入名"
+      "meaning": "轻舟已过，从容自渡"
     },
     {
       "char": "全",
@@ -32207,6 +32208,30 @@
         "音律"
       ],
       "meaning": "关雎和鸣，淑雅端庄"
+    },
+    {
+      "char": "惠",
+      "strokes": 12,
+      "pinyin": "huì",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "温柔",
+        "品德"
+      ],
+      "meaning": "惠风和畅，温润仁爱"
+    },
+    {
+      "char": "暮",
+      "strokes": 14,
+      "pinyin": "mù",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "自然",
+        "温柔"
+      ],
+      "meaning": "暮春之初，温柔向晚"
     }
   ]
 }

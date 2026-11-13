@@ -79,6 +79,7 @@ function runEngine(opts) {
   });
   input.pool = solved.pool;
   input.surnameMeta = solved.surnameMeta;
+  input.quotes = loader.quotesIndex.quotes || []; // 典故组名语料（对齐 pipeline 传参）
   if (opts.rng) input.rng = opts.rng;
   if (opts.seedKey != null) input.seedKey = opts.seedKey;
   return engine.generate(input);
@@ -178,6 +179,28 @@ console.log('\n[5] 回归（字辈/避讳/红线/白名单/无分值）');
 
   // 白名单 + 红线 + 分值外泄（用未过滤的原始批做最严检查）
   const raw = runEngine({ surname: '沈', gender: 'female', styles: ['温柔诗意'] });
+
+  // 典故组名（quote-pair）：多配置扫描，带出处候选应出现且结构合法
+  let quoteHit = 0, scanned = 0;
+  for (const cfg of [
+    { surname: '沈', gender: 'male', styles: [] },
+    { surname: '顾', gender: 'female', styles: ['温柔诗意'] },
+    { surname: '顾', gender: 'male', styles: ['典籍感'] }
+  ]) {
+    const r = runEngine(cfg);
+    scanned += r.candidates.length;
+    quoteHit += r.candidates.filter((x) => x.quote && x.quote.title && x.quote.sentence).length;
+  }
+  check('典故组名生效（三批扫描带出处候选 ≥1，实际 ' + quoteHit + '/' + scanned + '）', quoteHit >= 1);
+
+  // 多样性收紧：同字/同首字整批 ≤2（参数 v0.2 配额）
+  const cntAll = {};
+  for (const x of raw.candidates) {
+    for (let i = 1; i < x.name.length; i++) cntAll[x.name[i]] = (cntAll[x.name[i]] || 0) + 1;
+  }
+  check('收紧后任一字出现 ≤2', Object.values(cntAll).every((n) => n <= 2),
+    JSON.stringify(Object.entries(cntAll).filter(([, n]) => n > 2)));
+
   const notWl = raw.candidates.filter((x) => [...x.name].some((ch, i) => i > 0 && !whitelist.has(ch)));
   check('名字用字全部在白名单', notWl.length === 0, notWl.map((x) => x.name).join(','));
   const redHit = [];

@@ -144,6 +144,68 @@ function generate(input) {
     }
   }
 
+  // 3a. 典故组名（quote-pair）：两字同出一句典籍（quotes-index 字级标注）的组合
+  //     大幅加分并直接挂出处——名字自带画面与出处（岸芷汀兰/疏影横斜式组名）。
+  //     语料字多为 mid 频，纯评分可能被冷门字挤出位置池，故对「最优字对」做
+  //     保底注入（仿字辈保底）：每条 quote 取评分和最高的一对字替换入池尾。
+  const quotePairBonus = (p.generate && p.generate.quotePairBonus) || 0;
+  const quotesFillMax = (p.generate && p.generate.quotesFillMax) || 8;
+  const pairQuotes = new Map(); // "字a|字b"（按字码序）→ quote 三元组
+  if (quotePairBonus > 0 && Array.isArray(input.quotes)) {
+    const baseSet = new Set(base.map((c) => c.char));
+    const scoredMap = new Map(scored.map((s) => [s.entry.char, s.styleScore + s.freqScore]));
+    const pairScore = [];
+    for (const q of input.quotes) {
+      const cs = [...new Set((q.chars || []).filter((c) => baseSet.has(c) && c !== input.surname))];
+      let bestPair = null;
+      let bestSum = -Infinity;
+      for (let i = 0; i < cs.length; i++) {
+        for (let j = i + 1; j < cs.length; j++) {
+          const sum = (scoredMap.get(cs[i]) || 0) + (scoredMap.get(cs[j]) || 0);
+          if (sum > bestSum) { bestSum = sum; bestPair = [cs[i], cs[j]]; }
+        }
+      }
+      if (bestPair) pairScore.push({ pair: bestPair, sum: bestSum, quote: q });
+    }
+    pairScore.sort((a, b) => b.sum - a.sum);
+    // 最优字对保底注入位置池：缺失字从池尾向前替换非字辈位，池规模维持 POOL_SIZE
+    const posSet = new Set(posPool.map((s) => s.entry.char));
+    const genInPool = generationChar ? posSet.has(generationChar) : false;
+    const injectChars = [];
+    for (const item of pairScore.slice(0, quotesFillMax)) {
+      for (const ch of item.pair) {
+        if (!posSet.has(ch) && !injectChars.includes(ch)) injectChars.push(ch);
+      }
+    }
+    let fillIdx = posPool.length - 1;
+    for (const ch of injectChars) {
+      const src = scored.find((s) => s.entry.char === ch);
+      if (!src) continue;
+      while (fillIdx >= 0) {
+        const cur = posPool[fillIdx];
+        if (genInPool && cur.entry.char === generationChar) { fillIdx--; continue; }
+        if (injectChars.includes(cur.entry.char)) { fillIdx--; continue; } // 已注入位不覆盖
+        posPool[fillIdx] = { entry: src.entry, styleScore: src.styleScore, freqScore: src.freqScore };
+        posSet.add(ch);
+        fillIdx--;
+        break;
+      }
+    }
+    // 重建配对表（基于最终位置池）
+    const inPool = new Set(posPool.map((s) => s.entry.char));
+    for (const q of input.quotes) {
+      const cs = [...new Set((q.chars || []).filter((c) => inPool.has(c) && c !== input.surname))];
+      for (let i = 0; i < cs.length; i++) {
+        for (let j = i + 1; j < cs.length; j++) {
+          const key = [cs[i], cs[j]].sort().join('|');
+          if (!pairQuotes.has(key)) {
+            pairQuotes.set(key, { author: q.author, title: q.title, sentence: q.sentence });
+          }
+        }
+      }
+    }
+  }
+
   // 3. 组合 + 全名四维评分
   const surnameMeta = input.surnameMeta || { pinyin: '', tone: 0, strokes: 0 };
   const combos = [];
@@ -179,6 +241,11 @@ function generate(input) {
       // 打破纯确定性贪心的「同参数永远同批」；rng 可注入保证测试可复现
       const jittered = internal + Math.abs(internal) * jitterRatio * (rng() * 2 - 1);
 
+      // 典故组名：两字同出一句 → 加分 + 挂出处（quote 进候选文档，详情页出处卡可用）
+      const pairKey = [a.entry.char, b.entry.char].sort().join('|');
+      const quoteHit = pairQuotes.get(pairKey) || null;
+      const finalScore = jittered + (quoteHit ? quotePairBonus : 0);
+
       combos.push({
         name: name,
         first: a.entry,
@@ -186,7 +253,8 @@ function generate(input) {
         pyArr: pyArr,
         toneArr: toneArr,
         strokeArr: strokeArr,
-        _internalScore: jittered
+        quote: quoteHit,
+        _internalScore: finalScore
       });
     }
   }
@@ -287,7 +355,7 @@ function buildCandidate(ctx) {
     },
     style: ctx.styleLabel,
     meaning: c.first.char + '：' + c.first.meaning + '；' + c.second.char + '：' + c.second.meaning,
-    quote: null,          // 降级模式不提供典籍出处（B3 语料索引接入后填充）
+    quote: c.quote || null, // 典故组名命中时直接携带出处（无则 null，B3 语料索引兜底）
     collected: false,
     reportFlagged: false
   };

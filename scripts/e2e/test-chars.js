@@ -35,7 +35,7 @@ async function main() {
   check('1b 返回 groups 与 chars', groups.length === 6 && chars.length > 500,
     'groups=' + groups.length + ' chars=' + chars.length);
   check('1c meta 携带字库版本与总数（前端版本身份标识）',
-    board.meta && board.meta.version === 'v0.6' && board.meta.count === chars.length,
+    board.meta && board.meta.version === 'v0.7' && board.meta.count === chars.length,
     JSON.stringify(board.meta));
 
   console.log('\n[2] 分组定义完备性');

@@ -61,7 +61,11 @@ async function main() {
   const leaked = JSON.stringify(dr.data);
   const bad = ['_openid', 'jobId', 'score', 'quoteRef', '_internalScore'].filter((k) => leaked.includes(k));
   check('A6 输出零内部字段外泄', bad.length === 0, '命中 ' + bad.join(','));
-  check('A7 降级模式 quote 恒 null（出处卡降级契约）', cand.quote === null, 'quote=' + JSON.stringify(cand.quote));
+  check('A7 quote 为 null 或合法出处三元组（典故组名候选直接带出处）',
+    cand.quote === null
+    || (cand.quote && typeof cand.quote.author === 'string'
+      && typeof cand.quote.title === 'string' && typeof cand.quote.sentence === 'string'),
+    'quote=' + JSON.stringify(cand.quote));
 
   const alts = (dr.data && dr.data.alternatives) || [];
   check('A8 同风格替代 1-6 个且结构合法',

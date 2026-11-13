@@ -133,7 +133,8 @@ async function run(job) {
         pool: solved.pool,
         params: loader.engineParams,
         batch: seg,
-        seedKey: seedKey
+        seedKey: seedKey,
+        quotes: loader.quotesIndex.quotes || []
       });
       const fr = await filter.runAll(deg.candidates, filterCtx);
       for (const c of fr.passed) {
@@ -157,7 +158,8 @@ async function run(job) {
         pool: solved.pool,
         params: loader.engineParams,
         batch: seg,
-        seedKey: seedKey
+        seedKey: seedKey,
+        quotes: loader.quotesIndex.quotes || []
       });
       const fr = await filter.runAll(deg.candidates, filterCtx);
       for (const c of fr.passed) {
