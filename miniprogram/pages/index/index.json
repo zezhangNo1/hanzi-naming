@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "汉字美学",
-  "usingComponents": {}
+  "usingComponents": {
+    "aigc-banner": "/components/aigc-banner/aigc-banner",
+    "style-chips": "/components/style-chips/style-chips",
+    "progressive-card": "/components/progressive-card/progressive-card"
+  }
 }
