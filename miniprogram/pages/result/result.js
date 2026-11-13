@@ -209,9 +209,9 @@ Page({
     });
   },
 
-  /** 选名夹入口（T09） */
+  /** 选名夹入口（T09；tabBar 页用 switchTab） */
   onFolderTap() {
-    wx.navigateTo({ url: '/pages/folder/folder' });
+    wx.switchTab({ url: '/pages/folder/folder' });
   },
 
   /** 点击候选卡 → 命名检测报告（T08 详情页） */

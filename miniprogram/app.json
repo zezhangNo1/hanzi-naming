@@ -19,6 +19,17 @@
     "backgroundTextStyle": "dark"
   },
   "style": "v2",
+  "tabBar": {
+    "color": "#8C8880",
+    "selectedColor": "#B03A2E",
+    "backgroundColor": "#F7F4EC",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "开始取名" },
+      { "pagePath": "pages/chars/chars", "text": "候选字库" },
+      { "pagePath": "pages/folder/folder", "text": "选名夹" }
+    ]
+  },
   "requiredPrivateInfos": [],
   "sitemapLocation": "sitemap.json"
 }

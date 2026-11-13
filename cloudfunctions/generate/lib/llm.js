@@ -161,8 +161,45 @@ async function callLlm(input, options) {
   }
 }
 
+/**
+ * 通用对话调用（aiPick 等非生成场景复用同一传输层）
+ * @param {Object} input { system, user, temperature? }（temperature 默认 0.6，点评场景收敛）
+ * @param {Object} [options] { transport? }
+ * @returns {Promise<Object|null>} 解析后的 JSON 对象；未配置/失败返回 null
+ */
+async function callChat(input, options) {
+  const opts = options || {};
+  const apiKey = process.env.LLM_API_KEY || '';
+  const baseUrl = process.env.LLM_BASE_URL || '';
+  const model = process.env.LLM_MODEL || '';
+  if (!apiKey || !baseUrl || !model) return null;
+
+  const body = JSON.stringify({
+    model: model,
+    messages: [
+      { role: 'system', content: input.system },
+      { role: 'user', content: input.user }
+    ],
+    temperature: typeof input.temperature === 'number' ? input.temperature : 0.6,
+    response_format: { type: 'json_object' }
+  });
+
+  const transport = opts.transport || httpsTransport;
+  try {
+    const content = await transport({
+      baseUrl: baseUrl, apiKey: apiKey, model: model,
+      body: body, timeoutMs: TIMEOUT_MS
+    });
+    return parseLlmJson(content);
+  } catch (err) {
+    console.error('[llm] callChat 失败：' + ((err && err.message) || String(err)));
+    return null;
+  }
+}
+
 module.exports = {
   callLlm: callLlm,
+  callChat: callChat,
   isConfigured: isConfigured,
   parseLlmJson: parseLlmJson
 };

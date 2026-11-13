@@ -25,7 +25,38 @@
 
   <!-- 收藏列表 -->
   <block wx:else>
-    <view class="count-line">共收藏 {{list.length}} 个名字</view>
+    <view class="count-line">
+      <text class="count-text">共收藏 {{list.length}} 个名字</text>
+      <text wx:if="{{list.length >= 2}}"
+            class="ai-btn {{picking ? 'ai-btn--busy' : ''}}"
+            bindtap="onAiPickTap">{{picking ? 'AI 分析中…' : 'AI 帮选'}}</text>
+    </view>
+
+    <!-- AI 帮选结果面板 -->
+    <view wx:if="{{pick}}" class="pick-panel">
+      <view class="pick-head">
+        <text class="pick-title font-serif">AI 帮选</text>
+        <text class="pick-mode">{{pick.modeLabel}}</text>
+        <text class="pick-close" bindtap="onPickClose">收起</text>
+      </view>
+
+      <!-- 合规标识：AI 参与生成的内容必须标注；规则模式无 AI 参与，说明来源 -->
+      <text wx:if="{{!pick.degraded}}" class="pick-aigc">以下内容由 AI 参与生成，仅供参考</text>
+      <text wx:else class="pick-aigc">智能通道繁忙，以下为规则引擎的客观维度对比</text>
+
+      <view class="pick-top" wx:for="{{pick.top3}}" wx:key="name">
+        <text class="pick-rank">{{item.rank}}</text>
+        <view class="pick-body">
+          <text class="pick-name font-serif">{{item.name}}</text>
+          <text class="pick-reason">{{item.reason}}</text>
+        </view>
+      </view>
+
+      <view class="pick-comment" wx:for="{{pick.comments}}" wx:key="name">
+        <text class="pick-cname font-serif">{{item.name}}</text>
+        <text class="pick-ctext">{{item.comment}}</text>
+      </view>
+    </view>
 
     <view class="candidate" wx:for="{{list}}" wx:key="cid"
           data-cid="{{item.cid}}" bindtap="onCardTap" hover-class="candidate--tap">

@@ -16,6 +16,8 @@ const quota = require('./lib/quota');
 const cache = require('./lib/cache');
 const pipeline = require('./lib/pipeline');
 const charBoard = require('./lib/char-board');
+const aiPick = require('./lib/ai-pick');
+const llm = require('./lib/llm');
 const loader = require('./lib/data-loader');
 const { ensureCollections } = require('./lib/ensure-collections');
 
@@ -279,12 +281,65 @@ async function handleListChars() {
   return ok(charBoard.buildBoard(loader));
 }
 
+/**
+ * action: aiPick — AI 帮选（选名夹收藏名的 AI 点评 + 推荐前三）
+ * 入参：{ candidateIds: string[]（≤20）, wishes?: string（≤50） }
+ * 出参：{ mode: 'ai'|'rule', degraded, comments: [{name,comment}], top3: [{name,reason}] }
+ * 鉴权：候选 _openid 必须等于调用方（非本人候选直接剔除，不足 1 个按 1001）。
+ * 降级：LLM 未配置/调用失败/输出消毒不通过 → ruleSummary 客观摘要（degraded:true）。
+ * 不消耗生成额度（点评非生成）；不缓存（同批收藏可反复点评）。
+ */
+async function handleAiPick(event) {
+  const openid = wxOpenid();
+  const ids = Array.isArray(event.candidateIds)
+    ? event.candidateIds.filter((x) => typeof x === 'string' && x).slice(0, 20)
+    : [];
+  const wishes = typeof event.wishes === 'string' ? event.wishes.slice(0, 50) : '';
+  if (ids.length === 0) {
+    return fail(1001, '缺少 candidateIds');
+  }
+
+  const docs = await loadCandidates(ids);
+  const own = docs.filter((d) => d._openid === openid);
+  if (own.length === 0) {
+    return fail(1001, '候选不存在');
+  }
+
+  // 点评上下文：仅可验证维度（字义/音律拼音/出处/风格/谐音/重名度），不带任何分值
+  const items = own.map((d) => ({
+    name: d.name,
+    pinyin: Array.isArray(d.pinyin) ? d.pinyin.join(' ') : '',
+    meaning: d.meaning || '',
+    quote: d.quote && d.quote.title ? d.quote : null,
+    style: d.style || '',
+    dupLevel: (d.checks && d.checks.duplicateLevel) || 'mid',
+    homophonePass: d.checks
+      ? (d.checks.homophonePutonghua !== 'fail' && d.checks.sensitive !== 'fail')
+      : true
+  }));
+  const ctx = { wishes: wishes, items: items };
+  const names = items.map((i) => i.name);
+
+  if (llm.isConfigured()) {
+    const prompt = aiPick.buildPickPrompt(ctx);
+    const parsed = await llm.callChat({ system: prompt.system, user: prompt.user });
+    const clean = aiPick.sanitizePick(parsed, names, loader.redlineLlm.words);
+    if (clean) {
+      return ok({ mode: 'ai', degraded: false, comments: clean.comments, top3: clean.top3 });
+    }
+    console.error('[aiPick] LLM 输出不可用，走规则降级');
+  }
+  const rule = aiPick.ruleSummary(ctx);
+  return ok({ mode: 'rule', degraded: true, comments: rule.comments, top3: rule.top3 });
+}
+
 /** action 路由表（接口契约见交接包 3.1） */
 const ACTIONS = {
   create: handleCreate,
   poll: handlePoll,
   getDetail: handleGetDetail,
-  listChars: handleListChars
+  listChars: handleListChars,
+  aiPick: handleAiPick
 };
 
 exports.main = async (event, context) => {

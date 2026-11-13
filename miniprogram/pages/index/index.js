@@ -114,16 +114,6 @@ Page({
     wx.showToast({ title: '生辰输入暂未开放', icon: 'none' });
   },
 
-  /** 选名夹入口（T09） */
-  onFolderTap() {
-    wx.navigateTo({ url: '/pages/folder/folder' });
-  },
-
-  /** 候选字库入口 */
-  onCharsTap() {
-    wx.navigateTo({ url: '/pages/chars/chars' });
-  },
-
   /** 协议入口（提审合规） */
   onTermsTap() {
     wx.navigateTo({ url: '/pages/agreement/agreement?type=terms' });

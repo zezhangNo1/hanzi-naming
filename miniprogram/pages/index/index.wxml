@@ -87,16 +87,6 @@
   <!-- 免费额度提示 -->
   <text class="quota-hint">免费生成 {{2}} 批 · 看广告可多换 {{1}} 批</text>
 
-  <!-- 选名夹 / 候选字库入口 -->
-  <view class="entry-row">
-    <view class="folder-entry" bindtap="onFolderTap">
-      <text class="folder-entry-text">选名夹 · 回看收藏的名字</text>
-    </view>
-    <view class="folder-entry" bindtap="onCharsTap">
-      <text class="folder-entry-text">候选字库 · 按气质挑字</text>
-    </view>
-  </view>
-
   <!-- 免责声明（合规统一文案） -->
   <text class="disclaimer">基于汉字字义、音律与传统典籍提供文化参考，不具备任何预测效力</text>
 

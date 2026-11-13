@@ -26,7 +26,10 @@ Page({
   data: {
     loading: true,
     loadFailed: false,
-    list: []          // [{ cid, name, pinyin, tones, style, meaning, note, dup }]
+    list: [],          // [{ cid, name, pinyin, tones, style, meaning, note, dup }]
+    // AI 帮选面板（null=收起）
+    picking: false,
+    pick: null         // { modeLabel, degraded, aigc, top3: [{rank,name,reason}], comments: [{name,comment}] }
   },
 
   /** 行级操作锁（cid -> true），防连点重复请求 */
@@ -134,8 +137,76 @@ Page({
     }
   },
 
-  /** 空态引导：回首页起名 */
+  /** 空态引导：回首页起名（tabBar 页用 switchTab） */
   onGoNamingTap() {
-    wx.reLaunch({ url: '/pages/index/index' });
+    wx.switchTab({ url: '/pages/index/index' });
+  },
+
+  /* ---------------- AI 帮选 ---------------- */
+
+  /** AI 帮选（≥2 个收藏才有排序意义）；wishes 取最近一次生成输入的寄语 */
+  async onAiPickTap() {
+    if (this.data.picking || this.data.list.length < 2) return;
+    const cids = this.data.list.map((x) => x.cid).filter(Boolean);
+    let wishes = '';
+    try {
+      const last = wx.getStorageSync('lastNamingInput');
+      if (last && last.constraints && last.constraints.wishes) wishes = last.constraints.wishes;
+    } catch (e) { /* 忽略 */ }
+
+    this.setData({ picking: true });
+    try {
+      const res = await this._callAiPick({ candidateIds: cids, wishes: wishes });
+      this._applyPick(res);
+      tracker.track('ai_pick', {
+        count: cids.length,
+        mode: res && res.mode,
+        degraded: !!(res && res.degraded)
+      });
+    } catch (err) {
+      // toast 已由 request.js 统一处理（LLM 不可用时服务端本身会降级，此处多为网络层错误）
+      console.error('[folder] aiPick 失败：', err);
+    } finally {
+      this.setData({ picking: false });
+    }
+  },
+
+  /** 同 listFolder 的冷启动抖动自动重试策略 */
+  _callAiPick(data) {
+    const req = () => request.call('generate', 'aiPick', data);
+    return req().catch((err) => {
+      if (err && err.code === request.NETWORK_ERROR_CODE
+        && /-504002|code exit unexpected/i.test(err.msg || '')) {
+        console.warn('[folder] aiPick 命中云函数冷启动抖动（-504002），自动重试一次');
+        return req();
+      }
+      throw err;
+    });
+  },
+
+  /** 组装帮选面板（展示文案全部预计算，WXML 不做函数绑定） */
+  _applyPick(res) {
+    const modeLabel = res && res.mode === 'ai' ? 'AI 点评' : '规则模式';
+    const top3 = ((res && res.top3) || []).map((t, i) => ({
+      rank: i + 1,
+      name: t.name,
+      reason: t.reason
+    }));
+    const comments = ((res && res.comments) || []).map((c) => ({
+      name: c.name,
+      comment: c.comment
+    }));
+    this.setData({
+      pick: {
+        modeLabel: modeLabel,
+        degraded: !!(res && res.degraded),
+        top3: top3,
+        comments: comments
+      }
+    });
+  },
+
+  onPickClose() {
+    this.setData({ pick: null });
   }
 });
