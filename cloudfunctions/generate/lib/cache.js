@@ -15,8 +15,9 @@ const crypto = require('crypto');
  * 避免「云端已更新但同参请求永远命中旧结果」。
  * v7：字池 v0.4 增补 13 热门字 + 取名通道 mode（fast/ai）参与指纹。
  * v8：字池 v0.5 增补 81 热门字（豆包清单+全网榜单交叉精标）。
+ * v9：字池 v0.6 大换血——删 98 俗字 + 增 64 冷门惊艳字。
  */
-const ENGINE_VERSION = 'v8-hotchars2-20261113';
+const ENGINE_VERSION = 'v9-pool-v06-20261113';
 
 /**
  * 计算任务指纹

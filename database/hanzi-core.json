@@ -9035,12 +9035,12 @@
       "strokes": 7,
       "pinyin": "wěi",
       "tone": 3,
-      "freqLevel": "mid",
+      "freqLevel": "low",
       "imageryTags": [
         "草木",
-        "自然"
+        "温柔"
       ],
-      "meaning": "草部字，青葱繁茂"
+      "meaning": "蒹葭苇荻，柔韧清白"
     },
     {
       "char": "芽",
@@ -11290,11 +11290,12 @@
       "strokes": 7,
       "pinyin": "chén",
       "tone": 2,
-      "freqLevel": "mid",
+      "freqLevel": "low",
       "imageryTags": [
-        "心性"
+        "心性",
+        "品德"
       ],
-      "meaning": "心部字，性情真挚"
+      "meaning": "热忱真挚，赤诚待人"
     },
     {
       "char": "快",
@@ -15914,11 +15915,12 @@
       "strokes": 8,
       "pinyin": "xián",
       "tone": 2,
-      "freqLevel": "mid",
+      "freqLevel": "low",
       "imageryTags": [
-        "自然"
+        "音律",
+        "文采"
       ],
-      "meaning": "规范汉字，音形均衡，可入名"
+      "meaning": "弦歌不辍，雅意悠长"
     },
     {
       "char": "孟",
@@ -24044,12 +24046,12 @@
       "strokes": 10,
       "pinyin": "jiàn",
       "tone": 4,
-      "freqLevel": "mid",
+      "freqLevel": "low",
       "imageryTags": [
         "水泽",
-        "灵动"
+        "山岳"
       ],
-      "meaning": "水部字，澄澈灵动"
+      "meaning": "山间清溪，泠泠作响"
     },
     {
       "char": "涕",
@@ -31485,6 +31487,726 @@
         "心性"
       ],
       "meaning": "弈局从容，智深虑远"
+    },
+    {
+      "char": "霁",
+      "strokes": 14,
+      "pinyin": "jì",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "心性"
+      ],
+      "meaning": "雨过天晴，光风霁月"
+    },
+    {
+      "char": "岫",
+      "strokes": 8,
+      "pinyin": "xiù",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "山岳",
+        "自然"
+      ],
+      "meaning": "云无心出岫，山岚幽深"
+    },
+    {
+      "char": "嵘",
+      "strokes": 12,
+      "pinyin": "róng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "山岳",
+        "刚毅"
+      ],
+      "meaning": "山势高峻，岁月峥嵘"
+    },
+    {
+      "char": "岱",
+      "strokes": 8,
+      "pinyin": "dài",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "山岳",
+        "刚毅"
+      ],
+      "meaning": "岱宗泰山，巍然稳重"
+    },
+    {
+      "char": "邈",
+      "strokes": 17,
+      "pinyin": "miǎo",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "高远",
+        "心性"
+      ],
+      "meaning": "烟波辽远，超然出尘"
+    },
+    {
+      "char": "颢",
+      "strokes": 18,
+      "pinyin": "hào",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "高远"
+      ],
+      "meaning": "白光浩大，气象光明"
+    },
+    {
+      "char": "昶",
+      "strokes": 9,
+      "pinyin": "chǎng",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "家宅"
+      ],
+      "meaning": "白昼舒长，畅达光明"
+    },
+    {
+      "char": "曈",
+      "strokes": 16,
+      "pinyin": "tóng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "灵动"
+      ],
+      "meaning": "日出渐明，曈曈向暖"
+    },
+    {
+      "char": "皎",
+      "strokes": 11,
+      "pinyin": "jiǎo",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "温柔"
+      ],
+      "meaning": "皎皎明月，明亮纯净"
+    },
+    {
+      "char": "旖",
+      "strokes": 14,
+      "pinyin": "yǐ",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "温柔",
+        "灵动"
+      ],
+      "meaning": "旖旎柔美，婉转生姿"
+    },
+    {
+      "char": "汀",
+      "strokes": 5,
+      "pinyin": "tīng",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "自然"
+      ],
+      "meaning": "水边平洲，清浅安然"
+    },
+    {
+      "char": "沚",
+      "strokes": 7,
+      "pinyin": "zhǐ",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "自然"
+      ],
+      "meaning": "水中小洲，静立澄澈"
+    },
+    {
+      "char": "洄",
+      "strokes": 9,
+      "pinyin": "huí",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "灵动"
+      ],
+      "meaning": "水流回旋，温柔绵长"
+    },
+    {
+      "char": "溯",
+      "strokes": 13,
+      "pinyin": "sù",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "言信"
+      ],
+      "meaning": "逆流求源，探本穷理"
+    },
+    {
+      "char": "濯",
+      "strokes": 17,
+      "pinyin": "zhuó",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "品德"
+      ],
+      "meaning": "濯清涟而不妖，澄净"
+    },
+    {
+      "char": "潋",
+      "strokes": 14,
+      "pinyin": "liàn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "灵动"
+      ],
+      "meaning": "水光潋滟，盈盈生辉"
+    },
+    {
+      "char": "渺",
+      "strokes": 12,
+      "pinyin": "miǎo",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "高远"
+      ],
+      "meaning": "烟波浩渺，辽远开阔"
+    },
+    {
+      "char": "沅",
+      "strokes": 7,
+      "pinyin": "yuán",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "草木"
+      ],
+      "meaning": "沅有芷兮，澄江如练"
+    },
+    {
+      "char": "霈",
+      "strokes": 15,
+      "pinyin": "pèi",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "丰茂"
+      ],
+      "meaning": "霖雨丰沛，泽被绵长"
+    },
+    {
+      "char": "葭",
+      "strokes": 12,
+      "pinyin": "jiā",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "温柔"
+      ],
+      "meaning": "蒹葭苍苍，清扬婉约"
+    },
+    {
+      "char": "荻",
+      "strokes": 10,
+      "pinyin": "dí",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "自然"
+      ],
+      "meaning": "枫叶荻花，清逸萧然"
+    },
+    {
+      "char": "篁",
+      "strokes": 15,
+      "pinyin": "huáng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "高远"
+      ],
+      "meaning": "独坐幽篁，竹韵清雅"
+    },
+    {
+      "char": "竺",
+      "strokes": 8,
+      "pinyin": "zhú",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "文采"
+      ],
+      "meaning": "清雅如竹，笃学不倦"
+    },
+    {
+      "char": "蓁",
+      "strokes": 13,
+      "pinyin": "zhēn",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "丰茂"
+      ],
+      "meaning": "其叶蓁蓁，欣欣向荣"
+    },
+    {
+      "char": "蕤",
+      "strokes": 15,
+      "pinyin": "ruí",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "光亮"
+      ],
+      "meaning": "葳蕤生光，繁盛华美"
+    },
+    {
+      "char": "芊",
+      "strokes": 6,
+      "pinyin": "qiān",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "丰茂"
+      ],
+      "meaning": "草木芊芊，葱茏生机"
+    },
+    {
+      "char": "栀",
+      "strokes": 9,
+      "pinyin": "zhī",
+      "tone": 1,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "草木",
+        "光亮"
+      ],
+      "meaning": "栀子花开，清芬馥郁"
+    },
+    {
+      "char": "蔚",
+      "strokes": 14,
+      "pinyin": "wèi",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "自然",
+        "丰茂"
+      ],
+      "meaning": "云蒸霞蔚，葱郁可观"
+    },
+    {
+      "char": "蕴",
+      "strokes": 15,
+      "pinyin": "yùn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "心性",
+        "文采"
+      ],
+      "meaning": "蕴藉含蓄，厚积薄发"
+    },
+    {
+      "char": "韫",
+      "strokes": 13,
+      "pinyin": "yùn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "美玉",
+        "心性"
+      ],
+      "meaning": "石韫玉而山辉，含光"
+    },
+    {
+      "char": "璁",
+      "strokes": 15,
+      "pinyin": "cōng",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "美玉",
+        "光亮"
+      ],
+      "meaning": "似玉美石，明亮温润"
+    },
+    {
+      "char": "珑",
+      "strokes": 9,
+      "pinyin": "lóng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "美玉",
+        "灵动"
+      ],
+      "meaning": "玉声玲珑，明澈精巧"
+    },
+    {
+      "char": "瑭",
+      "strokes": 14,
+      "pinyin": "táng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "美玉",
+        "品德"
+      ],
+      "meaning": "玉质温润，端方贵重"
+    },
+    {
+      "char": "珺",
+      "strokes": 11,
+      "pinyin": "jùn",
+      "tone": 4,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "美玉",
+        "品德"
+      ],
+      "meaning": "美玉温润，坚贞可贵"
+    },
+    {
+      "char": "钰",
+      "strokes": 10,
+      "pinyin": "yù",
+      "tone": 4,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "美玉",
+        "品德"
+      ],
+      "meaning": "宝璧珍金，坚贵兼美"
+    },
+    {
+      "char": "缇",
+      "strokes": 12,
+      "pinyin": "tí",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "温柔"
+      ],
+      "meaning": "丹缃明色，温暖明丽"
+    },
+    {
+      "char": "斓",
+      "strokes": 16,
+      "pinyin": "lán",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "灵动"
+      ],
+      "meaning": "五彩斑斓，明丽生辉"
+    },
+    {
+      "char": "彧",
+      "strokes": 10,
+      "pinyin": "yù",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "文采",
+        "品德"
+      ],
+      "meaning": "文采茂盛，高雅有教"
+    },
+    {
+      "char": "聿",
+      "strokes": 6,
+      "pinyin": "yù",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "文采",
+        "言信"
+      ],
+      "meaning": "笔之古称，文思敏捷"
+    },
+    {
+      "char": "徽",
+      "strokes": 17,
+      "pinyin": "huī",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "言信",
+        "品德"
+      ],
+      "meaning": "徽音雅正，德音孔昭"
+    },
+    {
+      "char": "箫",
+      "strokes": 14,
+      "pinyin": "xiāo",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "音律",
+        "高远"
+      ],
+      "meaning": "箫声清远，风雅悠扬"
+    },
+    {
+      "char": "隽",
+      "strokes": 10,
+      "pinyin": "jùn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "文采",
+        "心性"
+      ],
+      "meaning": "隽永悠长，才俊出众"
+    },
+    {
+      "char": "臻",
+      "strokes": 16,
+      "pinyin": "zhēn",
+      "tone": 1,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "品德",
+        "高远"
+      ],
+      "meaning": "臻于至善，日臻圆满"
+    },
+    {
+      "char": "谙",
+      "strokes": 11,
+      "pinyin": "ān",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "言信",
+        "文采"
+      ],
+      "meaning": "风景旧曾谙，博闻深晓"
+    },
+    {
+      "char": "疏",
+      "strokes": 12,
+      "pinyin": "shū",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "心性",
+        "自然"
+      ],
+      "meaning": "疏影横斜，清逸有致"
+    },
+    {
+      "char": "邕",
+      "strokes": 10,
+      "pinyin": "yōng",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "文采"
+      ],
+      "meaning": "四方文水，雍和儒雅"
+    },
+    {
+      "char": "宓",
+      "strokes": 8,
+      "pinyin": "mì",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "家宅",
+        "心性"
+      ],
+      "meaning": "洛神宓妃，安宁娴静"
+    },
+    {
+      "char": "妘",
+      "strokes": 7,
+      "pinyin": "yún",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "温柔",
+        "家宅"
+      ],
+      "meaning": "上古雅姓，温婉高贵"
+    },
+    {
+      "char": "恺",
+      "strokes": 9,
+      "pinyin": "kǎi",
+      "tone": 3,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "心性",
+        "光亮"
+      ],
+      "meaning": "恺悌君子，和乐明朗"
+    },
+    {
+      "char": "晟",
+      "strokes": 10,
+      "pinyin": "shèng",
+      "tone": 4,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "光亮",
+        "丰茂"
+      ],
+      "meaning": "光明兴盛，朝阳气象"
+    },
+    {
+      "char": "燊",
+      "strokes": 16,
+      "pinyin": "shēn",
+      "tone": 1,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "光亮",
+        "丰茂"
+      ],
+      "meaning": "火木旺盛，兴旺炽盛"
+    },
+    {
+      "char": "赫",
+      "strokes": 14,
+      "pinyin": "hè",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "光亮",
+        "力量"
+      ],
+      "meaning": "声名显赫，光明盛大"
+    },
+    {
+      "char": "衎",
+      "strokes": 9,
+      "pinyin": "kàn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "心性",
+        "品德"
+      ],
+      "meaning": "和乐衎衎，刚正愉悦"
+    },
+    {
+      "char": "祉",
+      "strokes": 8,
+      "pinyin": "zhǐ",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "家宅",
+        "丰茂"
+      ],
+      "meaning": "福祉安宁，嘉乐绵长"
+    },
+    {
+      "char": "颀",
+      "strokes": 10,
+      "pinyin": "qí",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "高远",
+        "灵动"
+      ],
+      "meaning": "硕人其颀，仪态挺秀"
+    },
+    {
+      "char": "胤",
+      "strokes": 9,
+      "pinyin": "yìn",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "家宅",
+        "高远"
+      ],
+      "meaning": "福胤绵长，气度雍容"
+    },
+    {
+      "char": "翾",
+      "strokes": 19,
+      "pinyin": "xuān",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "灵动",
+        "高远"
+      ],
+      "meaning": "轻飞曼舞，翩然灵动"
+    },
+    {
+      "char": "飏",
+      "strokes": 7,
+      "pinyin": "yáng",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "灵动",
+        "高远"
+      ],
+      "meaning": "风举高飏，意气飞扬"
+    },
+    {
+      "char": "阑",
+      "strokes": 12,
+      "pinyin": "lán",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "家宅",
+        "自然"
+      ],
+      "meaning": "夜阑静好，清宁雅致"
+    },
+    {
+      "char": "雎",
+      "strokes": 13,
+      "pinyin": "jū",
+      "tone": 1,
+      "freqLevel": "low",
+      "imageryTags": [
+        "家宅",
+        "音律"
+      ],
+      "meaning": "关雎和鸣，淑雅端庄"
     }
   ]
 }

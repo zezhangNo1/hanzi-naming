@@ -84,11 +84,11 @@ function jobOf(jobId) {
   };
 }
 
-/** 14 个合法 LLM 候选（名字用字均在 name-pool 内） */
+/** 14 个合法 LLM 候选（名字用字均在 name-pool 内；v0.6 换血后志/辉/毅/俊/松/岩/柏/森已出池，同步换字） */
 function validNames(meaningOf) {
   const chars = [
-    ['宇', '航'], ['明', '轩'], ['泽', '楷'], ['志', '远'], ['博', '辉'], ['晨', '曦'],
-    ['浩', '瀚'], ['睿', '诚'], ['嘉', '毅'], ['俊', '逸'], ['松', '岩'], ['柏', '森'],
+    ['宇', '航'], ['明', '轩'], ['泽', '楷'], ['知', '远'], ['博', '文'], ['晨', '曦'],
+    ['浩', '瀚'], ['睿', '诚'], ['嘉', '懿'], ['澄', '澜'], ['安', '宁'], ['朗', '逸'],
     ['清', '泉'], ['涵', '洋']
   ];
   return chars.map((p, i) => ({
@@ -142,9 +142,9 @@ async function main() {
     surname: '沈', surnameMeta: solved.surnameMeta, charMetaMap: metaMap, constraints: {}, styles: ['古风雅致']
   });
   const frB = await filter.runAll(mappedB, { db: db, jobId: jobId, constraints: {} });
-  check('b1 「五格」候选被剔除，其余 13 个保留', frB.passed.length === 13 && !frB.passed.some((c) => c.name === '沈志远'),
+  check('b1 「五格」候选被剔除，其余 13 个保留', frB.passed.length === 13 && !frB.passed.some((c) => c.name === '沈知远'),
     'passed=' + frB.passed.length);
-  const rlLog = (store.block_log ? store.block_log.docs : []).filter((d) => d.stage === 'redline' && d.raw === '沈志远');
+  const rlLog = (store.block_log ? store.block_log.docs : []).filter((d) => d.stage === 'redline' && d.raw === '沈知远');
   check('b2 block_log 有 stage=redline 记录', rlLog.length >= 1, JSON.stringify(rlLog));
 
   // ===== 场景 c：quoteRef.key 不存在 → quote=null 不剔除 =====

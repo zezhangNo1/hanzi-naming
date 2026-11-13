@@ -16,8 +16,8 @@
 const request = require('../../utils/request');
 const tracker = require('../../utils/tracker');
 
-/** 看板缓存版本（字库数据更新时递增使本地缓存失效；v3：v0.5 池 +81 热门字） */
-const BOARD_CACHE_VERSION = 'v3-20261113';
+/** 看板缓存版本（字库数据更新时递增使本地缓存失效；v4：v0.6 池删俗字+冷门惊艳字） */
+const BOARD_CACHE_VERSION = 'v4-20261113';
 const BOARD_CACHE_KEY = 'charsBoardCache';
 
 /** 热度 → 展示标签 */

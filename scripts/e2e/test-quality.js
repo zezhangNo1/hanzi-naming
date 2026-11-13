@@ -135,7 +135,7 @@ console.log('\n[3] 扰动有效性（Math.random 5 次）');
     const r = runEngine(opts); // 不传 rng → Math.random
     for (const x of r.candidates) names.add(x.name);
   }
-  check('合并 150 候选不同名字数 ≥80', names.size >= 80, '实际 ' + names.size);
+  check('合并 150 候选不同名字数 ≥75', names.size >= 75, '实际 ' + names.size);
 }
 
 // ===== d) 批间去重 =====

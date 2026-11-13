@@ -69,7 +69,7 @@ async function main() {
   console.log('\n[4] 热门字入池生效（v0.4）');
   const pool = require(path.join(GEN, 'data', 'name-pool.json'));
   const all = [...pool.chars.m, ...pool.chars.f, ...pool.chars.n];
-  check('4a 池总量 697（603+13+81 热门字）', all.length === 697, '实际 ' + all.length);
+  check('4a 池总量 663（v0.6 换血后）', all.length === 663, '实际 ' + all.length);
   const hot = '玥宥佑祐丞熙楚岑奕栩樾荞浔'.split('');
   check('4b 13 热门字全部在池', hot.every((c) => all.includes(c)));
   const core = require(path.join(GEN, 'data', 'hanzi-core.json'));
