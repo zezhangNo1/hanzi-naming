@@ -174,14 +174,19 @@
   color: #a09778;
 }
 
-/* 选名夹入口 */
+/* 选名夹 / 候选字库入口 */
+.entry-row {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-top: 24rpx;
+}
 .folder-entry {
   display: flex;
   justify-content: center;
-  margin-top: 24rpx;
 }
 .folder-entry-text {
-  padding: 12rpx 32rpx;
+  padding: 12rpx 24rpx;
   border-radius: 999rpx;
   border: 1rpx solid rgba(176, 58, 46, 0.35);
   color: var(--cinnabar, #B03A2E);

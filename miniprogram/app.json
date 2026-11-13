@@ -4,6 +4,7 @@
     "pages/result/result",
     "pages/detail/detail",
     "pages/folder/folder",
+    "pages/chars/chars",
     "pages/agreement/agreement",
     "pages/vote/vote",
     "pages/poster/poster",

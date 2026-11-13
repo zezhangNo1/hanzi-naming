@@ -41,10 +41,27 @@ Page({
     this._fetch().then(() => wx.stopPullDownRefresh());
   },
 
+  /**
+   * 读接口 + 已知平台抖动自动重试：-504002（0 code exit unexpected）是免费环境
+   * Node16 冷启动偶发进程崩溃（交接简报已知问题，与代码无关，重试即恢复）。
+   * listFolder 为只读操作，重试安全；仅对这一类错误重试一次，其余原样抛出。
+   */
+  _callListFolder() {
+    const req = () => request.call('user', 'listFolder', { limit: 50 });
+    return req().catch((err) => {
+      if (err && err.code === request.NETWORK_ERROR_CODE
+        && /-504002|code exit unexpected/i.test(err.msg || '')) {
+        console.warn('[folder] 命中云函数冷启动抖动（-504002），自动重试一次');
+        return req();
+      }
+      throw err;
+    });
+  },
+
   async _fetch() {
     this.setData({ loading: true, loadFailed: false });
     try {
-      const res = await request.call('user', 'listFolder', { limit: 50 });
+      const res = await this._callListFolder();
       this._applyResult(res);
     } catch (err) {
       console.error('[folder] listFolder 失败：', err);

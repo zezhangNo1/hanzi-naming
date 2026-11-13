@@ -24,12 +24,21 @@ function check(name, cond, detail) {
   else { failCnt++; failures.push(name + (detail ? ' —— ' + detail : '')); console.log('  ❌ ' + name + (detail ? ' —— ' + detail : '')); }
 }
 
-/** 从 wxml 提取自定义组件标签（含连字符的标签 = 组件约定） */
+/** 原生连字符标签白名单（非自定义组件，不要求注册） */
+const NATIVE_TAGS = new Set([
+  'scroll-view', 'swiper-item', 'movable-view', 'movable-area',
+  'cover-view', 'cover-image', 'match-text', 'page-container',
+  'navigation-bar', 'root-portal', 'custom-wrapper', 'functional-page-navigator'
+]);
+
+/** 从 wxml 提取自定义组件标签（含连字符的标签 = 组件约定；排除原生连字符标签） */
 function customTagsOf(wxml) {
   const tags = new Set();
   const re = /<([a-z][a-z0-9]*(?:-[a-z0-9]+)+)[\s/>]/g;
   let m;
-  while ((m = re.exec(wxml)) !== null) tags.add(m[1]);
+  while ((m = re.exec(wxml)) !== null) {
+    if (!NATIVE_TAGS.has(m[1])) tags.add(m[1]);
+  }
   return [...tags];
 }
 

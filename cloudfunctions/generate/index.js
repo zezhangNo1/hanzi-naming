@@ -15,6 +15,8 @@ const db = cloud.database();
 const quota = require('./lib/quota');
 const cache = require('./lib/cache');
 const pipeline = require('./lib/pipeline');
+const charBoard = require('./lib/char-board');
+const loader = require('./lib/data-loader');
 const { ensureCollections } = require('./lib/ensure-collections');
 
 /** 每次请求内调用 getWXContext 获取调用方身份（模块顶层调用拿不到 OPENID，严禁上移） */
@@ -267,11 +269,22 @@ async function loadCandidates(candidateIds) {
   return slice.map((id) => byId[id]).filter(Boolean);
 }
 
+/**
+ * action: listChars — 候选字库看板（pages/chars 浏览页，静态只读）
+ * 出参：{ groups, chars }（装配逻辑与缓存见 lib/char-board.js）
+ * 不消耗额度、不影响生成输出（无 ENGINE_VERSION 关联）；无需鉴权字段
+ * （数据为全局字库，无用户维度内容）。
+ */
+async function handleListChars() {
+  return ok(charBoard.buildBoard(loader));
+}
+
 /** action 路由表（接口契约见交接包 3.1） */
 const ACTIONS = {
   create: handleCreate,
   poll: handlePoll,
-  getDetail: handleGetDetail
+  getDetail: handleGetDetail,
+  listChars: handleListChars
 };
 
 exports.main = async (event, context) => {

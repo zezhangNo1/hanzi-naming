@@ -1,0 +1,81 @@
+<!-- chars 页：候选字库（气质分组 × 热门度浏览） -->
+<view class="page">
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="state-box">
+    <text class="state-title font-serif">正在打开字库…</text>
+  </view>
+
+  <!-- 失败 -->
+  <view wx:elif="{{loadFailed}}" class="state-box">
+    <text class="state-title font-serif">字库没有打开</text>
+    <text class="state-sub">可能是网络波动，稍后再试一次</text>
+    <button class="btn btn--primary state-btn" bindtap="onRetryTap">重试</button>
+  </view>
+
+  <block wx:else>
+    <!-- 气质分组 -->
+    <scroll-view class="group-scroll" scroll-x>
+      <view class="group-row">
+        <view wx:for="{{groupChips}}" wx:key="key"
+              class="group-chip {{item.active ? 'group-chip--on' : ''}}"
+              data-key="{{item.key}}" bindtap="onGroupTap">
+          <text class="group-label">{{item.label}}</text>
+          <text class="group-count">{{item.count}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 热度筛选 -->
+    <view class="freq-row">
+      <view wx:for="{{freqChips}}" wx:key="key"
+            class="freq-chip {{item.active ? 'freq-chip--on' : ''}}"
+            data-key="{{item.key}}" bindtap="onFreqTap">
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+
+    <text class="total-line">{{totalLine}}</text>
+
+    <!-- 字卡网格 -->
+    <view class="char-grid">
+      <view class="char-card" wx:for="{{list}}" wx:key="char"
+            data-char="{{item.char}}" bindtap="onCharTap" hover-class="char-card--tap">
+        <view class="char-head">
+          <text class="char-glyph font-serif">{{item.char}}</text>
+          <text class="char-gender char-gender--{{item.genderKey}}">{{item.genderLabel}}</text>
+        </view>
+        <text class="char-pinyin">{{item.pinyin}}</text>
+        <text class="char-meaning">{{item.meaning}}</text>
+      </view>
+    </view>
+
+    <text class="disclaimer">字库释义基于通用规范汉字表整理，仅作文化参考</text>
+
+    <!-- 字详情弹层 -->
+    <view wx:if="{{selected}}" class="detail-mask" bindtap="onSelectedClose">
+      <view class="detail-card" catchtap="">
+        <view class="detail-head">
+          <text class="detail-glyph font-serif">{{selected.char}}</text>
+          <view class="detail-meta">
+            <text class="detail-pinyin">{{selected.pinyin}}</text>
+            <text class="detail-sub">{{selected.strokes}} 画 · {{selected.freqLabel}} · {{selected.genderLabel}}</text>
+          </view>
+        </view>
+        <view class="detail-line" wx:if="{{selected.groupLabels}}">
+          <text class="detail-label">气质</text>
+          <text class="detail-value">{{selected.groupLabels}}</text>
+        </view>
+        <view class="detail-line" wx:if="{{selected.tagsText}}">
+          <text class="detail-label">意象</text>
+          <text class="detail-value">{{selected.tagsText}}</text>
+        </view>
+        <view class="detail-line">
+          <text class="detail-label">释义</text>
+          <text class="detail-value">{{selected.meaning}}</text>
+        </view>
+        <button class="detail-close" bindtap="onSelectedClose">收起</button>
+      </view>
+    </view>
+  </block>
+</view>
