@@ -79,10 +79,15 @@
     </view>
   </progressive-card>
 
-  <!-- 提交按钮 -->
-  <button class="submit-btn {{submitting ? 'submit-btn--loading' : ''}}" bindtap="onSubmit" disabled="{{submitting}}">
-    {{submitting ? '正在生成…' : '开始取名'}}
-  </button>
+  <!-- 提交按钮：快速取名（规则引擎秒出）/ AI 取名（LLM 精选，需几秒） -->
+  <view class="submit-row">
+    <button class="submit-btn submit-btn--half {{submitting ? 'submit-btn--loading' : ''}}" bindtap="onSubmit" data-mode="fast" disabled="{{submitting}}">
+      {{submitting && lastMode === 'fast' ? '生成中…' : '开始取名'}}
+    </button>
+    <button class="submit-btn submit-btn--half submit-btn--ai {{submitting ? 'submit-btn--loading' : ''}}" bindtap="onSubmit" data-mode="ai" disabled="{{submitting}}">
+      {{submitting && lastMode === 'ai' ? 'AI 取名中…' : 'AI 取名'}}
+    </button>
+  </view>
 
   <!-- 免费额度提示 -->
   <text class="quota-hint">免费生成 {{2}} 批 · 看广告可多换 {{1}} 批</text>

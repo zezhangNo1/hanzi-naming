@@ -152,14 +152,28 @@
 }
 
 /* 提交按钮 */
-.submit-btn {
+/* 双通道提交：快速（珊瑚实底）/ AI（白底珊瑚描边） */
+.submit-row {
+  display: flex;
+  gap: 20rpx;
   margin-top: 36rpx;
-  background: #2f3a2f;
-  color: #f7f4ec;
-  font-size: 32rpx;
+}
+.submit-btn {
+  flex: 1;
+  margin: 0;
+  background: var(--cinnabar, #D96C55);
+  color: #FFFFFF;
+  font-size: 30rpx;
+  font-weight: 500;
   border-radius: 999rpx;
   padding: 8rpx 0;
-  letter-spacing: 8rpx;
+  letter-spacing: 4rpx;
+}
+.submit-btn--ai {
+  background: #FFFFFF;
+  color: var(--cinnabar, #D96C55);
+  border: 2rpx solid var(--cinnabar, #D96C55);
+  letter-spacing: 4rpx;
 }
 
 .submit-btn--loading {

@@ -69,7 +69,8 @@ Page({
   async _fetch() {
     this.setData({ loading: true, loadFailed: false });
     try {
-      const res = await request.call('generate', 'getDetail', {
+      // 只读接口：callSafe 对冷启动抖动（-504002）自动重试
+      const res = await request.callSafe('generate', 'getDetail', {
         candidateId: this.data.candidateId
       });
       this._applyResult(res);
@@ -145,11 +146,12 @@ Page({
     this.setData({ collectBusy: true });
     try {
       if (this.data.collected) {
-        await request.call('user', 'uncollect', { candidateId: candidateId });
+        // collect/uncollect 幂等（服务端 upsert/remove），冷启动抖动重试安全
+        await request.callSafe('user', 'uncollect', { candidateId: candidateId });
         this.setData({ collected: false });
         wx.showToast({ title: '已取消收藏', icon: 'none' });
       } else {
-        await request.call('user', 'collect', { candidateId: candidateId });
+        await request.callSafe('user', 'collect', { candidateId: candidateId });
         this.setData({ collected: true });
         wx.showToast({ title: '已收藏', icon: 'none' });
         // collect 埋点（WNKU 口径）：batch_index 取最近一次生成输入的批次

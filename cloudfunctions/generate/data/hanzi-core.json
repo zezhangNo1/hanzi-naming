@@ -10170,11 +10170,12 @@
       "strokes": 7,
       "pinyin": "yòu",
       "tone": 4,
-      "freqLevel": "mid",
+      "freqLevel": "high",
       "imageryTags": [
+        "家宅",
         "品德"
       ],
-      "meaning": "人部字，多与立身处世相关"
+      "meaning": "护佑平安，顺遂安康"
     },
     {
       "char": "但",
@@ -30559,6 +30560,150 @@
         "文采"
       ],
       "meaning": "大道至简，简静方正"
+    },
+    {
+      "char": "玥",
+      "strokes": 8,
+      "pinyin": "yuè",
+      "tone": 4,
+      "freqLevel": "high",
+      "imageryTags": [
+        "美玉",
+        "灵动"
+      ],
+      "meaning": "传说神珠，珍美出众"
+    },
+    {
+      "char": "宥",
+      "strokes": 9,
+      "pinyin": "yòu",
+      "tone": 4,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "心性",
+        "品德"
+      ],
+      "meaning": "宽宏仁厚，有容乃大"
+    },
+    {
+      "char": "祐",
+      "strokes": 9,
+      "pinyin": "yòu",
+      "tone": 4,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "家宅",
+        "品德"
+      ],
+      "meaning": "护助之义，安和顺遂"
+    },
+    {
+      "char": "丞",
+      "strokes": 6,
+      "pinyin": "chéng",
+      "tone": 2,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "力量",
+        "品德"
+      ],
+      "meaning": "辅弼之才，担当有为"
+    },
+    {
+      "char": "熙",
+      "strokes": 14,
+      "pinyin": "xī",
+      "tone": 1,
+      "freqLevel": "high",
+      "imageryTags": [
+        "光亮",
+        "丰茂"
+      ],
+      "meaning": "光明和乐，兴盛温暖"
+    },
+    {
+      "char": "楚",
+      "strokes": 13,
+      "pinyin": "chǔ",
+      "tone": 3,
+      "freqLevel": "mid",
+      "imageryTags": [
+        "文采",
+        "灵动"
+      ],
+      "meaning": "清晰清丽，明净雅致"
+    },
+    {
+      "char": "岑",
+      "strokes": 7,
+      "pinyin": "cén",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "山岳",
+        "高远"
+      ],
+      "meaning": "山之清峻，挺拔雅正"
+    },
+    {
+      "char": "奕",
+      "strokes": 9,
+      "pinyin": "yì",
+      "tone": 4,
+      "freqLevel": "high",
+      "imageryTags": [
+        "光亮",
+        "高远"
+      ],
+      "meaning": "神采焕发，盛大光明"
+    },
+    {
+      "char": "栩",
+      "strokes": 10,
+      "pinyin": "xǔ",
+      "tone": 3,
+      "freqLevel": "low",
+      "imageryTags": [
+        "灵动",
+        "草木"
+      ],
+      "meaning": "栩栩如生，生动灵巧"
+    },
+    {
+      "char": "樾",
+      "strokes": 16,
+      "pinyin": "yuè",
+      "tone": 4,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "家宅"
+      ],
+      "meaning": "林荫覆地，庇护清凉"
+    },
+    {
+      "char": "荞",
+      "strokes": 9,
+      "pinyin": "qiáo",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "草木",
+        "自然"
+      ],
+      "meaning": "荞麦清风，朴素天然"
+    },
+    {
+      "char": "浔",
+      "strokes": 9,
+      "pinyin": "xún",
+      "tone": 2,
+      "freqLevel": "low",
+      "imageryTags": [
+        "水泽",
+        "自然"
+      ],
+      "meaning": "水滨之地，澄澈悠远"
     }
   ]
 }

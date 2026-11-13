@@ -20,10 +20,10 @@
   },
   "style": "v2",
   "tabBar": {
-    "color": "#8C8880",
-    "selectedColor": "#B03A2E",
-    "backgroundColor": "#F7F4EC",
-    "borderStyle": "black",
+    "color": "#A79D8F",
+    "selectedColor": "#D96C55",
+    "backgroundColor": "#FDF9F1",
+    "borderStyle": "white",
     "list": [
       { "pagePath": "pages/index/index", "text": "开始取名" },
       { "pagePath": "pages/chars/chars", "text": "候选字库" },

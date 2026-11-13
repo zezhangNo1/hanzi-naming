@@ -3,7 +3,7 @@
   min-height: 100vh;
   padding: 24rpx 32rpx 60rpx;
   box-sizing: border-box;
-  background: var(--paper, #F7F4EC);
+  background: var(--paper, #FDF9F1);
 }
 
 /* 状态盒（加载/失败） */
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
 }
-.state-title { font-size: 36rpx; color: var(--ink, #1C1C1C); }
+.state-title { font-size: 36rpx; color: var(--ink, #33302B); }
 .state-sub { margin-top: 16rpx; font-size: 26rpx; color: var(--ink-60, rgba(28, 28, 28, 0.5)); }
 .btn-row {
   margin-top: 48rpx;
@@ -31,7 +31,7 @@
 .report-title {
   font-size: 40rpx;
   letter-spacing: 8rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .report-sub {
   margin-top: 12rpx;
@@ -45,14 +45,14 @@
   flex-direction: column;
   align-items: center;
   padding: 40rpx 32rpx;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.05);
+  box-shadow: 0 6rpx 20rpx rgba(51, 48, 43, 0.05);
 }
 .name {
   font-size: 72rpx;
   letter-spacing: 16rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .pinyin {
   margin-top: 10rpx;
@@ -84,9 +84,9 @@
 .section {
   margin-top: 24rpx;
   padding: 32rpx;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.05);
+  box-shadow: 0 6rpx 20rpx rgba(51, 48, 43, 0.05);
 }
 .section-head {
   display: flex;
@@ -98,12 +98,12 @@
   height: 30rpx;
   margin-right: 16rpx;
   border-radius: 4rpx;
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
 }
 .section-title {
   font-size: 30rpx;
   font-weight: 600;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 
 /* 字义逐字卡 */
@@ -117,8 +117,8 @@
   flex-direction: column;
   align-items: center;
   padding: 24rpx 16rpx;
-  border-radius: 16rpx;
-  background: var(--paper, #F7F4EC);
+  border-radius: 20rpx;
+  background: var(--paper, #FDF9F1);
 }
 .char-char-row {
   display: flex;
@@ -126,7 +126,7 @@
 }
 .char-char {
   font-size: 56rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .char-surname-mark {
   margin-left: 6rpx;
@@ -162,9 +162,9 @@
 }
 .kv-value {
   font-size: 26rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
-.kv-value--high { color: var(--cinnabar, #B03A2E); }
+.kv-value--high { color: var(--cinnabar, #D96C55); }
 .kv-value--low { color: #3E7C4F; }
 .dup-desc {
   display: block;
@@ -182,13 +182,13 @@
 }
 .btn {
   margin: 0 0 24rpx;
-  border-radius: 16rpx;
+  border-radius: 999rpx;
   background: #FFFFFF;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
   font-size: 30rpx;
 }
 .btn--primary {
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
   color: #FFFFFF;
 }
 .btn--block { width: 100%; }

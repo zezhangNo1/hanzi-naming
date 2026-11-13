@@ -9,7 +9,7 @@
  *   c) 音近 warn：佩琳（pui3+lam4，lam 音近 lan2=撚）→ 保留 + 警示；
  *   d) pass：妙如（miu6+jyu4）→ 通过 + 写回完整 jyutping；
  *   e) 查无映射字 → 跳过方言检测（pass + 空 jyutping，不误报）；
- *   f) 全池不变量：603 池字粤拼映射 100% 覆盖（防扩池后漏配）；
+ *   f) 全池不变量：616 池字粤拼映射 100% 覆盖（防扩池后漏配）；
  *   g) 集成：降级生成 30 候选 checks.homophoneDialect 全部为 {yue, jyutping} 对象且
  *      yue ∈ {pass, warn}（fail 级已被过滤剔除），jyutping 非空。
  */
@@ -78,7 +78,7 @@ function cand(surname, given, pinyin) {
   const pool = require(path.resolve(__dirname, '../../database/name-pool.json'));
   const all = [...new Set([...pool.chars.m, ...pool.chars.f, ...pool.chars.n])];
   const noMap = all.filter((ch) => !JYUTPING[ch]);
-  check('B1 603 池字粤拼 100% 覆盖', noMap.length === 0, '缺：' + noMap.join(''));
+  check('B1 616 池字粤拼 100% 覆盖', noMap.length === 0, '缺：' + noMap.join(''));
   const badFmt = all.filter((ch) => !/^[a-z]+[1-6]$/.test(JYUTPING[ch] || ''));
   check('B2 粤拼格式合法（字母+声调 1-6）', badFmt.length === 0,
     '非法：' + badFmt.slice(0, 10).map((c) => c + '=' + JYUTPING[c]).join(','));

@@ -16,8 +16,8 @@
 const request = require('../../utils/request');
 const tracker = require('../../utils/tracker');
 
-/** 看板缓存版本（字库数据更新时递增使本地缓存失效） */
-const BOARD_CACHE_VERSION = 'v1-20261113';
+/** 看板缓存版本（字库数据更新时递增使本地缓存失效；v2：v0.4 池 +13 热门字） */
+const BOARD_CACHE_VERSION = 'v2-20261113';
 const BOARD_CACHE_KEY = 'charsBoardCache';
 
 /** 热度 → 展示标签 */
@@ -58,17 +58,9 @@ Page({
     this._load().then(() => wx.stopPullDownRefresh());
   },
 
-  /** 只读接口 + -504002 冷启动抖动自动重试（与 folder 页同策略） */
+  /** 只读接口走 callSafe（冷启动抖动自动重试，见 request.js） */
   _callListChars() {
-    const req = () => request.call('generate', 'listChars', {});
-    return req().catch((err) => {
-      if (err && err.code === request.NETWORK_ERROR_CODE
-        && /-504002|code exit unexpected/i.test(err.msg || '')) {
-        console.warn('[chars] 命中云函数冷启动抖动（-504002），自动重试一次');
-        return req();
-      }
-      throw err;
-    });
+    return request.callSafe('generate', 'listChars', {});
   },
 
   async _load() {

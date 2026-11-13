@@ -3,7 +3,7 @@
   min-height: 100vh;
   padding: 24rpx 32rpx 60rpx;
   box-sizing: border-box;
-  background: var(--paper, #F7F4EC);
+  background: var(--paper, #FDF9F1);
 }
 
 /* 状态盒 */
@@ -13,12 +13,12 @@
   flex-direction: column;
   align-items: center;
 }
-.state-title { font-size: 36rpx; color: var(--ink, #1C1C1C); }
+.state-title { font-size: 36rpx; color: var(--ink, #33302B); }
 .state-sub { margin-top: 16rpx; font-size: 26rpx; color: rgba(28, 28, 28, 0.5); }
 .state-btn { margin-top: 48rpx; width: 320rpx; }
 .btn {
-  border-radius: 16rpx;
-  background: var(--cinnabar, #B03A2E);
+  border-radius: 20rpx;
+  background: var(--cinnabar, #D96C55);
   color: #FFFFFF;
   font-size: 30rpx;
 }
@@ -39,16 +39,16 @@
   align-items: center;
   margin-right: 16rpx;
   padding: 12rpx 28rpx;
-  border-radius: 16rpx;
+  border-radius: 20rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(28, 28, 28, 0.04);
+  box-shadow: 0 4rpx 12rpx rgba(51, 48, 43, 0.05);
 }
 .group-chip--on {
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
 }
 .group-label {
   font-size: 26rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .group-chip--on .group-label { color: #FFFFFF; }
 .group-count {
@@ -67,13 +67,13 @@
   margin-right: 16rpx;
   padding: 8rpx 24rpx;
   border-radius: 999rpx;
-  border: 1rpx solid rgba(28, 28, 28, 0.15);
+  border: 1rpx solid rgba(51, 48, 43, 0.12);
   font-size: 24rpx;
   color: rgba(28, 28, 28, 0.6);
 }
 .freq-chip--on {
-  border-color: var(--cinnabar, #B03A2E);
-  color: var(--cinnabar, #B03A2E);
+  border-color: var(--cinnabar, #D96C55);
+  color: var(--cinnabar, #D96C55);
   background: rgba(176, 58, 46, 0.06);
 }
 
@@ -94,9 +94,9 @@
   width: 218rpx;
   margin-bottom: 20rpx;
   padding: 24rpx 16rpx;
-  border-radius: 16rpx;
+  border-radius: 20rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 12rpx rgba(28, 28, 28, 0.04);
+  box-shadow: 0 4rpx 12rpx rgba(51, 48, 43, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -111,7 +111,7 @@
 }
 .char-glyph {
   font-size: 72rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
   line-height: 1.2;
 }
 .char-gender {
@@ -164,9 +164,9 @@
 .detail-card {
   width: 600rpx;
   padding: 40rpx 36rpx 32rpx;
-  border-radius: 24rpx;
+  border-radius: 32rpx;
   background: #FFFFFF;
-  box-shadow: 0 12rpx 40rpx rgba(28, 28, 28, 0.15);
+  box-shadow: 0 12rpx 40rpx rgba(51, 48, 43, 0.12);
 }
 .detail-head {
   display: flex;
@@ -174,7 +174,7 @@
 }
 .detail-glyph {
   font-size: 96rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
   line-height: 1.1;
 }
 .detail-meta {
@@ -198,7 +198,7 @@
 .detail-label {
   flex: 0 0 88rpx;
   font-size: 24rpx;
-  color: var(--cinnabar, #B03A2E);
+  color: var(--cinnabar, #D96C55);
 }
 .detail-value {
   flex: 1;
@@ -208,9 +208,9 @@
 }
 .detail-close {
   margin-top: 36rpx;
-  border-radius: 16rpx;
-  background: var(--paper, #F7F4EC);
-  color: var(--ink, #1C1C1C);
+  border-radius: 20rpx;
+  background: var(--paper, #FDF9F1);
+  color: var(--ink, #33302B);
   font-size: 28rpx;
 }
 .detail-close::after { border: none; }

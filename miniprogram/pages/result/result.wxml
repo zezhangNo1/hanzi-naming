@@ -8,8 +8,8 @@
 
   <!-- 加载中 -->
   <view wx:if="{{loading}}" class="state-box">
-    <text class="state-title font-serif">正在为宝宝精心取名…</text>
-    <text class="state-sub">通常只需几秒钟</text>
+    <text class="state-title font-serif">{{loadingTitle}}</text>
+    <text class="state-sub">{{loadingSub}}</text>
   </view>
 
   <!-- 失败/超时 -->

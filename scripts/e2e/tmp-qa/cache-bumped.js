@@ -13,6 +13,7 @@ const crypto = require('crypto');
  * 引擎版本号：参与缓存指纹计算。
  * 引擎/字池/参数有任何影响输出的变更时必须 +1，使历史缓存自然失效，
  * 避免「云端已更新但同参请求永远命中旧结果」。
+ * v7：字池 v0.4 增补 13 热门字 + 取名通道 mode（fast/ai）参与指纹。
  */
 const ENGINE_VERSION = 'v4-llm-20260908-QATEST';
 
@@ -34,7 +35,8 @@ function jobHash(input) {
       dialects: ((input.constraints && input.constraints.dialects) || []).slice().sort(),
       birth: null // birth 不参与 hash（敏感项不入指纹，B4 生辰授权后单独处理）
     },
-    b: input.batch || 1
+    b: input.batch || 1,
+    m: input.mode || 'auto'
   });
   return crypto.createHash('md5').update(normalized, 'utf8').digest('hex');
 }

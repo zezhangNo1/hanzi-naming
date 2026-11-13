@@ -117,8 +117,36 @@ function handleBusinessError(code, msg) {
   return payload;
 }
 
+/**
+ * 是否命中已知云开发免费环境冷启动崩溃（-504002：Node16 框架初始化阶段崩溃，
+ * 业务代码未执行，社区已知问题）——重试即恢复。
+ */
+function isColdStartCrash(err) {
+  return !!err && err.code === NETWORK_ERROR_CODE
+    && /-504002|code exit unexpected/i.test(err.msg || '');
+}
+
+/**
+ * 安全调用：在 call() 基础上对冷启动崩溃自动重试（默认 2 次，600ms 退避）。
+ * 崩溃发生在框架初始化阶段、业务代码未执行，重试无副作用——但仍只用于
+ * 只读或幂等 action（listFolder/poll/getDetail/listChars/collect/uncollect/aiPick）。
+ * create 等非幂等操作（额度扣减）禁用。
+ */
+function callSafe(name, action, data = {}, retries = 2) {
+  const attempt = (left) => call(name, action, data).catch((err) => {
+    if (left > 0 && isColdStartCrash(err)) {
+      console.warn('[request] ' + name + '.' + action + ' 命中冷启动抖动，重试（剩 ' + left + ' 次）');
+      return new Promise((resolve) => setTimeout(resolve, 600)).then(() => attempt(left - 1));
+    }
+    throw err;
+  });
+  return attempt(retries);
+}
+
 module.exports = {
   call: call,
+  callSafe: callSafe,
+  isColdStartCrash: isColdStartCrash,
   ERR: ERR,
   NETWORK_ERROR_CODE: NETWORK_ERROR_CODE
 };

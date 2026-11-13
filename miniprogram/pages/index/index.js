@@ -39,6 +39,7 @@ Page({
     dialectChips: DIALECT_CHIPS,
     // 状态
     submitting: false,
+    lastMode: 'fast',
     showQuotaCard: false,
     surnameError: ''
   },
@@ -124,8 +125,11 @@ Page({
 
   /* ---------------- 提交 ---------------- */
 
-  async onSubmit() {
+  /** 双通道提交：dataset.mode = fast（规则秒出）| ai（LLM 精选，失败自动降级） */
+  async onSubmit(e) {
     if (this.data.submitting) return;
+    const mode = e && e.currentTarget && e.currentTarget.dataset && e.currentTarget.dataset.mode === 'ai'
+      ? 'ai' : 'fast';
 
     // 1. 姓氏校验（1 字）
     const surname = this.data.surname.trim();
@@ -151,8 +155,9 @@ Page({
       dialects: this.data.dialects.slice()
     };
 
-    // 埋点：input_submit
+    // 埋点：input_submit（含通道）
     tracker.track('input_submit', {
+      mode: mode,
       has_styles: this.data.styles.length > 0,
       has_constraints: constraints.generationChar !== '' || avoidChars.length > 0 || constraints.wishes !== '' || constraints.dialects.length > 0
     });
@@ -163,13 +168,14 @@ Page({
       styles: this.data.styles,
       constraints: constraints,
       source: 'free',
-      batch: 1
+      batch: 1,
+      mode: mode
     };
 
     // 供结果页「换一批」复用（storage 方案，B4 可改 eventChannel）
     try { wx.setStorageSync('lastNamingInput', payload); } catch (e) { /* storage 异常不阻断 */ }
 
-    this.setData({ submitting: true, showQuotaCard: false });
+    this.setData({ submitting: true, lastMode: mode, showQuotaCard: false });
     try {
       const res = await request.call('generate', 'create', payload);
       wx.navigateTo({

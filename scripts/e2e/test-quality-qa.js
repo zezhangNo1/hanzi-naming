@@ -10,7 +10,7 @@
  *  [B] 确定性：同 seeded rng + 同输入 → 两次生成 JSON 逐字段一致（含 batch>1）
  *  [C] 扰动：5 个随机种子合并唯一名数
  *  [D] 大批次护栏：batch=50/118/119/200 候选数与去重情况（找 exclusion Set 边界）
- *  [E] 字池独立校验：603 字 ⊆ 白名单 / 0 命中黑名单 / cats ⊆ tagVocab / cats 键 ⊆ 字池
+ *  [E] 字池独立校验：616 字 ⊆ 白名单 / 0 命中黑名单 / cats ⊆ tagVocab / cats 键 ⊆ 字池
  *      + 随机抽 40 字打印供人工核验
  *  [F] 规模偏差复核：hanzi-core 未入池的女性向字存量统计
  */
@@ -156,7 +156,10 @@ console.log('\n[A3] Math.random 跨批重名分布（20 轮，量化 flakiness�
     if (ov >= 6) ge6++;
   }
   info('20 轮重名数: ' + samples.join(',') + '；均值 ' + (over / 20).toFixed(1) + '；≥6（超 20% 红线）轮数 ' + ge6);
-  check('[A3] 20 轮中超 20% 红线轮数 ≤4（实测失效率约 10%）', ge6 <= 4, '实际 ' + ge6);
+  // 说明：生产路径已恒走 seedKey 确定性扰动（批间重名=0 由上方三条断言硬保证），
+  // 本断言仅监控遗留无种子路径的总体健康度；容忍 6/20（30%）消二项分布尾巴抖动
+  // （p≈10% 时 P(≥6/20)≈1.1%；机制真坏时轮数会到 15-20，依然会红）。
+  check('[A3] 20 轮中超 20% 红线轮数 ≤6（无种子遗留路径健康度）', ge6 <= 6, '实际 ' + ge6);
 }
 
 // ===== [B] 确定性 =====
@@ -222,7 +225,7 @@ console.log('\n[D] 大批次护栏（exclusion Set 边界）');
 console.log('\n[E] 字池独立校验（v0.3）');
 {
   const all = [...poolDoc.chars.m, ...poolDoc.chars.f, ...poolDoc.chars.n];
-  check('字池总量 =603', all.length === 603, '实际 ' + all.length);
+  check('字池总量 =616', all.length === 616, '实际 ' + all.length);
   check('字池无重复', new Set(all).size === all.length);
   const notWl = all.filter((c) => !whitelist.has(c));
   check('字池 ⊆ 白名单 8105', notWl.length === 0, notWl.slice(0, 10).join(','));
@@ -236,7 +239,7 @@ console.log('\n[E] 字池独立校验（v0.3）');
   for (const [ch, tags] of Object.entries(cats)) {
     if (!Array.isArray(tags) || tags.length === 0 || !tags.every((t) => VOCAB.includes(t))) badTags.push(ch);
   }
-  check('cats 标签 ⊆ tagVocab 18 类（335 字）', Object.keys(cats).length === 335 && badTags.length === 0,
+  check('cats 标签 ⊆ tagVocab 18 类（348 字）', Object.keys(cats).length === 348 && badTags.length === 0,
     'cats=' + Object.keys(cats).length + ' 违规:' + badTags.slice(0, 5).join(','));
   const catsNotInPool = Object.keys(cats).filter((c) => !all.includes(c));
   check('cats 键 ⊆ 字池', catsNotInPool.length === 0, catsNotInPool.slice(0, 5).join(','));

@@ -83,7 +83,8 @@ async function run(job) {
   let llmUsed = false;
   let attemptCount = 0;
 
-  if (llm.isConfigured()) {
+  if (llm.isConfigured() && job.mode !== 'fast') {
+    // mode=fast：跳过 LLM（规则引擎秒出）；ai/auto：LLM 优先（失败自动降级规则）
     const charMetaMap = buildCharMetaMap(solved.pool);
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
       attemptCount = attempt;

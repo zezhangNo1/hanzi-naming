@@ -3,7 +3,7 @@
   min-height: 100vh;
   padding: 40rpx 40rpx 80rpx;
   box-sizing: border-box;
-  background: var(--paper, #F7F4EC);
+  background: var(--paper, #FDF9F1);
 }
 
 .doc-head {
@@ -14,7 +14,7 @@
 }
 .doc-title {
   font-size: 40rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .doc-version {
   margin-top: 12rpx;
@@ -25,15 +25,15 @@
 .doc-section {
   margin-bottom: 36rpx;
   padding: 32rpx;
-  border-radius: 16rpx;
+  border-radius: 24rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.04);
+  box-shadow: 0 4rpx 16rpx rgba(51, 48, 43, 0.05);
 }
 .doc-h {
   display: block;
   font-size: 30rpx;
   font-weight: 600;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .doc-p {
   display: block;

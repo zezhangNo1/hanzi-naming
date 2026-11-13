@@ -45,20 +45,10 @@ Page({
   },
 
   /**
-   * 读接口 + 已知平台抖动自动重试：-504002（0 code exit unexpected）是免费环境
-   * Node16 冷启动偶发进程崩溃（交接简报已知问题，与代码无关，重试即恢复）。
-   * listFolder 为只读操作，重试安全；仅对这一类错误重试一次，其余原样抛出。
+   * 读接口统一走 callSafe（冷启动抖动 -504002 自动重试，见 request.js）
    */
   _callListFolder() {
-    const req = () => request.call('user', 'listFolder', { limit: 50 });
-    return req().catch((err) => {
-      if (err && err.code === request.NETWORK_ERROR_CODE
-        && /-504002|code exit unexpected/i.test(err.msg || '')) {
-        console.warn('[folder] 命中云函数冷启动抖动（-504002），自动重试一次');
-        return req();
-      }
-      throw err;
-    });
+    return request.callSafe('user', 'listFolder', { limit: 50 });
   },
 
   async _fetch() {
@@ -171,17 +161,9 @@ Page({
     }
   },
 
-  /** 同 listFolder 的冷启动抖动自动重试策略 */
+  /** aiPick 走 callSafe（LLM 失败服务端自降级，此处只兜网络层抖动） */
   _callAiPick(data) {
-    const req = () => request.call('generate', 'aiPick', data);
-    return req().catch((err) => {
-      if (err && err.code === request.NETWORK_ERROR_CODE
-        && /-504002|code exit unexpected/i.test(err.msg || '')) {
-        console.warn('[folder] aiPick 命中云函数冷启动抖动（-504002），自动重试一次');
-        return req();
-      }
-      throw err;
-    });
+    return request.callSafe('generate', 'aiPick', data);
   },
 
   /** 组装帮选面板（展示文案全部预计算，WXML 不做函数绑定） */

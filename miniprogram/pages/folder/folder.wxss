@@ -3,7 +3,7 @@
   min-height: 100vh;
   padding: 24rpx 32rpx 60rpx;
   box-sizing: border-box;
-  background: var(--paper, #F7F4EC);
+  background: var(--paper, #FDF9F1);
 }
 
 /* 状态盒（加载/失败/空态） */
@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
 }
-.state-title { font-size: 36rpx; color: var(--ink, #1C1C1C); }
+.state-title { font-size: 36rpx; color: var(--ink, #33302B); }
 .state-sub { margin-top: 16rpx; font-size: 26rpx; color: rgba(28, 28, 28, 0.5); }
 .state-btn { margin-top: 48rpx; width: 320rpx; }
 
@@ -23,14 +23,14 @@
   gap: 24rpx;
 }
 .btn {
-  border-radius: 16rpx;
+  border-radius: 999rpx;
   background: #FFFFFF;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
   font-size: 30rpx;
 }
 .btn::after { border: none; }
 .btn--primary {
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
   color: #FFFFFF;
 }
 
@@ -48,7 +48,7 @@
 .ai-btn {
   padding: 8rpx 28rpx;
   border-radius: 999rpx;
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
   color: #FFFFFF;
   font-size: 24rpx;
 }
@@ -58,9 +58,9 @@
 .pick-panel {
   margin-bottom: 24rpx;
   padding: 32rpx;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.05);
+  box-shadow: 0 6rpx 20rpx rgba(51, 48, 43, 0.05);
 }
 .pick-head {
   display: flex;
@@ -68,14 +68,14 @@
 }
 .pick-title {
   font-size: 32rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .pick-mode {
   margin-left: 16rpx;
   padding: 4rpx 14rpx;
   border-radius: 999rpx;
   background: rgba(176, 58, 46, 0.08);
-  color: var(--cinnabar, #B03A2E);
+  color: var(--cinnabar, #D96C55);
   font-size: 20rpx;
 }
 .pick-close {
@@ -101,7 +101,7 @@
   flex: 0 0 44rpx;
   height: 44rpx;
   border-radius: 50%;
-  background: var(--cinnabar, #B03A2E);
+  background: var(--cinnabar, #D96C55);
   color: #FFFFFF;
   font-size: 24rpx;
   text-align: center;
@@ -115,7 +115,7 @@
 .pick-name {
   font-size: 34rpx;
   letter-spacing: 4rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .pick-reason {
   margin-top: 8rpx;
@@ -133,7 +133,7 @@
   flex: 0 0 160rpx;
   font-size: 28rpx;
   letter-spacing: 2rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .pick-ctext {
   flex: 1;
@@ -146,9 +146,9 @@
 .candidate {
   margin-bottom: 24rpx;
   padding: 32rpx;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   background: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(28, 28, 28, 0.05);
+  box-shadow: 0 6rpx 20rpx rgba(51, 48, 43, 0.05);
 }
 .candidate--tap { background: #FDFBF5; }
 .candidate-head {
@@ -159,7 +159,7 @@
 .candidate-name {
   font-size: 64rpx;
   letter-spacing: 12rpx;
-  color: var(--ink, #1C1C1C);
+  color: var(--ink, #33302B);
 }
 .candidate-pinyin {
   margin-top: 8rpx;
@@ -195,7 +195,7 @@
   padding: 12rpx 20rpx;
   border-radius: 12rpx;
   background: rgba(176, 58, 46, 0.08);
-  color: var(--cinnabar, #B03A2E);
+  color: var(--cinnabar, #D96C55);
   font-size: 24rpx;
   line-height: 1.6;
 }

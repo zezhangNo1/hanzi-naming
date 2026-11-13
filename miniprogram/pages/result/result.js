@@ -39,6 +39,8 @@ Page({
     jobId: '',
     loading: true,          // 轮询中
     loadFailed: false,      // 轮询超时/失败（展示重试）
+    loadingTitle: '正在为宝宝精心取名…',
+    loadingSub: '通常只需几秒钟',
     degraded: false,        // 降级标记（3001）
     candidates: [],         // 渲染用候选列表
     quota: { freeLeft: 0, adLeft: 0, paidLeft: 0 },
@@ -56,6 +58,13 @@ Page({
       this.setData({ loading: false, loadFailed: true });
       return;
     }
+    // 通道文案：AI 取名等待更久（LLM 秒级~十几秒），快速取名通常 1s 内
+    try {
+      const last = wx.getStorageSync('lastNamingInput');
+      if (last && last.mode === 'ai') {
+        this.setData({ loadingTitle: 'AI 正在为宝宝取名…', loadingSub: '精选通道约需几秒到十几秒' });
+      }
+    } catch (e) { /* 忽略 */ }
     this.setData({ jobId: jobId });
     this._pollStart = Date.now();
     this._startPolling();
@@ -81,7 +90,8 @@ Page({
 
   async _pollOnce() {
     try {
-      const res = await request.call('generate', 'poll', { jobId: this.data.jobId });
+      // poll 只读：callSafe 对冷启动抖动（-504002）自动重试
+      const res = await request.callSafe('generate', 'poll', { jobId: this.data.jobId });
       if (res.status === 'done') {
         const latency = Date.now() - this._pollStart;
         this._applyResult(res);

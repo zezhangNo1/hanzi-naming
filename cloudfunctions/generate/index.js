@@ -53,6 +53,8 @@ async function handleCreate(event) {
   const constraints = normalizeConstraints(event.constraints);
   const source = ['free', 'ad', 'paid'].includes(event.source) ? event.source : 'free';
   const batch = Math.max(1, parseInt(event.batch, 10) || 1);
+  // 取名通道：fast=规则引擎秒出；ai=LLM 精选（失败自动降级规则）；auto=兼容旧端（同 ai）
+  const mode = ['fast', 'ai'].indexOf(event.mode) !== -1 ? event.mode : 'auto';
   const openid = wxOpenid();
 
   // 0. 首次调用时确保集合存在（users/name_jobs/candidates/block_log），避免 5000
@@ -69,8 +71,8 @@ async function handleCreate(event) {
     return fail(quotaResult.code, quotaResult.msg);
   }
 
-  // 6. 缓存查重：同参同批命中 → 直接返回既有结果（不重复扣批次可接受口径：命中不消耗新内容额度，但已扣减，B2 记录之）
-  const hash = cache.jobHash({ surname: surname, gender: gender, styles: styles, constraints: constraints, batch: batch });
+  // 6. 缓存查重：同参同批同通道命中 → 直接返回既有结果（不重复扣批次可接受口径：命中不消耗新内容额度，但已扣减，B2 记录之）
+  const hash = cache.jobHash({ surname: surname, gender: gender, styles: styles, constraints: constraints, batch: batch, mode: mode });
   const cached = await cache.lookup(db, openid, hash);
   if (cached) {
     const q = await quota.quotaOf(db, openid);
@@ -97,6 +99,7 @@ async function handleCreate(event) {
     status: 'pending',
     source: source,
     batch: batch,
+    mode: mode,
     hash: hash,
     candidateIds: [],
     degraded: false,
@@ -118,7 +121,8 @@ async function handleCreate(event) {
       styles: styles,
       constraints: constraints,
       source: source,
-      batch: batch
+      batch: batch,
+      mode: mode
     });
   } catch (err) {
     console.error('[generate] 流水线失败：', err);
