@@ -14,8 +14,9 @@ const crypto = require('crypto');
  * 引擎/字池/参数有任何影响输出的变更时必须 +1，使历史缓存自然失效，
  * 避免「云端已更新但同参请求永远命中旧结果」。
  * v7：字池 v0.4 增补 13 热门字 + 取名通道 mode（fast/ai）参与指纹。
+ * v8：字池 v0.5 增补 81 热门字（豆包清单+全网榜单交叉精标）。
  */
-const ENGINE_VERSION = 'v7-hotchars-mode-20261113';
+const ENGINE_VERSION = 'v8-hotchars2-20261113';
 
 /**
  * 计算任务指纹
